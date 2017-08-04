@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dask-autoscaler
+  namespace: dask
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  namespace: dask
+  name: dask-autoscaler
+rules:
+- apiGroups: [""]
+  resources: ["deployment"]
+  resourceNames: ["dask-workers"]
+  verbs: ["update", "get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: dask-autoscaler
+  namespace: dask
+subjects:
+  - kind: ServiceAccount
+    name: dask-autoscaler
+    namespace: dask
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: dask-autoscaler
