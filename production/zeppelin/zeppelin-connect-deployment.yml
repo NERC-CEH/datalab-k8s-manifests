@@ -1,0 +1,31 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: zeppelin-connect-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zeppelin-connect
+    spec:
+      containers:
+        - name: zeppelin-connect
+          image: nerc/zeppelin-connect:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zeppelin-connect-service
+spec:
+  ports:
+    - name: zeppelin-connect
+      port: 80
+      targetPort: 8000
+  selector:
+    app: zeppelin-connect
+  type: NodePort

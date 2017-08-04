@@ -12,8 +12,8 @@ spec:
     spec:
       containers:
         - name: minio-connect
-          image: nerc/connect:latest
-          imagePullPolicy: Always
+          image: nerc/connect
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
           env:
