@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: datalab-api
-          image: nerc/datalab-api:0.5.0-104-gc857701
+          image: nerc/datalab-api:0.6.0-28-gf28e340
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
