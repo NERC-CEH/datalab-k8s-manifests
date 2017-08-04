@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: docs
-          image: nerc/docs
+          image: nerc/docs:0.6.0-36-gc5479fa
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
