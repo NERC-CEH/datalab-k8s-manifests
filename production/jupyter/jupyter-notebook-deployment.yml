@@ -14,7 +14,7 @@ spec:
       - image: jupyter/base-notebook:b4dd11e16ae4
         imagePullPolicy : "IfNotPresent"
         name: jupyter-notebook
-        command: ["start-notebook.sh", "--NotebookApp.token='$(JUPYTER_TOKEN)'", "--NotebookApp.allow_origin='*'"]
+        command: ["start-notebook.sh", "--NotebookApp.token='$(JUPYTER_TOKEN)'", "--NotebookApp.allow_origin='datalab-jupyter.datalabs.nerc.ac.uk'"]
         ports:
         - containerPort: 8888
           protocol: TCP
