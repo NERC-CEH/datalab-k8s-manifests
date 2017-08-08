@@ -11,7 +11,7 @@ spec:
         name: jupyter-notebook
     spec:
       containers:
-      - image: jupyter/base-notebook:b4dd11e16ae4
+      - image: jupyter/datascience-notebook:b4dd11e16ae4
         imagePullPolicy : "IfNotPresent"
         name: jupyter-notebook
         command: ["start-notebook.sh", "--NotebookApp.token='$(JUPYTER_TOKEN)'", "--NotebookApp.allow_origin='datalab-jupyter.datalabs.nerc.ac.uk'", "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
