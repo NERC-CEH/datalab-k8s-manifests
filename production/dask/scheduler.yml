@@ -15,8 +15,7 @@ spec:
       automountServiceAccountToken: true
       containers:
         - image: daskdev/dask:latest
-          command: ["/bin/bash"]
-          args: ["/opt/scheduler/run.sh"]
+          command: ["dask-scheduler"]
           imagePullPolicy: IfNotPresent
           name: dask-scheduler
           ports:
@@ -26,10 +25,3 @@ spec:
             requests:
               cpu: 100m
               memory: 1Gi
-          volumeMounts:
-            - name: config-volume
-              mountPath: /opt/scheduler
-      volumes:
-        - name: config-volume
-          configMap:
-            name: dask-scheduler

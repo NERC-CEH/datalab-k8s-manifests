@@ -5,7 +5,7 @@ metadata:
   name: dask-workers
   namespace: dask
 spec:
-  replicas: 0
+  replicas: 3
   template:
     metadata:
       labels:
@@ -13,9 +13,7 @@ spec:
     spec:
       containers:
         - image: daskdev/dask:latest
-          command: ["sh", "-c"]
-          args:
-            - dask-worker $DASK_SCHEDULER_SERVICE_HOST:$DASK_SCHEDULER_SERVICE_PORT --nprocs 1 --nthreads 1 --host $POD_IP --name $POD_NAME
+          command: ["dask-worker", "192.168.3.6:31082"]
           imagePullPolicy: IfNotPresent
           name: dask-worker
           env:
@@ -31,13 +29,13 @@ spec:
             requests:
               cpu: 100m
               memory: 1Gi
----
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
-metadata:
-  name: no-worker-disruption
-spec:
-  selector:
-    matchLabels:
-      app: dask-workers
-  minAvailable: 100%
+# ---
+# apiVersion: policy/v1beta1
+# kind: PodDisruptionBudget
+# metadata:
+#   name: no-worker-disruption
+# spec:
+#   selector:
+#     matchLabels:
+#       app: dask-workers
+#   minAvailable: 100%
