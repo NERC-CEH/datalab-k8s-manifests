@@ -1,9 +1,8 @@
-# Deployment
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: dask-scheduler
-  namespace: dask
 spec:
   replicas: 1
   template:
