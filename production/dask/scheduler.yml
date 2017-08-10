@@ -10,8 +10,6 @@ spec:
       labels:
         app: dask-scheduler
     spec:
-      serviceAccountName: dask-autoscaler
-      automountServiceAccountToken: true
       containers:
         - image: daskdev/dask:latest
           command: ["dask-scheduler"]

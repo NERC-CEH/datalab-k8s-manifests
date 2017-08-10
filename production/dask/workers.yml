@@ -4,27 +4,30 @@ kind: Deployment
 metadata:
   name: dask-workers
 spec:
-  replicas: 3
+  replicas: 4
   template:
     metadata:
       labels:
         app: dask-workers
     spec:
       containers:
-        - image: daskdev/dask:latest
-          command: ["dask-worker", "192.168.3.6:31082"]
-          imagePullPolicy: IfNotPresent
-          name: dask-worker
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-          resources:
-            requests:
-              cpu: 100m
-              memory: 1Gi
+      - image: daskdev/dask:latest
+        command: ["dask-worker", "dask-scheduler:8786"]
+        imagePullPolicy: IfNotPresent
+        name: dask-worker
+        env:
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 4Gi
