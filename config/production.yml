@@ -1,0 +1,38 @@
+---
+namespace: default
+environment: production
+domain: datalab.datalabs.nerc.ac.uk
+
+datalabVersion: 0.7.0-5-g989f8f3
+datalabVolume: datalab
+internalVolume: datalab-internal
+
+datalabApp:
+  imageName: nerc/datalab-app
+  replicas: 2
+datalabApi:
+  imageName: nerc/datalab-api
+  replicas: 2
+datalabDocs:
+  imageName: nerc/docs
+  replicas: 1
+vault:
+  imageName: vault
+  version: 0.7.3
+minio:
+  imageName: minio/minio
+  connectImage: nerc/connect
+zeppelin:
+  imageName: nerc/zeppelin
+  version: 0.7.2.2
+  connectImageName: nerc/zeppelin-connect
+  connectImageVersion: 1.0.0
+jupyter:
+  imageName: jupyter/datascience-notebook
+  version: b4dd11e16ae4
+  origin: testlab-jupyter.datalabs.nerc.ac.uk
+gluster:
+  nodes:
+    - 192.168.3.20
+    - 192.168.3.21
+    - 192.168.3.22
