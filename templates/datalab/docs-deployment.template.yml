@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: docs-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: {{ datalabDocs.replicas }}
+  template:
+    metadata:
+      labels:
+        app: docs
+        environment: {{ environment }}
+    spec:
+      containers:
+        - name: docs
+          image: {{ &datalabDocs.imageName }}:{{ datalabVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docs-service
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: docs
+  type: NodePort
