@@ -10,12 +10,15 @@ internalVolume: datalab-internal
 datalabApp:
   imageName: nerc/datalab-app
   replicas: 2
+  policy: localhost/docker-nginx
 datalabApi:
   imageName: nerc/datalab-api
   replicas: 2
+  policy: localhost/docker-node-alpine
 datalabDocs:
   imageName: nerc/docs
   replicas: 1
+  policy: localhost/docker-nginx
 vault:
   imageName: vault
   version: 0.7.3
