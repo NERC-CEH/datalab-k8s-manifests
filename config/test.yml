@@ -3,7 +3,7 @@ namespace: test
 environment: test
 domain: test-datalab.datalabs.nerc.ac.uk
 
-datalabVersion: 0.7.0-5-g989f8f3
+datalabVersion: 0.7.0-35-g8d1ddbd
 datalabVolume: testlab
 internalVolume: testlab-internal
 
