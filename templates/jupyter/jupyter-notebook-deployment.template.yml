@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: jupyter-notebook
+  name: jupyter-notebook
+  namespace: {{ namespace }}
+spec:
+  template:
+    metadata:
+      labels:
+        name: jupyter-notebook
+        environment: {{ environment }}
+    spec:
+      securityContext:
+        runAsUser: 0
+      containers:
+      - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
+        imagePullPolicy : "IfNotPresent"
+        name: jupyter-notebook
+        command: ["jupyter", "notebook", "--allow-root", "--NotebookApp.token='$(JUPYTER_TOKEN)'", "--NotebookApp.allow_origin='{{ jupyter.origin }}'", "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
+        ports:
+        - containerPort: 8888
+          protocol: TCP
+        env:
+        - name: JUPYTER_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: jupyter-secret
+              key: token
+        volumeMounts:
+            - mountPath: /data
+              name: glusterfsvol
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: {{ datalabVolume }}
+            readOnly: false
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jupyter-notebook-service
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: jupyter-notebook-web-ui
+      port: 80
+      targetPort: 8888
+  selector:
+    name: jupyter-notebook
+  type: NodePort
