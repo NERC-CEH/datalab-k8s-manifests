@@ -27,10 +27,21 @@ spec:
     spec:
       containers:
         - name: minio
-          image: {{ &minio.imageName }}
+          image: {{ &minio.imageName }}:{{ minio.version }}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
+          env:
+          - name: MINIO_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-secret
+                key: accessKey
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: minio-secret
+                key: secretKey
           args: ["server", "/mnt/glusterfs"]
           volumeMounts:
             - mountPath: /mnt/glusterfs

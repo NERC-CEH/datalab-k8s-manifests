@@ -23,8 +23,9 @@ vault:
   imageName: vault
   version: 0.7.3
 minio:
-  imageName: minio/minio
+  imageName: nerc/minio
   connectImage: nerc/connect
+  version: 1.0
 zeppelin:
   imageName: nerc/zeppelin
   version: 0.7.2.2
