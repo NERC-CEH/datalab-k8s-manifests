@@ -23,17 +23,20 @@ vault:
   imageName: vault
   version: 0.7.3
 minio:
-  imageName: minio/minio
+  imageName: nerc/minio
   connectImage: nerc/connect
+  version: 1.0
 zeppelin:
   imageName: nerc/zeppelin
   version: 0.7.2.2
   connectImageName: nerc/zeppelin-connect
-  connectImageVersion: 1.0.0
+  connectImageVersion: 1.0.1
+  grantSudo: "yes"
 jupyter:
   imageName: jupyter/datascience-notebook
   version: b4dd11e16ae4
   origin: testlab-jupyter.datalabs.nerc.ac.uk
+  grantSudo: "yes"
 gluster:
   nodes:
     - 192.168.3.20

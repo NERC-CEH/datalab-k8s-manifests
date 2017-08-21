@@ -16,7 +16,11 @@ spec:
       - image: jupyter/datascience-notebook:b4dd11e16ae4
         imagePullPolicy : "IfNotPresent"
         name: jupyter-notebook
-        command: ["jupyter", "notebook", "--allow-root", "--NotebookApp.token='$(JUPYTER_TOKEN)'", "--NotebookApp.allow_origin='datalab-jupyter.datalabs.nerc.ac.uk'", "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
+        command: ["tini", "--", "start.sh",
+          "jupyter", "notebook",
+          "--NotebookApp.token='$(JUPYTER_TOKEN)'",
+          "--NotebookApp.allow_origin='datalab-jupyter.datalabs.nerc.ac.uk'",
+          "--NotebookApp.notebook_dir='/data/notebooks/jupyter'"]
         ports:
         - containerPort: 8888
           protocol: TCP
@@ -26,6 +30,8 @@ spec:
             secretKeyRef:
               name: jupyter-secret
               key: token
+        - name: GRANT_SUDO
+          value: "yes"
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
