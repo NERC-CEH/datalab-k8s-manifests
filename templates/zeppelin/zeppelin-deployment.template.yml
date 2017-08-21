@@ -13,6 +13,8 @@ spec:
         name: zeppelin-master
         environment: {{ environment }}
     spec:
+      securityContext:
+        runAsUser: 0
       containers:
       - image: {{ &zeppelin.imageName }}:{{ zeppelin.version }}
         imagePullPolicy : "IfNotPresent"
@@ -27,6 +29,8 @@ spec:
           value: /data/notebooks/zeppelin
         - name: SECRET_CONFIG
           value: /secret/shiro.ini
+        - name: GRANT_SUDO
+          value: {{ zeppelin.grantSudo }}
         volumeMounts:
           - name: glusterfsvol
             mountPath: /data
