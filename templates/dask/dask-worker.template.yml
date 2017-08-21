@@ -1,0 +1,36 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dask-workers-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: {{ daskWorker.replicas }}
+  template:
+    metadata:
+      labels:
+        app: dask-workers
+        namespace: {{ namespace }}
+    spec:
+      containers:
+      - name: dask-worker
+        image: {{ &daskWorker.imageName }}:{{ daskWorker.version }}
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: DASK_ROLE
+            value: WORKER
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 4Gi

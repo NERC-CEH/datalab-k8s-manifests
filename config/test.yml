@@ -42,3 +42,10 @@ gluster:
     - 192.168.3.20
     - 192.168.3.21
     - 192.168.3.22
+daskScheduler:
+  imageName: nerc/dask
+  version: latest
+daskWorker:
+  imageName: nerc/dask
+  version: latest
+  replicas: 1
