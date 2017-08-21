@@ -1,0 +1,11 @@
+[
+  {
+    "capacityTotal" : 1,
+    "capacityUsed" : 1,
+    "id" : 1,
+    "linkToStorage" : "https://testlab-minio.datalabs.nerc.ac.uk/minio",
+    "internalEndpoint" : "http://minio-service/minio",
+    "name" : "disk-1",
+    "storageType" : 1
+  }
+]

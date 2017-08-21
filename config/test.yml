@@ -16,6 +16,9 @@ datalabApi:
 datalabDocs:
   imageName: nerc/docs
   replicas: 1
+mongo:
+  imageName: mongo
+  version: 3.4
 vault:
   imageName: vault
   version: 0.7.3

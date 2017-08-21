@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        environment: {{ environment }}
+    spec:
+      containers:
+        - name: mongodb
+          image: {{ &mongo.imageName }}:{{ mongo.version }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+          livenessProbe:
+            exec: 
+              command:
+                - mongo
+                - --eval
+                - "db.serverStatus()"
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: mongodb-volume-1
+              mountPath: /data
+              subPath: mongodb
+      volumes:
+        - name: mongodb-volume-1
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: {{ internalVolume }}
+            readOnly: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    app: mongodb
+  type: NodePort

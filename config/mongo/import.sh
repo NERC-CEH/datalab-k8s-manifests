@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+echo "Job Import started: $(date)"
+
+MONGO_HOST=localhost
+MONGO_PORT=28017
+MONGO_DB_NAME=datalab
+
+echo "Vairables set: $(date)"
+
+mongoimport --host $MONGO_HOST:$MONGO_PORT --db $MONGO_DB_NAME --collection notebooks --type json --drop --file /data/notebookCollection.json --jsonArray
+mongoimport --host $MONGO_HOST:$MONGO_PORT --db $MONGO_DB_NAME --collection dataStorage --type json --drop --file /data/dataStorageCollection.json --jsonArray
+
+echo "Job Import finished: $(date)"
