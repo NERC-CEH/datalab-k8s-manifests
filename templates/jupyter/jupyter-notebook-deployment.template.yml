@@ -33,7 +33,7 @@ spec:
               name: jupyter-secret
               key: token
         - name: GRANT_SUDO
-          value: {{ jupyter.grantSudo }}
+          value: "{{ jupyter.grantSudo }}"
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol

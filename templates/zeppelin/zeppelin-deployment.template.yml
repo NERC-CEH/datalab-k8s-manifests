@@ -30,7 +30,7 @@ spec:
         - name: SECRET_CONFIG
           value: /secret/shiro.ini
         - name: GRANT_SUDO
-          value: {{ zeppelin.grantSudo }}
+          value: "{{ zeppelin.grantSudo }}"
         volumeMounts:
           - name: glusterfsvol
             mountPath: /data
@@ -38,7 +38,7 @@ spec:
             mountPath: /secret
         livenessProbe:
           httpGet:
-            path: index.hmtl
+            path: index.html
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 10
