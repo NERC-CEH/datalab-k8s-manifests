@@ -10,6 +10,8 @@ spec:
       labels:
         app: docs
         environment: {{ environment }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/docs: {{ &datalabDocs.policy }}
     spec:
       containers:
         - name: docs

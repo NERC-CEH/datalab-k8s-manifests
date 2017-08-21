@@ -10,12 +10,15 @@ internalVolume: testlab-internal
 datalabApp:
   imageName: nerc/datalab-app
   replicas: 1
+  policy: localhost/docker-default
 datalabApi:
   imageName: nerc/datalab-api
   replicas: 1
+  policy: localhost/docker-default
 datalabDocs:
   imageName: nerc/docs
   replicas: 1
+  policy: localhost/docker-default
 vault:
   imageName: vault
   version: 0.7.3

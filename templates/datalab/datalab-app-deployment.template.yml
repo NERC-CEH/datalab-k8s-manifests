@@ -10,6 +10,8 @@ spec:
       labels:
         app: datalab-app
         environment: {{ environment }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/datalab-app: {{ &datalabApp.policy }}
     spec:
       containers:
         - name: datalab-app
