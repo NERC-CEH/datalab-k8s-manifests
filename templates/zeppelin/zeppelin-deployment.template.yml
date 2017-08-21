@@ -32,6 +32,12 @@ spec:
             mountPath: /data
           - name: zeppelin-shiro
             mountPath: /secret
+        livenessProbe:
+          httpGet:
+            path: index.hmtl
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
       volumes:
         - name: glusterfsvol
           glusterfs:

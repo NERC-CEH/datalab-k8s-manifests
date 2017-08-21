@@ -29,7 +29,7 @@ zeppelin:
   imageName: nerc/zeppelin
   version: 0.7.2.2
   connectImageName: nerc/zeppelin-connect
-  connectImageVersion: 1.0.0
+  connectImageVersion: 1.0.1
 jupyter:
   imageName: jupyter/datascience-notebook
   version: b4dd11e16ae4
