@@ -1,0 +1,28 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dask-scheduler-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dask-scheduler
+        environment: {{ environment }}
+    spec:
+      containers:
+        - name: dask-scheduler
+          image: {{ &daskScheduler.imageName }}:{{ daskScheduler.version }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8787
+            - containerPort: 8786
+          env:
+            - name: DASK_ROLE
+              value: SCHEDULER
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1Gi

@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spark-worker
+  namespace: {{ namespace }}
+  labels:
+    name: spark-worker
+spec:
+  replicas: {{ sparkWorker.replicas }}
+  template:
+    metadata:
+      labels:
+        name: spark-worker
+        environment: {{ environment }}
+    spec:
+      securityContext:
+        runAsUser: 0
+      containers:
+      - name: spark-worker
+        image: {{ &sparkWorker.imageName }}:{{ sparkWorker.version }}
+        imagePullPolicy : "IfNotPresent"
+        ports:
+        - containerPort: 7078
+          protocol: TCP
+        env:
+        - name: SPARK_ROLE
+          value: WORKER
+        volumeMounts:
+          - mountPath: /data
+            name: glusterfsvol
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: datalab
+            readOnly: false
