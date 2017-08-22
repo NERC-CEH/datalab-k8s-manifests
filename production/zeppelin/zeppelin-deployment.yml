@@ -11,6 +11,8 @@ spec:
       labels:
         name: zeppelin-master
     spec:
+      securityContext:
+        runAsUser: 0
       containers:
       - image: nerc/zeppelin:0.7.2.2
         imagePullPolicy : "IfNotPresent"
@@ -25,11 +27,19 @@ spec:
           value: /data/notebooks/zeppelin
         - name: SECRET_CONFIG
           value: /secret/shiro.ini
+        - name: GRANT_SUDO
+          value: "yes"
         volumeMounts:
           - name: glusterfsvol
             mountPath: /data
           - name: zeppelin-shiro
             mountPath: /secret
+        livenessProbe:
+          httpGet:
+            path: index.hmtl
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
       volumes:
         - name: glusterfsvol
           glusterfs:
