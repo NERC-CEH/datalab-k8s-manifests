@@ -53,20 +53,20 @@ curl -i -X POST \
   --data 'upstream_url=http://192.168.3.6:31913' \
   --data 'https_only=true'
 
-# dask - 30306
-# curl -i -X POST \
-#   --url http://localhost:8001/apis \
-#   --data 'name=datalab-dask' \
-#   --data 'hosts=testlab-dask.test-datalabs.nerc.ac.uk' \
-#   --data 'upstream_url=http://192.168.3.6:30306' \
-#   --data 'https_only=true'
+# dask - 30551
+curl -i -X POST \
+  --url http://localhost:8001/apis \
+  --data 'name=datalab-dask' \
+  --data 'hosts=testlab-dask.test-datalabs.nerc.ac.uk' \
+  --data 'upstream_url=http://192.168.3.6:30551' \
+  --data 'https_only=true'
 
-# spark dashboard - 30318
+# spark dashboard - 32629
 # curl -i -X POST \
 #   --url http://localhost:8001/apis \
 #   --data 'name=datalab-spark' \
 #   --data 'hosts=testlab-spark.test-datalabs.nerc.ac.uk' \
-#   --data 'upstream_url=http://192.168.3.6:30318' \
+#   --data 'upstream_url=http://192.168.3.6:32629' \
 #   --data 'https_only=true'
 
 

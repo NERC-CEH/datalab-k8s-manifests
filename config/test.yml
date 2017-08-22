@@ -34,14 +34,31 @@ zeppelin:
   version: 0.7.2.3
   connectImageName: nerc/zeppelin-connect
   connectImageVersion: 1.0.1
-  grantSudo: 'yes'
+  grantSudo: "yes"
 jupyter:
   imageName: jupyter/datascience-notebook
   version: b4dd11e16ae4
   origin: testlab-jupyter.datalabs.nerc.ac.uk
-  grantSudo: 'yes'
+  grantSudo: "yes"
 gluster:
   nodes:
     - 192.168.3.20
     - 192.168.3.21
     - 192.168.3.22
+daskScheduler:
+  imageName: nerc/dask
+  version: latest
+daskWorker:
+  imageName: nerc/dask
+  version: latest
+  replicas: 1
+sparkMaster:
+  imageName: nerc/spark
+  version: 2.1.0.3
+sparkWorker:
+  imageName: nerc/spark
+  version: 2.1.0.3
+  replicas: 1
+sparkProxy:
+  imageName: elsonrodriguez/spark-ui-proxy
+  version: "1.0"
