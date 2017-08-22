@@ -20,7 +20,15 @@ locally.
 With the Port forward open, run the following command **from within the config/mongo directory** to execute a mongo container and import the required seed data.
 
 ```
-docker run -rm --net="host" -v ${PWD}/<environment>:/data -v ${PWD}/import.sh:/import.sh mongo sh //import.sh
+docker run --rm --net="host" -v ${PWD}/production:/seeddata -v ${PWD}/import.sh:/import.sh mongo sh /import.sh
 ```
 
-The `--net="host"` allows the container to use the open port forward
+The `--net="host"` allows the container to use the open port forward.
+
+Environment variables can be used to set the database name, host and port:
+
+* MONGO_HOST
+* MONGO_PORT
+* MONGO_DB_NAME
+
+These can be set using the docker `-e` flag.

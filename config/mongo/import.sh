@@ -4,9 +4,9 @@ set -e
 
 echo "Job Import started: $(date)"
 
-MONGO_HOST=localhost
-MONGO_PORT=28017
-MONGO_DB_NAME=datalab
+MONGO_HOST=${MONGO_HOST:-localhost}
+MONGO_PORT=${MONGO_PORT:-27017}
+MONGO_DB_NAME=${MONGO_DB_NAME:-datalab}
 
 echo "Vairables set: $(date)"
 
