@@ -31,12 +31,12 @@ zeppelin:
   version: 0.7.2.3
   connectImageName: nerc/zeppelin-connect
   connectImageVersion: 1.0.1
-  grantSudo: 'yes'
+  grantSudo: "yes"
 jupyter:
   imageName: jupyter/datascience-notebook
   version: b4dd11e16ae4
   origin: testlab-jupyter.datalabs.nerc.ac.uk
-  grantSudo: 'yes'
+  grantSudo: "yes"
 gluster:
   nodes:
     - 192.168.3.20

@@ -10,7 +10,7 @@ spec:
     metadata:
       labels:
         app: dask-workers
-        namespace: {{ namespace }}
+        environment: {{ environment }}
     spec:
       containers:
       - name: dask-worker
@@ -19,6 +19,8 @@ spec:
         env:
           - name: DASK_ROLE
             value: WORKER
+          - name: SCHEDULER
+            value: dask-scheduler:8786
           - name: POD_IP
             valueFrom:
               fieldRef:
