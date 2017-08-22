@@ -49,3 +49,13 @@ daskWorker:
   imageName: nerc/dask
   version: latest
   replicas: 4
+sparkMaster:
+  imageName: nerc/spark
+  version: 2.1.0.3
+sparkWorker:
+  imageName: nerc/spark
+  version: 2.1.0.3
+  replicas: 1
+sparkProxy:
+  imageName: elsonrodriguez/spark-ui-proxy
+  version: "1.0"
