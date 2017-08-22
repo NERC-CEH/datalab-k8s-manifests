@@ -1,9 +1,9 @@
 ---
 namespace: test
 environment: test
-domain: test-datalab.datalabs.nerc.ac.uk
+domain: test-datalab.test-datalabs.nerc.ac.uk
 
-datalabVersion: 0.7.0-35-g8d1ddbd
+datalabVersion: 0.7.0-59-g124f861
 datalabVolume: testlab
 internalVolume: testlab-internal
 
