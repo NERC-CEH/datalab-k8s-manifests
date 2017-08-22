@@ -33,8 +33,8 @@ zeppelin:
   connectImageVersion: 1.0.1
   grantSudo: "yes"
 jupyter:
-  imageName: jupyter/datascience-notebook
-  version: b4dd11e16ae4
+  imageName: nerc/jupyter-notebook
+  version: 0.1.0
   origin: testlab-jupyter.datalabs.nerc.ac.uk
   grantSudo: "yes"
 gluster:
