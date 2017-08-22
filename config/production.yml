@@ -3,7 +3,7 @@ namespace: default
 environment: production
 domain: datalab.datalabs.nerc.ac.uk
 
-datalabVersion: 0.7.0-5-g989f8f3
+datalabVersion: 0.7.0-59-g124f861
 datalabVolume: datalab
 internalVolume: datalab-internal
 
@@ -28,7 +28,7 @@ vault:
 minio:
   imageName: nerc/minio
   connectImage: nerc/connect
-  version: 1.0
+  version: "1.0"
 zeppelin:
   imageName: nerc/zeppelin
   version: 0.7.2.2
