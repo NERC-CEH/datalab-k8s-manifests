@@ -28,7 +28,7 @@ spec:
         - name: SPARK_SUBMIT_OPTIONS
           value: "--packages com.esri.geometry:esri-geometry-api:1.2.1"
         - name: ZEPPELIN_JAVA_OPTS
-          value: "-Dshell.command.timeout.millisecs=2700000"
+          value: "-Dshell.command.timeout.millisecs=3600000"
         - name: ZEPPELIN_NOTEBOOK_DIR
           value: /data/notebooks/zeppelin
         - name: SECRET_CONFIG
