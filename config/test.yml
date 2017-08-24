@@ -31,7 +31,7 @@ minio:
   version: "1.0"
 zeppelin:
   imageName: nerc/zeppelin
-  version: 0.7.2.3
+  version: 0.7.2.4
   connectImageName: nerc/zeppelin-connect
   connectImageVersion: 1.0.1
   grantSudo: "yes"
@@ -54,10 +54,10 @@ daskWorker:
   replicas: 1
 sparkMaster:
   imageName: nerc/spark
-  version: 2.1.0.3
+  version: 2.1.0.4
 sparkWorker:
   imageName: nerc/spark
-  version: 2.1.0.3
+  version: 2.1.0.4
   replicas: 1
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
