@@ -38,5 +38,5 @@ spec:
         - name: glusterfsvol
           glusterfs:
             endpoints: glusterfs-cluster
-            path: datalab
+            path: {{ datalabVolume }}
             readOnly: false
