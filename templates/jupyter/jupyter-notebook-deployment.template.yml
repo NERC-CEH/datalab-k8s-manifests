@@ -27,6 +27,8 @@ spec:
         - containerPort: 8888
           protocol: TCP
         env:
+        - name: MASTER
+          value: {{ sparkMasterAddress }}
         - name: JUPYTER_TOKEN
           valueFrom:
             secretKeyRef:
