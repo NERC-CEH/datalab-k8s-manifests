@@ -24,7 +24,7 @@ spec:
           protocol: TCP
         env:
         - name: MASTER
-          value: spark://spark-master:7077
+          value: {{ sparkMasterAddress }}
         - name: SPARK_SUBMIT_OPTIONS
           value: "--packages com.esri.geometry:esri-geometry-api:1.2.1"
         - name: ZEPPELIN_JAVA_OPTS
