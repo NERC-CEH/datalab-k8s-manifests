@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: infrastructure-api-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: {{ infrastructureApi.replicas }}
+  template:
+    metadata:
+      labels:
+        app: infrastructure-api
+        environment: {{ environment }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/infrastructure-api: {{ &infrastructureApi.policy }}
+    spec:
+      containers:
+        - name: infrastructure-api
+          image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10

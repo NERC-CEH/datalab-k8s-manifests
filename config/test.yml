@@ -3,7 +3,7 @@ namespace: test
 environment: test
 domain: testlab.test-datalabs.nerc.ac.uk
 
-datalabVersion: 0.7.0-59-g124f861
+datalabVersion: 0.8.0-5-g19e5a4d
 datalabVolume: testlab
 internalVolume: testlab-internal
 
@@ -13,6 +13,10 @@ datalabApp:
   policy: localhost/docker-default
 datalabApi:
   imageName: nerc/datalab-api
+  replicas: 1
+  policy: localhost/docker-default
+infrastructureApi:
+  imageName: nerc/infrastructure-api
   replicas: 1
   policy: localhost/docker-default
 datalabDocs:
