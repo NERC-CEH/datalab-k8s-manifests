@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    name: shiny-server-deployment
+  name: shiny-server-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: shiny-server
+        environment: {{ environment }}
+    spec:
+      containers:
+      - image: {{ &shinyServer.imageName }}:{{ shinyServer.version }}
+        imagePullPolicy : "IfNotPresent"
+        name:  shiny-server
+        ports:
+        - containerPort: 3838
+          protocol: TCP
+        volumeMounts:
+          - name: glusterfsvol
+            mountPath: /srv/shiny-server
+            subPath: shinyapps
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 1
+            memory: 2Gi
+      volumes:
+        - name: glusterfsvol
+          glusterfs:
+            endpoints: glusterfs-cluster
+            path: {{ datalabVolume }}
+            readOnly: false
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: shiny-server-service
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: shiny-server-web-ui
+      port: 80
+      targetPort: 3838
+  selector:
+    name: shiny-server
+  type: NodePort
