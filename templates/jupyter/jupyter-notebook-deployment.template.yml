@@ -28,7 +28,7 @@ spec:
           protocol: TCP
         env:
         - name: MASTER
-          value: {{ sparkMasterAddress }}
+          value: {{ &sparkMasterAddress }}
         - name: JUPYTER_TOKEN
           valueFrom:
             secretKeyRef:
