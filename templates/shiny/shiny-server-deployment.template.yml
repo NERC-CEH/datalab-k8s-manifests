@@ -14,9 +14,9 @@ spec:
         environment: {{ environment }}
     spec:
       containers:
-      - image: rocker/shiny
+      - image: {{ &shinyServer.imageName }}:{{ shinyServer.version }}
         imagePullPolicy : "IfNotPresent"
-        name:  zeppelin-master
+        name:  shiny-server
         ports:
         - containerPort: 3838
           protocol: TCP
