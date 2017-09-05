@@ -24,7 +24,7 @@ spec:
           protocol: TCP
         env:
         - name: MASTER
-          value: spark://spark-master:7077
+          value: {{ &sparkMasterAddress }}
         - name: SPARK_SUBMIT_OPTIONS
           value: "--packages com.esri.geometry:esri-geometry-api:1.2.1"
         - name: ZEPPELIN_JAVA_OPTS
@@ -40,6 +40,13 @@ spec:
             mountPath: /data
           - name: zeppelin-shiro
             mountPath: /secret
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
         livenessProbe:
           httpGet:
             path: index.html
