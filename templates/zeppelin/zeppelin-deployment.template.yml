@@ -40,6 +40,13 @@ spec:
             mountPath: /data
           - name: zeppelin-shiro
             mountPath: /secret
+        resources:
+          requests:
+            cpu: 200m
+            memory: 128Mi
+          limits:
+            cpu: 2
+            memory: 4Gi
         livenessProbe:
           httpGet:
             path: index.html
