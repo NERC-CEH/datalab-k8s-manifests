@@ -2,6 +2,8 @@
 namespace: test
 environment: test
 domain: testlab.test-datalabs.nerc.ac.uk
+kubernetesMasterUrl: 192.168.3.6
+kongApiUrl: http://192.168.3.30:8001
 
 datalabVersion: 0.8.0-5-g19e5a4d
 datalabVolume: testlab
@@ -45,6 +47,9 @@ jupyter:
   version: 0.1.1
   origin: testlab-jupyter.datalabs.nerc.ac.uk
   grantSudo: "yes"
+kubectl:
+  imageName: nerc/kubectl
+  version: 0.1.0
 gluster:
   nodes:
     - 192.168.3.20

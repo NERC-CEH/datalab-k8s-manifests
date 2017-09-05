@@ -13,10 +13,18 @@ spec:
       annotations:
         container.apparmor.security.beta.kubernetes.io/infrastructure-api: {{ &infrastructureApi.policy }}
     spec:
+      serviceAccountName: infrastructure-service-account
       containers:
         - name: infrastructure-api
           image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
           imagePullPolicy: IfNotPresent
+          env:
+            - name: KUBERNETES_MASTER_URL
+              value: {{ kubernetesMasterUrl }}
+            - name: KONG_API
+              value: {{ kongApiUrl }}
+            - name: KUBERNETES_NAMESPACE
+              value: {{ namespace }}
           ports:
             - containerPort: 8000
           livenessProbe:
@@ -25,6 +33,12 @@ spec:
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
+        - name: kubectl
+          image: {{ &kubectl.imageName }}:{{ kubectl.version }}
+          imagePullPolicy: IfNotPresent
+          command: ['kubectl', 'proxy']
+          ports:
+            - containerPort: 8001
 ---
 apiVersion: v1
 kind: Service
