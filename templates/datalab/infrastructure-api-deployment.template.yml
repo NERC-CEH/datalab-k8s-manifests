@@ -20,9 +20,16 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: KUBERNETES_MASTER_URL
-              value: {{ kubernetesMasterUrl }}
+              value: http://{{ kubernetesMasterIp }}
             - name: KONG_API
-              value: {{ kongApiUrl }}
+              value: {{ &kongApiUrl }}
+            - name: VAULT_API
+              value: http://vault-service:8200
+            - name: VAULT_APP_ROLE
+              valueFrom:
+                secretKeyRef:
+                  name: vault-management-secret
+                  key: vaultAppRole
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
           ports:
