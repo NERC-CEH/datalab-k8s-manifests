@@ -1,11 +1,12 @@
 ---
 namespace: test
 environment: test
+datalabName: testlab
 domain: testlab.test-datalabs.nerc.ac.uk
 kubernetesMasterIp: 192.168.3.6
 kongApiUrl: http://192.168.3.30:8001
 
-datalabVersion: 0.9.0-30-gdee986b
+datalabVersion: 0.9.0-48-g2330a18
 datalabVolume: testlab
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077

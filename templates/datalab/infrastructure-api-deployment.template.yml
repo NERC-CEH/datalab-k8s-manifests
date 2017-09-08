@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: INFRASTRUCTURE_API_PORT
-              value: 8000
+              value: '8000'
             - name: KUBERNETES_MASTER_URL
               value: http://{{ kubernetesMasterIp }}
             - name: KONG_API
