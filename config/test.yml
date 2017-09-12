@@ -73,5 +73,5 @@ sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
   version: "1.0"
 shinyServer:
-  imageName: rocker/shiny
-  version: latest
+  imageName: nerc/rshiny
+  version: 0.1.0
