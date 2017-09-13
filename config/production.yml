@@ -67,3 +67,6 @@ sparkWorker:
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
   version: "1.0"
+shinyServer:
+  imageName: nerc/rshiny
+  version: 0.1.0
