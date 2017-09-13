@@ -38,13 +38,13 @@ minio:
   version: "1.0"
 zeppelin:
   imageName: nerc/zeppelin
-  version: 0.7.2.5
+  version: 0.7.2.6
   connectImageName: nerc/zeppelin-connect
   connectImageVersion: 1.0.1
   grantSudo: "yes"
 jupyter:
   imageName: nerc/jupyter-notebook
-  version: 0.1.1
+  version: 0.1.2
   origin: testlab-jupyter.datalabs.nerc.ac.uk
   grantSudo: "yes"
 kubectl:
@@ -64,10 +64,10 @@ daskWorker:
   replicas: 1
 sparkMaster:
   imageName: nerc/spark
-  version: 2.1.0.5
+  version: 2.1.0.6
 sparkWorker:
   imageName: nerc/spark
-  version: 2.1.0.5
+  version: 2.1.0.6
   replicas: 1
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
