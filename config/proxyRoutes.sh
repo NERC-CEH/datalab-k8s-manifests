@@ -89,3 +89,11 @@ curl -i -X POST \
   --data 'uris=/connect' \
   --data 'strip_uri=true' \
   --data 'https_only=true'
+
+# shiny-server - 31594
+curl -i -X POST \
+  --url http://localhost:8001/apis \
+  --data 'name=datalab-shiny' \
+  --data 'hosts=testlab-shiny.test-datalabs.nerc.ac.uk' \
+  --data 'upstream_url=http://192.168.3.6:31594' \
+  --data 'https_only=true'
