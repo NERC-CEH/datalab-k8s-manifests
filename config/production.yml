@@ -1,7 +1,10 @@
 ---
 namespace: default
 environment: production
+datalabName: datalab
 domain: datalab.datalabs.nerc.ac.uk
+kubernetesMasterIp: 192.168.3.6
+kongApiUrl: http://192.168.3.3:8001
 
 datalabVersion: 0.8.0-5-g19e5a4d
 datalabVolume: datalab
