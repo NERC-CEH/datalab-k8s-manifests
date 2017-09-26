@@ -36,6 +36,8 @@ spec:
               key: token
         - name: GRANT_SUDO
           value: "{{ jupyter.grantSudo }}"
+        - name: R_LIBS_USER
+          value: {{ &sharedRLibs }}
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
