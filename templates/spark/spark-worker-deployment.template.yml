@@ -25,6 +25,8 @@ spec:
         env:
         - name: SPARK_ROLE
           value: WORKER
+        - name: R_LIBS_USER
+          value: {{ &sharedRLibs }}
         volumeMounts:
           - mountPath: /data
             name: glusterfsvol

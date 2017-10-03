@@ -18,7 +18,7 @@ spec:
       - image: {{ &jupyter.imageName }}:{{ jupyter.version }}
         imagePullPolicy : "IfNotPresent"
         name: jupyter-notebook
-        command: ["tini", "--", "start.sh",
+        command: ["start.sh",
           "jupyter", "notebook",
           "--NotebookApp.token='$(JUPYTER_TOKEN)'",
           "--NotebookApp.allow_origin='datalab-jupyter.datalabs.nerc.ac.uk'",
@@ -36,6 +36,8 @@ spec:
               key: token
         - name: GRANT_SUDO
           value: "{{ jupyter.grantSudo }}"
+        - name: R_LIBS_USER
+          value: {{ &sharedRLibs }}
         volumeMounts:
             - mountPath: /data
               name: glusterfsvol
