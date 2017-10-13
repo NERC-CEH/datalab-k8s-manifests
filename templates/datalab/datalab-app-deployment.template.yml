@@ -5,6 +5,7 @@ metadata:
   namespace: {{ namespace }}
 spec:
   replicas: {{ datalabApp.replicas }}
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
