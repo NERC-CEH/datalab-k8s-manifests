@@ -77,3 +77,6 @@ sparkProxy:
 shinyServer:
   imageName: nerc/rshiny
   version: 0.1.1
+threddsServer:
+  imageName: unidata/thredds-docker
+  version: 4.6.10
