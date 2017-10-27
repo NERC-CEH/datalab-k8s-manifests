@@ -27,7 +27,7 @@ spec:
             periodSeconds: 10
           volumeMounts:
             - name: mongodb-volume-1
-              mountPath: /data
+              mountPath: /data/db
               subPath: mongodb
       volumes:
         - name: mongodb-volume-1
