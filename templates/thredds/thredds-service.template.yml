@@ -1,0 +1,13 @@
+---
+kind: Service
+metadata:
+  name: thredds-service
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: thredds-server
+  type: NodePort
