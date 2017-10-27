@@ -6,10 +6,11 @@ domain: datalab.datalabs.nerc.ac.uk
 kubernetesMasterIp: 192.168.3.6
 kongApiUrl: http://192.168.3.3:8001
 
-datalabVersion: 0.8.0-5-g19e5a4d
+datalabVersion: 0.10.0-94-g9b6b991
 datalabVolume: datalab
 internalVolume: datalab-internal
 sparkMasterAddress: spark://spark-master:7077
+sharedRLibs: /data/packages/R/%p/%v
 
 datalabApp:
   imageName: nerc/datalab-app
@@ -39,7 +40,7 @@ minio:
   version: "1.0"
 zeppelin:
   imageName: nerc/zeppelin
-  version: 0.7.2.6
+  version: 0.7.2.7
   connectImageName: nerc/zeppelin-connect
   connectImageVersion: 1.0.1
   grantSudo: "yes"
@@ -48,6 +49,9 @@ jupyter:
   version: 0.1.2
   origin: testlab-jupyter.datalabs.nerc.ac.uk
   grantSudo: "yes"
+kubectl:
+  imageName: nerc/kubectl
+  version: 0.1.0
 gluster:
   nodes:
     - 192.168.3.20
@@ -62,10 +66,10 @@ daskWorker:
   replicas: 4
 sparkMaster:
   imageName: nerc/spark
-  version: 2.1.0.6
+  version: 2.1.0.7
 sparkWorker:
   imageName: nerc/spark
-  version: 2.1.0.6
+  version: 2.1.0.7
   replicas: 4
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
