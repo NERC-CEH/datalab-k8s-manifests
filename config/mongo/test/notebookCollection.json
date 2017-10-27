@@ -4,7 +4,8 @@
     "displayName" : "Biodiversity",
     "type" : "jupyter",
     "url" : "https://testlab-jupyter.test-datalabs.nerc.ac.uk",
-    "internalEndpoint" : "http://jupyter-service"
+    "internalEndpoint" : "http://jupyter-service",
+    "category" : "analysis"
   },
   {
     "name" : "zeppelin",
@@ -14,6 +15,7 @@
     "internalEndpoint" : "http://zeppelin-service",
     "users" : [
       "auth0|595f40a25caf4344b2e0e678"
-    ]
+    ],
+    "category" : "analysis"
   }
 ]
