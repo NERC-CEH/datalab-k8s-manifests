@@ -28,6 +28,11 @@ datalabDocs:
   imageName: nerc/docs
   replicas: 1
   policy: localhost/docker-default
+defaultBackend:
+  imageName: nerc/default-backend
+  replicas: 1
+  policy: localhost/docker-default
+  version: 0.1.0
 mongo:
   imageName: mongo
   version: 3.4
