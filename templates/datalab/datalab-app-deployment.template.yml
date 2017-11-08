@@ -40,3 +40,18 @@ spec:
   selector:
     app: datalab-app
   type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: datalab-app-ingress
+  namespace: {{ namespace }}
+spec:
+  rules:
+  - host: testlab.test-datalabs.nerc.ac.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: datalab-app-service
+          servicePort: 80

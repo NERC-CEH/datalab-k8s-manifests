@@ -6,7 +6,7 @@ domain: testlab.test-datalabs.nerc.ac.uk
 kubernetesMasterIp: 192.168.3.6
 kongApiUrl: http://192.168.3.30:8001
 
-datalabVersion: 0.11.0-19-g745e8cf
+datalabVersion: 0.11.0-44-g43f63fa
 datalabVolume: testlab
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
@@ -32,7 +32,7 @@ defaultBackend:
   imageName: nerc/default-backend
   replicas: 1
   policy: localhost/docker-default
-  version: 0.1.0
+  version: 0.2.0
 mongo:
   imageName: mongo
   version: 3.4
