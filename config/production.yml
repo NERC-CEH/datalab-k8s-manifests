@@ -12,6 +12,10 @@ internalVolume: datalab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 
+datalabAuth:
+  imageName: nerc/authorisation-svc
+  replicas: 1
+  policy: localhost/docker-default
 datalabApp:
   imageName: nerc/datalab-app
   replicas: 2
