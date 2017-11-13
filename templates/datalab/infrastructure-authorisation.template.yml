@@ -10,8 +10,8 @@ metadata:
   name: infrastructure-management-role
   namespace: {{ namespace }}
 rules:
-- apiGroups: ["", "apps"] # "" is the core API group
-  resources: ["secrets", "deployments", "services"]
+- apiGroups: ["", "apps", "extensions"] # "" is the core API group
+  resources: ["secrets", "deployments", "services", "ingresses"]
   verbs: ["get", "list", "update", "create", "patch", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1

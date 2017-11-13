@@ -40,3 +40,18 @@ spec:
   selector:
     app: docs
   type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: datalab-docs-ingress
+  namespace: {{ namespace }}
+spec:
+  rules:
+  - host: testlab-docs.test-datalabs.nerc.ac.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: docs-service
+          servicePort: 80
