@@ -48,10 +48,8 @@ spec:
               name: glusterfsvol
       volumes:
         - name: glusterfsvol
-          glusterfs:
-            endpoints: glusterfs-cluster
-            path: {{ datalabVolume }}
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: {{ datalabVolume }}-claim
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
