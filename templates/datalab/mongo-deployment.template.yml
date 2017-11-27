@@ -31,10 +31,8 @@ spec:
               subPath: mongodb
       volumes:
         - name: mongodb-volume-1
-          glusterfs:
-            endpoints: glusterfs-cluster
-            path: {{ internalVolume }}
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: testlab-internal-claim
 ---
 apiVersion: v1
 kind: Service

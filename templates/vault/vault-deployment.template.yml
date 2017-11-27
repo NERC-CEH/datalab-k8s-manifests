@@ -40,7 +40,5 @@ spec:
               name: vault-volume-1
       volumes:
         - name: vault-volume-1
-          glusterfs:
-            endpoints: glusterfs-cluster
-            path: {{ internalVolume }}
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: testlab-internal-claim
