@@ -30,7 +30,7 @@ datalabApi:
 infrastructureApi:
   imageName: nerc/infrastructure-api
   replicas: 2
-  policy: localhost/docker-node-apline
+  policy: localhost/docker-node-alpine
 datalabDocs:
   imageName: nerc/docs
   replicas: 1
