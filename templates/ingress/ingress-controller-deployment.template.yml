@@ -29,6 +29,7 @@ spec:
             - --disable-node-list
             - --force-namespace-isolation
             - --watch-namespace={{ namespace }}
+            - --default-ssl-certificate={{ namespace }}/tls-secret
           env:
             - name: POD_NAME
               valueFrom:
