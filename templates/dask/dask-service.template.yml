@@ -34,8 +34,12 @@ metadata:
     ingress.kubernetes.io/auth-url: {{ &authUrl }}
     ingress.kubernetes.io/auth-signin: {{ &authSignin }}
 spec:
+  tls:
+  - hosts:
+    - {{ datalabName }}-dask.{{ domain }}
+    secretName: tls-secret
   rules:
-  - host: testlab-dask.test-datalabs.nerc.ac.uk
+  - host: {{ datalabName }}-dask.{{ domain }}
     http:
       paths:
       - path: /
