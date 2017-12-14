@@ -47,8 +47,12 @@ metadata:
   name: datalab-docs-ingress
   namespace: {{ namespace }}
 spec:
+  tls:
+  - hosts:
+    - {{ datalabName }}-docs.{{ domain }}
+    secretName: tls-secret
   rules:
-  - host: testlab-docs.test-datalabs.nerc.ac.uk
+  - host: {{ datalabName }}-docs.{{ domain }}
     http:
       paths:
       - path: /

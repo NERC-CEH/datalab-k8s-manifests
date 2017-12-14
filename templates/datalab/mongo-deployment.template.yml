@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: mongodb-volume-1
           persistentVolumeClaim:
-            claimName: testlab-internal-claim
+            claimName: {{ datalabVolume }}-internal-claim
 ---
 apiVersion: v1
 kind: Service

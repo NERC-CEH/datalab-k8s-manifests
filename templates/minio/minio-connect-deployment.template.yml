@@ -20,7 +20,7 @@ spec:
             - containerPort: 80
           env:
             - name: ORIGIN
-              value: {{ domain }}
+              value: {{ datalabName }}.{{ domain }}
             - name: ACTIONS
               value: "['set']"
           livenessProbe:

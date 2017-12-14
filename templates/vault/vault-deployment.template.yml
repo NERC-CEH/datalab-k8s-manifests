@@ -41,4 +41,4 @@ spec:
       volumes:
         - name: vault-volume-1
           persistentVolumeClaim:
-            claimName: testlab-internal-claim
+            claimName: {{ datalabVolume }}-internal-claim

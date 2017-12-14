@@ -47,8 +47,12 @@ metadata:
   name: datalab-app-ingress
   namespace: {{ namespace }}
 spec:
+  tls:
+  - hosts:
+    - {{ datalabName }}.{{ domain }}
+    secretName: tls-secret
   rules:
-  - host: testlab.test-datalabs.nerc.ac.uk
+  - host: {{ datalabName }}.{{ domain }}
     http:
       paths:
       - path: /
