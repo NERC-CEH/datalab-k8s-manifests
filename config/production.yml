@@ -6,7 +6,7 @@ domain: datalabs.nerc.ac.uk
 kubernetesMasterIp: 192.168.3.6
 kongApiUrl: http://192.168.3.3:8001
 
-datalabVersion: 0.13.0-70-g2bd7172
+datalabVersion: 0.14.0-21-g7ff25d0
 datalabVolume: datalab
 internalVolume: datalab-internal
 sparkMasterAddress: spark://spark-master:7077
