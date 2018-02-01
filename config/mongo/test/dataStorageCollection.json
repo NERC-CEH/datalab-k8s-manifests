@@ -1,11 +1,13 @@
 [
   {
-    "capacityTotal" : 1,
-    "capacityUsed" : 1,
-    "id" : 1,
-    "linkToStorage" : "https://testlab-minio.test-datalabs.nerc.ac.uk/minio",
-    "internalEndpoint" : "http://minio-service/minio",
-    "name" : "disk-1",
-    "storageType" : 1
+      "created" : "2017-11-28 13:40:06.000Z",
+      "description" : "Default storage volume for DataLabs.",
+      "displayName" : "Default Storage",
+      "internalEndpoint" : "http://minio-service/minio",
+      "name" : "testlab",
+      "status" : "requested",
+      "type" : 1,
+      "url" : "https://testlab-minio.test-datalabs.nerc.ac.uk/minio",
+      "volumeSize" : "108"
   }
 ]
