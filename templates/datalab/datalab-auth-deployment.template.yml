@@ -19,13 +19,35 @@ spec:
           image: {{ &datalabAuth.imageName }}:{{ datalabVersion }}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8000
+            - containerPort: 9000
+          env:
+            - name: AUTHORISATION_API_CLIENT_ID
+              value: {{ authorisationClientId }}
+            - name: AUTHORISATION_API_IDENTIFIER
+              value: {{ authorisationIdentifier }}
+            - name: AUTHORISATION_API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: authorisation-api-client-secret
+                  key: secret
+            - name: PUBLIC_KEY
+              value: /etc/keys/public
+            - name: PRIVATE_KEY
+              value: /etc/keys/private
+          volumeMounts:
+            - name: auth-signing-key
+              mountPath: "/etc/keys"
+              readOnly: true
           livenessProbe:
             httpGet:
               path: /status
-              port: 8000
+              port: 9000
             initialDelaySeconds: 5
             periodSeconds: 10
+      volumes:
+        - name: auth-signing-key
+          secret:
+            secretName: auth-signing-key
 ---
 apiVersion: v1
 kind: Service
@@ -36,7 +58,7 @@ spec:
   ports:
     - name: auth
       port: 80
-      targetPort: 8000
+      targetPort: 9000
   selector:
     app: datalab-auth
   type: NodePort
