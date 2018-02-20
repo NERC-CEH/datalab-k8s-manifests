@@ -35,6 +35,8 @@ spec:
                   key: vaultAppRole
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
+            - name: AUTHORISATION_SERVICE
+              value: http://datalab-auth-service
           ports:
             - containerPort: 8000
           livenessProbe:
