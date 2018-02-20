@@ -34,6 +34,8 @@ spec:
                   key: vaultAppRole
             - name: VAULT_API
               value: http://vault-service:8200
+            - name: AUTHORISATION_SERVICE
+              value: http://datalab-auth-service
           livenessProbe:
             httpGet:
               path: /status

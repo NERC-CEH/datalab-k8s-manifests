@@ -1,3 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2016-03-30T18:14:41Z
+  name: datalab-auth-config
+  namespace: {{ namespace }}
+data:
+  permissions: |
+    ---
+    instance-admin: []
+    admin:
+      - name: stacks
+        permissions:
+          - create
+          - delete
+          - list
+          - open
+      - name: storage
+        permissions:
+          - create
+          - delete
+          - view
+          - list
+          - open
+    user:
+      - name: stacks
+        permissions:
+          - create
+          - delete
+          - list
+          - open
+      - name: storage
+        permissions:
+          - list
+          - open
+    viewer:
+      - name: stacks
+        permissions:
+          - list
+          - open
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -34,10 +75,14 @@ spec:
               value: /etc/keys/public
             - name: PRIVATE_KEY
               value: /etc/keys/private
+            - name: AUTHORISATION_PERMISSIONS
+              value: /usr/src/config/permissions.yml
           volumeMounts:
             - name: auth-signing-key
               mountPath: "/etc/keys"
               readOnly: true
+            - name: auth-config
+              mountPath: /usr/src/config
           livenessProbe:
             httpGet:
               path: /status
@@ -48,6 +93,12 @@ spec:
         - name: auth-signing-key
           secret:
             secretName: auth-signing-key
+        - name: auth-config
+          configMap:
+            name: datalab-auth-config
+            items:
+              - key: permissions
+                path: permissions.yml
 ---
 apiVersion: v1
 kind: Service
