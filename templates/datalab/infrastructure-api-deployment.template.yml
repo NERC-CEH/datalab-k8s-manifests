@@ -37,6 +37,8 @@ spec:
               value: {{ namespace }}
             - name: AUTH_SERVICE_URL
               value: {{ &authUrl }}
+            - name: AUTH_SIGNIN_URL
+              value: {{ &authSignin }}
             - name: AUTHORISATION_SERVICE
               value: http://datalab-auth-service
           ports:
