@@ -24,8 +24,6 @@ spec:
               value: '8000'
             - name: KUBERNETES_MASTER_URL
               value: http://{{ kubernetesMasterIp }}
-            - name: KONG_API
-              value: {{ &kongApiUrl }}
             - name: VAULT_API
               value: http://vault-service:8200
             - name: VAULT_APP_ROLE
@@ -35,10 +33,10 @@ spec:
                   key: vaultAppRole
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
-            - name: AUTH_SERVICE_URL
-              value: {{ &authUrl }}
             - name: AUTHORISATION_SERVICE
-              value: http://datalab-auth-service
+              value: {{ &authService }}
+            - name: AUTH_SIGNIN_URL
+              value: {{ &authSignin }}
           ports:
             - containerPort: 8000
           livenessProbe:
