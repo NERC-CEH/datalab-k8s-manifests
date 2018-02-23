@@ -25,6 +25,7 @@ datalabAuth:
   imageName: nerc/authorisation-svc
   replicas: 1
   policy: localhost/docker-default
+  port: 9000 # Remove once production version is over 0.16.0-15-g687e60b
 datalabApp:
   imageName: nerc/datalab-app
   replicas: 1
