@@ -13,7 +13,7 @@ internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 
-authUrl: http://datalab-auth-service.test.svc.cluster.local/auth
+authService: http://datalab-auth-service.test.svc.cluster.local
 authSignin: https://testlab.test-datalabs.nerc.ac.uk
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
