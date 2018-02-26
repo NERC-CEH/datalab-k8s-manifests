@@ -7,7 +7,7 @@ kubernetesMasterIp: 192.168.3.6
 kongApiUrl: http://192.168.3.30:8001
 discourse-ip-address: 192.168.3.50
 
-datalabVersion: 0.18.0-6-g43fe5b9
+datalabVersion: 0.18.0-13-ge139bf1
 datalabVolume: testlab
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
