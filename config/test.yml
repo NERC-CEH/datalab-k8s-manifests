@@ -7,13 +7,13 @@ kubernetesMasterIp: 192.168.3.6
 kongApiUrl: http://192.168.3.30:8001
 discourse-ip-address: 192.168.3.50
 
-datalabVersion: 0.18.0-13-ge139bf1
+datalabVersion: 0.18.0-32-geb75be9
 datalabVolume: testlab
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 
-authUrl: http://datalab-auth-service.test.svc.cluster.local/auth
+authService: http://datalab-auth-service.test.svc.cluster.local
 authSignin: https://testlab.test-datalabs.nerc.ac.uk
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
