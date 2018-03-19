@@ -99,3 +99,5 @@ shinyServer:
 threddsServer:
   imageName: unidata/thredds-docker
   version: 4.6.10
+  wave-dir-vol: nocwavesdir
+  wave-hs-vol: nocwaveshs
