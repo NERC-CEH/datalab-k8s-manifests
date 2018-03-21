@@ -15,6 +15,7 @@ sharedRLibs: /data/packages/R/%p/%v
 
 authService: http://datalab-auth-service.test.svc.cluster.local
 authSignin: https://testlab.test-datalabs.nerc.ac.uk
+authUrl: http://datalab-auth-service.default.svc.cluster.local/auth 
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
 
@@ -99,3 +100,5 @@ shinyServer:
 threddsServer:
   imageName: unidata/thredds-docker
   version: 4.6.10
+  wave-dir-vol: nocwavesdir
+  wave-hs-vol: nocwaveshs

@@ -1,11 +1,12 @@
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: thredds-service
   namespace: {{ namespace }}
 spec:
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
       protocol: TCP
   selector:
@@ -32,4 +33,4 @@ spec:
       - path: /
         backend:
           serviceName: thredds-service
-          servicePort: 8080
+          servicePort: 80

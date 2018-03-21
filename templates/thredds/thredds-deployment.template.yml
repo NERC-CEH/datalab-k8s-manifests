@@ -19,18 +19,18 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - name: glusterfsvol
+            - name: glusterfs-wave-dir
               mountPath: /usr/local/tomcat/content/thredds/threddsConfig.xml
               subPath: thredds/threddsConfig.xml
-            - name: glusterfsvol
+            - name: glusterfs-wave-dir
               mountPath: /usr/local/tomcat/content/thredds/catalog.xml
               subPath: thredds/catalog.xml
-            - name: glusterfsvol
-              mountPath: /usr/local/tomcat/content/thredds/wmsConfig.xml
-              subPath: thredds/wmsConfig.xml
-            - name: glusterfsvol
-              mountPath: /data
-              subPath: chess
+            - name: glusterfs-wave-dir
+              mountPath: /data/wave-dir
+              subPath: wave-dir
+            - name: glusterfs-wave-hs
+              mountPath: /data/wave-hs
+              subPath: wave-hs
           resources:
             requests:
               cpu: 200m
@@ -39,6 +39,9 @@ spec:
               cpu: 1
               memory: 4Gi
       volumes:
-        - name: glusterfsvol
+        - name: glusterfs-wave-dir
           persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-claim
+            claimName: {{ &threddsServer.wave-dir-vol }}-claim
+        - name: glusterfs-wave-hs
+          persistentVolumeClaim:
+            claimName: {{ &threddsServer.wave-hs-vol }}-claim
