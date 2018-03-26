@@ -39,6 +39,8 @@ spec:
               value: {{ &authSignin }}
             - name: AUTHORISATION_SERVICE
               value: {{ &authService }}
+            - name: DATABASE_HOST
+              value: mongo-service
           ports:
             - containerPort: 8000
           livenessProbe:
