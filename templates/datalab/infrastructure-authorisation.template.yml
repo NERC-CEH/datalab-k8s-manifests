@@ -11,8 +11,8 @@ metadata:
   namespace: {{ namespace }}
 rules:
 - apiGroups: ["", "apps", "extensions"] # "" is the core API group
-  resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims"]
-  verbs: ["get", "list", "update", "create", "patch", "delete"]
+  resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims", "events", "pods"]
+  verbs: ["get", "list", "update", "create", "patch", "delete", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding

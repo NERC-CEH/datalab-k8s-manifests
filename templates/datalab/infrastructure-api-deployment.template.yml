@@ -39,6 +39,8 @@ spec:
               value: {{ &authSignin }}
             - name: AUTHORISATION_SERVICE
               value: {{ &authService }}
+            - name: DATABASE_HOST
+              value: mongo-service
           ports:
             - containerPort: 8000
           livenessProbe:
@@ -47,6 +49,15 @@ spec:
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
+        - name: infrastructure-watcher
+          image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
+          imagePullPolicy: IfNotPresent
+          command: ["node", "watcher.js"]
+          env:
+            - name: KUBERNETES_MASTER_URL
+              value: http://{{ kubernetesMasterIp }}
+            - name: KUBERNETES_NAMESPACE
+              value: {{ namespace }}
         - name: kubectl
           image: {{ &kubectl.imageName }}:{{ kubectl.version }}
           imagePullPolicy: IfNotPresent
