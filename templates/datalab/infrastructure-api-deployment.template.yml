@@ -58,6 +58,8 @@ spec:
               value: http://{{ kubernetesMasterIp }}
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
+            - name: DATABASE_HOST
+              value: mongo-service
         - name: kubectl
           image: {{ &kubectl.imageName }}:{{ kubectl.version }}
           imagePullPolicy: IfNotPresent
