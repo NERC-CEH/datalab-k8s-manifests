@@ -22,6 +22,9 @@ data:
           - view
           - list
           - open
+      - name: users
+        permissions:
+          - list
     user:
       - name: stacks
         permissions:
@@ -72,6 +75,13 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: authorisation-api-client-secret
+                  key: secret
+            - name: USER_MANAGEMENT_API_CLIENT_ID
+              value: {{ userManagementClientId }}
+            - name: USER_MANAGEMENT_API_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: user-management-api-client-secret
                   key: secret
             - name: PUBLIC_KEY
               value: /etc/keys/public
