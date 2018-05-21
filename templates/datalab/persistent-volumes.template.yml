@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ datalabName }}-internal-claim
+  name: {{ internalVolume }}-claim
   namespace: {{ namespace }}
   annotations:
     volume.beta.kubernetes.io/storage-class: glusterfs-storage
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ datalabName }}-claim
+  name: {{ datalabVolume }}-claim
   namespace: {{ namespace }}
   annotations:
     volume.beta.kubernetes.io/storage-class: glusterfs-storage
