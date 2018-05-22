@@ -30,7 +30,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: vault-management-secret
-                  key: vaultAppRole
+                  key: secret
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
             - name: AUTH_SIGNIN_URL

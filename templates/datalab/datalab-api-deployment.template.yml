@@ -31,7 +31,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: vault-secret
-                  key: vaultAppRole
+                  key: secret
             - name: VAULT_API
               value: http://vault-service:8200
             - name: AUTHORISATION_SERVICE
