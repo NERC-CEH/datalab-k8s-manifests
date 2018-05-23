@@ -18,7 +18,6 @@ authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
 userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
 
-internalVolumeSize: 10Gi
 dataVolumeSize: 100Gi
 
 datalabAuth:
