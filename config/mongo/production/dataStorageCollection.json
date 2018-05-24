@@ -1,11 +1,14 @@
 [
   {
-    "capacityTotal" : 1,
-    "capacityUsed" : 1,
-    "id" : 1,
-    "linkToStorage" : "https://datalab-minio.datalabs.nerc.ac.uk/minio",
-    "internalEndpoint" : "http://minio-service/minio",
-    "name" : "disk-1",
-    "storageType" : 1
+    "name": "datalab",
+    "status": "requested",
+    "created": "2018-05-24T12:45:47.306Z",
+    "displayName": "Datalab Shared Store",
+    "description": "Shared data store for Spark & Dask.",
+    "type": 1,
+    "volumeSize": "100",
+    "url": "https://datalab-datalab.datalabs.nerc.ac.uk/minio",
+    "internalEndpoint": "http://minio-datalab/minio",
+    "users": []
   }
 ]

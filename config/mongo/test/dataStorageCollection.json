@@ -1,13 +1,14 @@
 [
   {
-      "created" : "2017-11-28 13:40:06.000Z",
-      "description" : "Default storage volume for DataLabs.",
-      "displayName" : "Default Storage",
-      "internalEndpoint" : "http://minio-service/minio",
-      "name" : "testlab",
-      "status" : "requested",
-      "type" : 1,
-      "url" : "https://testlab-minio.test-datalabs.nerc.ac.uk/minio",
-      "volumeSize" : "108"
+    "name": "testlab",
+    "status": "requested",
+    "created": "2018-05-24T12:45:47.306Z",
+    "displayName": "Testlab Shared Store",
+    "description": "Shared data store for Spark & Dask.",
+    "type": 1,
+    "volumeSize": "100",
+    "url": "https://testlab-testlab.test-datalabs.nerc.ac.uk/minio",
+    "internalEndpoint": "http://minio-datalab/minio",
+    "users": []
   }
 ]
