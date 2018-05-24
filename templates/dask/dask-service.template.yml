@@ -1,4 +1,5 @@
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: dask-scheduler-dashboard
@@ -12,6 +13,7 @@ spec:
     app: dask-scheduler
   type: NodePort
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: dask-scheduler
@@ -31,7 +33,7 @@ metadata:
   name: dask-ingress
   namespace: {{ namespace }}
   annotations:
-    ingress.kubernetes.io/auth-url: {{ &authUrl }}
+    ingress.kubernetes.io/auth-url: {{ &authService }}/auth
     ingress.kubernetes.io/auth-signin: {{ &authSignin }}
 spec:
   tls:
