@@ -1,0 +1,117 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+      name: minio-{{ datalabVolume }}
+  name: minio-{{ datalabVolume }}-deployment
+  namespace: {{ namespace }}
+spec:
+  replicas: {{ minio.replicas }}
+  template:
+    metadata:
+      labels:
+        name: minio-{{ datalabVolume }}
+        user-pod: minio
+    spec:
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ["sh"]
+          args: ["-c", "chmod 777 /mnt/glusterfs"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+      containers:
+        - name: minio
+          image: {{ &minio.imageName }}:{{ minio.version }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+          env:
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-shared-store-secret
+                  key: accessKey
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-shared-store-secret
+                  key: secretKey
+          args: ["server", "/mnt/glusterfs"]
+          volumeMounts:
+            - mountPath: /mnt/glusterfs
+              name: glusterfsvol
+          livenessProbe:
+            httpGet:
+              path: /minio/login
+              port: 9000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+        - name: minio-{{ datalabVolume }}-connect
+          image: {{ &minio.connectImage }}:{{ minio.connectVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: ORIGIN
+              value: {{ domain }}
+            - name: ACTIONS
+              value: "['set']"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: glusterfsvol
+          persistentVolumeClaim:
+            claimName: {{ datalabVolume }}-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-{{ datalabVolume }}
+  namespace: {{ namespace }}
+spec:
+  ports:
+    - name: minio-{{ datalabVolume }}-ui
+      port: 80
+      targetPort: 9000
+    - name: minio-{{ datalabVolume }}-connect
+      port: 81
+      targetPort: 80
+  selector:
+    name: minio-{{ datalabVolume }}
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minio-{{ datalabVolume }}
+  namespace: {{ namespace }}
+  annotations:
+    ingress.kubernetes.io/auth-url: {{ &authService }}/auth
+    ingress.kubernetes.io/auth-signin: {{ &authSignin }}
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+    - {{ datalabName }}-{{ datalabVolume }}.{{ domain }}
+    secretName: tls-secret
+  rules:
+  - host: {{ datalabName }}-{{ datalabVolume }}.{{ domain }}
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: minio-service
+            servicePort: 80
+        - path: /connect
+          backend:
+            serviceName: minio-connect-service
+            servicePort: 80

@@ -8,6 +8,7 @@ discourseHostName: datalabs-discourse-test
 
 datalabVersion: 0.22.0-19-gd5b86be
 datalabVolume: testlab
+dataVolumeSize: 100Gi
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
@@ -17,8 +18,6 @@ authSignin: https://testlab.test-datalabs.nerc.ac.uk
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
 userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
-
-dataVolumeSize: 100Gi
 
 datalabAuth:
   imageName: nerc/authorisation-svc
@@ -51,6 +50,12 @@ mongo:
 kubectl:
   imageName: nerc/kubectl
   version: 0.1.0
+minio:
+  imageName: nerc/minio
+  version: "1.0"
+  replicas: 1
+  connectImage: nerc/connect
+  connectVersion: 1.0.0
 daskScheduler:
   imageName: nerc/dask
   version: latest
