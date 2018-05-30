@@ -51,7 +51,7 @@ spec:
               port: 9000
             initialDelaySeconds: 5
             periodSeconds: 10
-        - name: minio-{{ datalabVolume }}-connect
+        - name: minio-connect
           image: {{ &minio.connectImage }}:{{ minio.connectVersion }}
           imagePullPolicy: IfNotPresent
           ports:
@@ -109,9 +109,9 @@ spec:
       paths:
         - path: /
           backend:
-            serviceName: minio-service
+            serviceName: minio-{{ datalabVolume }}
             servicePort: 80
         - path: /connect
           backend:
-            serviceName: minio-connect-service
-            servicePort: 80
+            serviceName: minio-{{ datalabVolume }}
+            servicePort: 81
