@@ -63,10 +63,8 @@ spec:
           image: {{ &datalabAuth.imageName }}:{{ datalabVersion }}
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: {{ datalabAuth.port }} # 9000
+            - containerPort: 9000
           env:
-            - name: PORT
-              value: "{{ datalabAuth.port }}" # Default is 8000/9000
             - name: AUTHORISATION_API_CLIENT_ID
               value: {{ authorisationClientId }}
             - name: AUTHORISATION_API_IDENTIFIER
@@ -98,7 +96,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /status
-              port: {{ datalabAuth.port }} # 9000
+              port: 9000
             initialDelaySeconds: 5
             periodSeconds: 10
       volumes:
@@ -121,7 +119,7 @@ spec:
   ports:
     - name: auth
       port: 80
-      targetPort: {{ datalabAuth.port }} # 9000
+      targetPort: 9000
   selector:
     app: datalab-auth
   type: NodePort

@@ -1,33 +1,28 @@
 ---
-namespace: default
+namespace: prod
 environment: production
 datalabName: datalab
 domain: datalabs.nerc.ac.uk
-kubernetesMasterIp: 192.168.3.6
-kongApiUrl: http://192.168.3.3:8001
-discourse-ip-address: 192.168.3.51
+kubernetesMasterHostName: datalabs-k8s-master-1
+discourseHostName: datalabs-discourse
 
-datalabVersion: 0.14.0-35-g86c0327
+datalabVersion: 0.22.0-19-gd5b86be
 datalabVolume: datalab
+dataVolumeSize: 100Gi
 internalVolume: datalab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 
-authUrl: http://datalab-auth-service.default.svc.cluster.local/auth # Remove once production version is over 0.18.0-15-g652eafa
-# authService: http://datalab-auth-service.default.svc.cluster.local # Add once production version is over 0.18.0-15-g652eafa
+authService: http://datalab-auth-service.prod.svc.cluster.local
 authSignin: https://datalab.datalabs.nerc.ac.uk
-# authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437 # Add once production version is over 0.16.0-28-gc77b277
-# authorisationIdentifier: urn:auth0-authz-api # Add once production version is over 0.16.0-28-gc77b277
-### Required auth secret will need to be added to the kubernetess namespace
-
-internalVolumeSize: 10G
-dataVolumeSize: 200G
+authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
+authorisationIdentifier: urn:auth0-authz-api
+userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
 
 datalabAuth:
   imageName: nerc/authorisation-svc
   replicas: 1
   policy: localhost/docker-default
-  port: 9000 # Remove once production version is over 0.16.0-15-g687e60b
 datalabApp:
   imageName: nerc/datalab-app
   replicas: 2
@@ -51,33 +46,16 @@ defaultBackend:
   version: 0.2.0
 mongo:
   imageName: mongo
-  version: 3.4
-vault:
-  imageName: vault
-  version: 0.7.3
-minio:
-  imageName: nerc/minio
-  connectImage: nerc/connect
-  version: "1.0"
-zeppelin:
-  imageName: nerc/zeppelin
-  version: 0.7.2.7
-  connectImageName: nerc/zeppelin-connect
-  connectImageVersion: 1.0.1
-  grantSudo: "yes"
-jupyter:
-  imageName: nerc/jupyter-notebook
-  version: 0.1.2
-  origin: testlab-jupyter.datalabs.nerc.ac.uk
-  grantSudo: "yes"
+  version: "3.4"
 kubectl:
   imageName: nerc/kubectl
   version: 0.1.0
-gluster:
-  nodes:
-    - 192.168.3.20
-    - 192.168.3.21
-    - 192.168.3.22
+minio:
+  imageName: nerc/minio
+  version: "1.0"
+  replicas: 1
+  connectImage: nerc/connect
+  connectVersion: 1.0.0
 daskScheduler:
   imageName: nerc/dask
   version: latest
@@ -95,9 +73,3 @@ sparkWorker:
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
   version: "1.0"
-shinyServer:
-  imageName: nerc/rshiny
-  version: 0.1.1
-threddsServer:
-  imageName: unidata/thredds-docker
-  version: 4.6.10

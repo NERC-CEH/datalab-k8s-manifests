@@ -23,18 +23,16 @@ spec:
             - name: INFRASTRUCTURE_API_PORT
               value: '8000'
             - name: KUBERNETES_MASTER_URL
-              value: http://{{ kubernetesMasterIp }}
+              value: http://{{ kubernetesMasterHostName }}
             - name: VAULT_API
               value: http://vault-service:8200
             - name: VAULT_APP_ROLE
               valueFrom:
                 secretKeyRef:
                   name: vault-management-secret
-                  key: vaultAppRole
+                  key: secret
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
-            - name: AUTH_SERVICE_URL # Remove once production has deployed PR #234
-              value: {{ &authUrl }}
             - name: AUTH_SIGNIN_URL
               value: {{ &authSignin }}
             - name: AUTHORISATION_SERVICE
@@ -55,7 +53,7 @@ spec:
           command: ["node", "watcher.js"]
           env:
             - name: KUBERNETES_MASTER_URL
-              value: http://{{ kubernetesMasterIp }}
+              value: http://{{ kubernetesMasterHostName }}
             - name: KUBERNETES_NAMESPACE
               value: {{ namespace }}
             - name: DATABASE_HOST

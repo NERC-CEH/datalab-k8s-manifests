@@ -9,7 +9,7 @@ spec:
     port: 80
     targetPort: 80
   type: ExternalName
-  externalName: {{ discourse-ip-address }}
+  externalName: {{ discourseHostName }}
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress

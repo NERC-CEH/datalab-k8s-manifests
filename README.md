@@ -1,34 +1,24 @@
 # Datalab Kubernetes Manifests
 
-This respository contains all of the Kubernetes manifests required to deploy a datalab. There are many different components and each is separated into a different folder.
+This repository contains all of the Kubernetes manifests required to deploy a datalab. There are many different components and each is separated into a different folder.
 
 ## Datalab
 
 Deployment of the datalab application, api and online documentation. For each one a deployment and corresponding service is created.
 
-## Gluster
+## Dask
 
-Creation of the endpoints and service required to support Gluster volumes.
+Deployment of a Dask cluster. Scheduler and worker deployments into a namespace with
+required services.
 
-## Jupyter
+## Discourse
 
-Deployment of a Jupyter notebook with mounted storage and service.
-
-## Minio
-
-Deployment of a Minio container to provide S3 access and a file browser for a Gluster volume.
-
-## Rook
-
-Rook deployment. Possible alternative to Gluster.
+Discourse is deployed as a separate virtual machine within the tenancy; only ingress
+routes to the internal IP address are needed.
 
 ## Spark
 
 Deployment of a Spark cluster. Master and Worker deployments into a namespace with required services.
-
-## Zeppelin
-
-Deployment of a Zeppelin notebook with mounted storage and service.
 
 ## Vault
 

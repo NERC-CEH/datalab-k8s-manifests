@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -49,7 +50,7 @@ metadata:
   name: spark-ingress
   namespace: {{ namespace }}
   annotations:
-    ingress.kubernetes.io/auth-url: {{ &authUrl }}
+    ingress.kubernetes.io/auth-url: {{ &authService }}/auth
     ingress.kubernetes.io/auth-signin: {{ &authSignin }}
 spec:
   tls:
