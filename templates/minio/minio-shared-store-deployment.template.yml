@@ -97,6 +97,7 @@ metadata:
   annotations:
     ingress.kubernetes.io/auth-url: {{ &authService }}/auth
     ingress.kubernetes.io/auth-signin: {{ &authSignin }}
+    ingress.kubernetes.io/client-max-body-size: {{ &clientMaxBodySize }}
     ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
