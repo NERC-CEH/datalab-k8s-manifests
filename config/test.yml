@@ -6,12 +6,13 @@ domain: test-datalabs.nerc.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master-1
 discourseHostName: datalabs-discourse-test
 
-datalabVersion: 0.22.0-19-gd5b86be
+datalabVersion: 0.23.0-31-gcaa0b43
 datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
+maxBodySize: 500m
 
 authService: http://datalab-auth-service.test.svc.cluster.local
 authSignin: https://testlab.test-datalabs.nerc.ac.uk
