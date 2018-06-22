@@ -6,7 +6,7 @@ domain: datalabs.nerc.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master-1
 discourseHostName: datalabs-discourse
 
-datalabVersion: 0.23.0-25-gf07a8b4z
+datalabVersion: 0.23.0-31-gcaa0b43
 datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
