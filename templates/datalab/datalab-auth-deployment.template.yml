@@ -22,6 +22,7 @@ data:
           - view
           - list
           - open
+          - edit
       - name: users
         permissions:
           - list
