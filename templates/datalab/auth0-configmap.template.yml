@@ -9,8 +9,8 @@ data:
       "audience": "https://datalab-api.datalabs.nerc.ac.uk/",
       "clientID": "pz7ZUKi-bL79M6ADP7SWGauOiivdf6Hd",
       "domain": "mjbr.eu.auth0.com",
-      "redirectUri": "https://testlab.test-datalabs.nerc.ac.uk/callback",
+      "redirectUri": "https://{{ datalabName }}.{{ domain }}/callback",
       "responseType": "token id_token",
-      "returnTo": "https://testlab.test-datalabs.nerc.ac.uk/",
+      "returnTo": "https://{{ datalabName }}.{{ domain }}/",
       "scope": "openid profile"
     }
