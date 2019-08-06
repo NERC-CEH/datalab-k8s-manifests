@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth0-config
+  namespace: {{ namespace }}
+data:
+  config: |
+    {
+      "audience": "https://datalab-api.datalabs.nerc.ac.uk/",
+      "clientID": "pz7ZUKi-bL79M6ADP7SWGauOiivdf6Hd",
+      "domain": "mjbr.eu.auth0.com",
+      "redirectUri": "https://testlab.test-datalabs.nerc.ac.uk/callback",
+      "responseType": "token id_token",
+      "returnTo": "https://testlab.test-datalabs.nerc.ac.uk/",
+      "scope": "openid profile"
+    }
