@@ -19,6 +19,7 @@ authSignin: https://testlab.test-datalabs.nerc.ac.uk
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
 userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
+mongoUserName: datalab
 
 datalabAuth:
   imageName: nerc/authorisation-svc
