@@ -47,7 +47,7 @@ defaultBackend:
   version: 0.2.0
 mongo:
   imageName: mongo
-  version: "3.4"
+  version: 4.1.13-bionic
 kubectl:
   imageName: nerc/kubectl
   version: 0.1.0
