@@ -25,6 +25,13 @@ spec:
               value: {{ datalabName }}
             - name: DATABASE_HOST
               value: mongo-service
+            - name: DATABASE_USER
+              value: {{ mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
             - name: INFRASTRUCTURE_API
               value: http://infrastructure-api-service:8000
             - name: VAULT_APP_ROLE

@@ -39,6 +39,13 @@ spec:
               value: {{ &authService }}
             - name: DATABASE_HOST
               value: mongo-service
+            - name: DATABASE_USER
+              value: {{ mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
           ports:
             - containerPort: 8000
           livenessProbe:
@@ -58,6 +65,13 @@ spec:
               value: {{ namespace }}
             - name: DATABASE_HOST
               value: mongo-service
+            - name: DATABASE_USER
+              value: {{ mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
         - name: kubectl
           image: {{ &kubectl.imageName }}:{{ kubectl.version }}
           imagePullPolicy: IfNotPresent

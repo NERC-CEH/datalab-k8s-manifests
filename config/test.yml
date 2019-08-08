@@ -6,7 +6,7 @@ domain: test-datalabs.nerc.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master-1
 discourseHostName: datalabs-discourse-test
 
-datalabVersion: 0.23.0-31-gcaa0b43
+datalabVersion: 0.23.0-135-gcb5eb33
 datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
@@ -19,6 +19,7 @@ authSignin: https://testlab.test-datalabs.nerc.ac.uk
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
 userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
+mongoUserName: datalab
 
 datalabAuth:
   imageName: nerc/authorisation-svc
@@ -47,7 +48,7 @@ defaultBackend:
   version: 0.2.0
 mongo:
   imageName: mongo
-  version: 3.4
+  version: 4.1.13-bionic
 kubectl:
   imageName: nerc/kubectl
   version: 0.1.0
