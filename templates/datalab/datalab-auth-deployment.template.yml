@@ -70,6 +70,15 @@ spec:
               value: {{ authorisationClientId }}
             - name: AUTHORISATION_API_IDENTIFIER
               value: {{ authorisationIdentifier }}
+            - name: DATABASE_HOST
+              value: mongo-service
+            - name: DATABASE_USER
+              value: {{ mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
             - name: AUTHORISATION_API_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -88,15 +97,6 @@ spec:
               value: /etc/keys/private
             - name: AUTHORISATION_PERMISSIONS
               value: /usr/src/config/permissions.yml
-            - name: DATABASE_HOST
-              value: mongo-service
-            - name: DATABASE_USER
-              value: {{ mongoUserName }}
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-password-secret
-                  key: secret
             - name: AUTH_ZERO_AUDIENCE
               value: {{ &auth0Audience }}
             - name: AUTHORISATION_AUDIENCE
