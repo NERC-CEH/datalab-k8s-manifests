@@ -1,29 +1,28 @@
 ---
-namespace: test
-environment: test
-datalabName: testlab
-domain: test-datalabs.nerc.ac.uk
-kubernetesMasterHostName: datalabs-k8s-master-1
-discourseHostName: datalabs-discourse-test
+namespace: prod
+environment: production
+datalabName: datalab
+domain: datalabs.ceh.ac.uk
+kubernetesMasterHostName: ceh-datalabs-k8s-master-1
 
-datalabVersion: 0.23.0-135-gcb5eb33
-datalabVolume: testlab
+datalabVersion: 0.24.0-48-g2ae9e70
+datalabVolume: datalab
 dataVolumeSize: 100Gi
-internalVolume: testlab-internal
+internalVolume: datalab-internal
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
 
-authService: http://datalab-auth-service.test.svc.cluster.local
-authSignin: https://testlab.test-datalabs.nerc.ac.uk
-auth0ClientId: pz7ZUKi-bL79M6ADP7SWGauOiivdf6Hd
-auth0Audience: https://datalab-api.datalabs.nerc.ac.uk/
-authorisationAudience: https://api.datalabs.nerc.ac.uk/
-authorisationIssuer: https://authorisation.datalabs.nerc.ac.uk/
+authService: http://datalab-auth-service.prod.svc.cluster.local
+authSignin: https://datalab.datalabs.ceh.ac.uk
+auth0ClientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
+auth0Audience: https://datalab-api.datalabs.ceh.ac.uk/
+authorisationAudience: https://api.datalabs.ceh.ac.uk/
+authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
 userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
-mongoUserName: datalab
+mongoUserName: datalabs
 
 datalabAuth:
   imageName: nerc/authorisation-svc
@@ -31,28 +30,31 @@ datalabAuth:
   policy: localhost/docker-default
 datalabApp:
   imageName: nerc/datalab-app
-  replicas: 1
-  policy: localhost/docker-default
+  replicas: 2
+  policy: localhost/docker-nginx
 datalabApi:
   imageName: nerc/datalab-api
-  replicas: 1
-  policy: localhost/docker-default
+  replicas: 2
+  policy: localhost/docker-node-alpine
 infrastructureApi:
   imageName: nerc/infrastructure-api
-  replicas: 1
-  policy: localhost/docker-default
+  replicas: 2
+  policy: localhost/docker-node-alpine
 datalabDocs:
   imageName: nerc/docs
   replicas: 1
-  policy: localhost/docker-default
+  policy: localhost/docker-nginx
 defaultBackend:
   imageName: nerc/default-backend
   replicas: 1
-  policy: localhost/docker-default
+  policy: localhost/docker-node-alpine
   version: 0.2.0
 mongo:
   imageName: mongo
-  version: 4.1.13-bionic
+  version: "3.4"
+vault:
+  imageName: vault
+  version: "1.0.3"
 kubectl:
   imageName: nerc/kubectl
   version: 0.1.0
@@ -68,14 +70,14 @@ daskScheduler:
 daskWorker:
   imageName: nerc/dask
   version: latest
-  replicas: 1
+  replicas: 4
 sparkMaster:
   imageName: nerc/spark
   version: 2.1.0.7
 sparkWorker:
   imageName: nerc/spark
   version: 2.1.0.7
-  replicas: 1
+  replicas: 4
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
   version: "1.0"

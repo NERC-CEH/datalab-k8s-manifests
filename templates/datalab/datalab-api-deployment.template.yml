@@ -43,6 +43,10 @@ spec:
               value: http://vault-service:8200
             - name: AUTHORISATION_SERVICE
               value: http://datalab-auth-service
+            - name: AUTHORISATION_AUDIENCE
+              value: {{ &authorisationAudience }}
+            - name: AUTHORISATION_ISSUER
+              value: {{ &authorisationIssuer }}
           livenessProbe:
             httpGet:
               path: /status

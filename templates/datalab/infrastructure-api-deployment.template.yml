@@ -37,6 +37,10 @@ spec:
               value: {{ &authSignin }}
             - name: AUTHORISATION_SERVICE
               value: {{ &authService }}
+            - name: AUTHORISATION_AUDIENCE
+              value: {{ &authorisationAudience }}
+            - name: AUTHORISATION_ISSUER
+              value: {{ &authorisationIssuer }}
             - name: DATABASE_HOST
               value: mongo-service
             - name: DATABASE_USER
