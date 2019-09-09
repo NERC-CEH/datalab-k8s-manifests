@@ -6,7 +6,7 @@ metadata:
 data:
   config: |
     {
-      "audience": "https://datalab-api.{{ domain }}/",
+      "audience": "{{ auth0Audience }}",
       "clientID": "{{ auth0ClientId }}",
       "domain": "mjbr.eu.auth0.com",
       "redirectUri": "https://{{ datalabName }}.{{ domain }}/callback",
