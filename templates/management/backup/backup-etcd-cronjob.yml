@@ -1,0 +1,41 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-etcd
+  namespace: kube-system
+spec:
+  schedule: "00 22 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-etcd
+            # Same image as in /etc/kubernetes/manifests/etcd.yaml
+            image: {{ &etcdBackup.imageName }}:{{ etcdBackup.version }}
+            env:
+            - name: ETCDCTL_API
+              value: "3"
+            command: ["/bin/sh"]
+            args: ["-c", "etcdctl --endpoints=https://127.0.0.1:2379 snapshot save /backup/etcd-snapshot-$(date +%Y-%m-%d_%H:%M:%S_%Z).db --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/peer.crt --key=/etc/kubernetes/pki/etcd/peer.key"]
+            volumeMounts:
+            - mountPath: /backup
+              name: backup
+            - mountPath: /etc/kubernetes/pki/etcd
+              name: etcd-certs
+          restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: {{ kubernetesMasterHostName }}
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          hostNetwork: true
+          volumes:
+          - name: backup
+            persistentVolumeClaim:
+              claimName: etcd-backup-claim
+          - hostPath:
+              path: /etc/kubernetes/pki/etcd
+              type: DirectoryOrCreate
+            name: etcd-certs

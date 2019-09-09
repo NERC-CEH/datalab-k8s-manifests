@@ -3,7 +3,7 @@ namespace: test
 environment: test
 datalabName: testlab
 domain: test-datalabs.nerc.ac.uk
-kubernetesMasterHostName: datalabs-k8s-master-1
+kubernetesMasterHostName: datalabs-k8s-master
 discourseHostName: datalabs-discourse-test
 
 datalabVersion: 0.24.0-48-g2ae9e70
@@ -79,3 +79,6 @@ sparkWorker:
 sparkProxy:
   imageName: elsonrodriguez/spark-ui-proxy
   version: "1.0"
+etcdBackup:
+  imageName: k8s.gcr.io/etcd
+  version: 3.3.10
