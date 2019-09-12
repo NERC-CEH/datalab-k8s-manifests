@@ -6,7 +6,7 @@ metadata:
 data:
   config: |
     {
-      "audience": "{{ auth0Audience }}",
+      "audience": "{{ &auth0Audience }}",
       "clientID": "{{ auth0ClientId }}",
       "domain": "mjbr.eu.auth0.com",
       "redirectUri": "https://{{ datalabName }}.{{ domain }}/callback",
