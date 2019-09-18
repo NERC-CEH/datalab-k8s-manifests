@@ -19,13 +19,22 @@ data:
         permissions:
           - create
           - delete
-          - view
           - list
           - open
           - edit
       - name: users
         permissions:
           - list
+          - read
+      - name: settings
+        permissions:
+          - list
+          - read
+      - name: permissions
+        permissions:
+          - read
+          - create
+          - delete
     user:
       - name: stacks
         permissions:
