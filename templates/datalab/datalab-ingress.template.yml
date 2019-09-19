@@ -1,0 +1,23 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: datalab-ingress
+  namespace: {{ namespace }}
+spec:
+  tls:
+  - hosts:
+    - {{ datalabName }}.{{ domain }}
+    secretName: tls-secret
+  rules:
+  - host: {{ datalabName }}.{{ domain }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: datalab-app-service
+          servicePort: 80
+      - path: /api
+        backend:
+          serviceName: datalab-api-service
+          servicePort: 8000

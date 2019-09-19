@@ -51,22 +51,3 @@ spec:
   selector:
     app: datalab-app
   type: NodePort
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: datalab-app-ingress
-  namespace: {{ namespace }}
-spec:
-  tls:
-  - hosts:
-    - {{ datalabName }}.{{ domain }}
-    secretName: tls-secret
-  rules:
-  - host: {{ datalabName }}.{{ domain }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: datalab-app-service
-          servicePort: 80
