@@ -51,7 +51,7 @@ elasticsearch:
     password: "yourPass"
   bufferChunkLimit: "2M"
   bufferQueueLimit: 8
-  host: "elasticsearch-master.kube-system.svc.cluster.local"
+  host: "elasticsearch-master.efk-logging.svc.cluster.local"
   logstashPrefix: "logstash"
   port: 9200
   path: ""

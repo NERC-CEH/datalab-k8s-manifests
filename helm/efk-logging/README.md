@@ -11,18 +11,23 @@ helm3 repo add elastic https://helm.elastic.co
 helm3 repo add kiwigrid https://kiwigrid.github.io
 ```
 
+### Create logging namespace
+```bash
+kubectl create -f efk-logging/efk-logging-ns.yaml
+```
+
 
 ### Install Helm Charts
 ```bash
-helm3 install elasticsearch elastic/elasticsearch -n kube-system -f efk-logging/values-elastic.yaml
-helm3 install kibana elastic/kibana -n kube-system
-helm3 install fluentd-elasticsearch kiwigrid/fluentd-elasticsearch -n kube-system -f efk-logging/values-fluentd-es.yaml
+helm3 install elasticsearch elastic/elasticsearch -n efk-logging -f efk-logging/values-elastic.yaml
+helm3 install kibana elastic/kibana -n efk-logging
+helm3 install fluentd-elasticsearch kiwigrid/fluentd-elasticsearch -n efk-logging -f efk-logging/values-fluentd-es.yaml
 ```
 
 
 ### Access Kibana at localhost:5601 and create index pattern
 ```bash
-kubectl port-forward $KIBANA_POD 5601:5601 --namespace=kube-system
+kubectl port-forward $KIBANA_POD 5601:5601 --namespace=efk-logging
 ```
 
 ### Migrating from Helm2 to Helm3
