@@ -20,6 +20,8 @@ spec:
           image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
           imagePullPolicy: IfNotPresent
           env:
+            - name: DATALAB_DOMAIN
+              value: {{ domain }}
             - name: INFRASTRUCTURE_API_PORT
               value: '8000'
             - name: VAULT_API

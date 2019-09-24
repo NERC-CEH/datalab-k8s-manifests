@@ -67,22 +67,3 @@ spec:
   selector:
     app: datalab-api
   type: NodePort
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: datalab-api-ingress
-  namespace: {{ namespace }}
-spec:
-  tls:
-  - hosts:
-    - {{ datalabName }}-api.{{ domain }}
-    secretName: tls-secret
-  rules:
-  - host: {{ datalabName }}-api.{{ domain }}
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: datalab-api-service
-          servicePort: 8000
