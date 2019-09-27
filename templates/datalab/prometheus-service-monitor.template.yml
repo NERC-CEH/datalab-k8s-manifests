@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: datalab-service-monitor
+  namespace: {{ namespace }}
+spec:
+  selector:
+    matchLabels:
+      monitor: prometheus
+  endpoints:
+  - port: http
+    interval: 15s

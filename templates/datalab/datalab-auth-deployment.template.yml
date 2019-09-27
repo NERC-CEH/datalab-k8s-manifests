@@ -144,9 +144,11 @@ kind: Service
 metadata:
   name: datalab-auth-service
   namespace: {{ namespace }}
+  labels:
+    monitor: prometheus
 spec:
   ports:
-    - name: auth
+    - name: http
       port: 80
       targetPort: 9000
   selector:
