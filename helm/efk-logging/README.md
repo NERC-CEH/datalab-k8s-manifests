@@ -16,12 +16,16 @@ helm3 repo add kiwigrid https://kiwigrid.github.io
 kubectl create -f efk-logging/efk-logging-ns.yaml
 ```
 
+### Update repos
+```bash
+helm3 repo update
+```
 
 ### Install Helm Charts
 ```bash
-helm3 install elasticsearch elastic/elasticsearch -n efk-logging -f efk-logging/values-elastic.yaml
-helm3 install kibana elastic/kibana -n efk-logging
-helm3 install fluentd-elasticsearch kiwigrid/fluentd-elasticsearch -n efk-logging -f efk-logging/values-fluentd-es.yaml
+helm3 upgrade --install elasticsearch elastic/elasticsearch -n efk-logging -f efk-logging/values-elastic.yaml
+helm3 upgrade --install kibana elastic/kibana -n efk-logging
+helm3 upgrade --install fluentd-elasticsearch kiwigrid/fluentd-elasticsearch -n efk-logging -f efk-logging/values-fluentd-es.yaml
 ```
 
 

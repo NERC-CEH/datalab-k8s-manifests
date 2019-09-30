@@ -30,7 +30,7 @@ priorityClassName: ""
 # Specify where fluentd can find logs
 hostLogDir:
   varLog: /var/log
-  dockerContainers: /var/lib/docker/containers
+  dockerContainers: /data/docker/containers
   libSystemdDir: /usr/lib64
 
 ## Configure resource requests and limits
@@ -124,10 +124,10 @@ podAnnotations: {}
 updateStrategy:
   type: RollingUpdate
 
-tolerations: {}
-  # - key: node-role.kubernetes.io/master
-  #   operator: Exists
-  #   effect: NoSchedule
+tolerations:
+   - key: node-role.kubernetes.io/master
+     operator: Exists
+     effect: NoSchedule
 
 affinity: {}
   # nodeAffinity:
