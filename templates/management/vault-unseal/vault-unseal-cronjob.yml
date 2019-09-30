@@ -1,0 +1,27 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: vault-unseal
+  namespace:  {{ namespace }}
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: vault-unseal-checker
+            image: {{ &vaultUnseal.imageName }}:{{ vaultUnseal.version }}
+            env:
+            - name: VAULT_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: vault-unseal-secret
+                  key: secret
+            - name: VAULT_ADDR
+              value: http://vault-service:8200
+          restartPolicy: OnFailure
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists

@@ -82,3 +82,6 @@ sparkProxy:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
+vaultUnseal:
+  imageName: nerc/vault-unseal
+  version: 1.0.0
