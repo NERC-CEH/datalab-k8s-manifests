@@ -86,6 +86,8 @@ kind: Service
 metadata:
   name: infrastructure-api-service
   namespace: {{ namespace }}
+  labels:
+    monitor: prometheus
 spec:
   ports:
     - name: http

@@ -59,9 +59,11 @@ kind: Service
 metadata:
   name: datalab-api-service
   namespace: {{ namespace }}
+  labels:
+    monitor: prometheus
 spec:
   ports:
-    - name: api
+    - name: http
       port: 8000
       targetPort: 8000
   selector:
