@@ -39,6 +39,10 @@ data:
           - read
           - create
           - delete
+      - name: projects
+        permissions:
+          - edit
+          - read
     user:
       - name: stacks
         permissions:
@@ -50,11 +54,17 @@ data:
         permissions:
           - list
           - open
+      - name: projects
+        permissions:
+          - read
     viewer:
       - name: stacks
         permissions:
           - list
           - open
+      - name: projects
+        permissions:
+          - read
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
