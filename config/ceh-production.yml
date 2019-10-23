@@ -5,7 +5,7 @@ datalabName: datalab
 domain: datalabs.ceh.ac.uk
 kubernetesMasterHostName: ceh-datalabs-k8s-master-1
 
-datalabVersion: 0.24.0-48-g2ae9e70
+datalabVersion: 0.28.0-17-g1c79812 
 datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
@@ -16,7 +16,7 @@ maxBodySize: 500m
 authService: http://datalab-auth-service.prod.svc.cluster.local
 authSignin: https://datalab.datalabs.ceh.ac.uk
 auth0ClientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
-auth0Audience: https://datalab-api.datalabs.ceh.ac.uk/
+auth0Audience: https://datalab.datalabs.ceh.ac.uk/api
 authorisationAudience: https://api.datalabs.ceh.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
@@ -31,23 +31,23 @@ datalabAuth:
 datalabApp:
   imageName: nerc/datalab-app
   replicas: 2
-  policy: localhost/docker-nginx
+  policy: localhost/docker-default
 datalabApi:
   imageName: nerc/datalab-api
   replicas: 2
-  policy: localhost/docker-node-alpine
+  policy: localhost/docker-default
 infrastructureApi:
   imageName: nerc/infrastructure-api
   replicas: 2
-  policy: localhost/docker-node-alpine
+  policy: localhost/docker-default
 datalabDocs:
   imageName: nerc/docs
   replicas: 1
-  policy: localhost/docker-nginx
+  policy: localhost/docker-default
 defaultBackend:
   imageName: nerc/default-backend
   replicas: 1
-  policy: localhost/docker-node-alpine
+  policy: localhost/docker-default
   version: 0.2.0
 mongo:
   imageName: mongo
