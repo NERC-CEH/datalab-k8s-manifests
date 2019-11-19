@@ -11,7 +11,7 @@ metadata:
   namespace: {{ namespace }}
 rules:
 - apiGroups: ["", "apps", "extensions"] # "" is the core API group
-  resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims", "events", "pods","namespaces"]
+  resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims", "events", "pods","namespaces","configmaps"]
   verbs: ["get", "list", "update", "create", "patch", "delete", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
