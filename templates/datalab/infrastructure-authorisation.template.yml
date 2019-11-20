@@ -28,7 +28,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
+kind: ClusterRole
 metadata:
   name: health-check-role
 rules:
@@ -45,6 +45,6 @@ subjects:
   name: infrastructure-service-account
   namespace: {{ namespace }}
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: health-check-role
   apiGroup: rbac.authorization.k8s.io
