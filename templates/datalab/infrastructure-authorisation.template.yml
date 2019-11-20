@@ -5,13 +5,12 @@ metadata:
   namespace: {{ namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
+kind: ClusterRole
 metadata:
   name: infrastructure-management-role
-  namespace: {{ namespace }}
 rules:
-- apiGroups: ["", "apps", "extensions"] # "" is the core API group
-  resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims", "events", "pods"]
+- apiGroups: ["", "apps", "extensions","rbac.authorization.k8s.io"] # "" is the core API group
+  resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims", "events", "pods","namespaces","configmaps","serviceaccounts","rolebindings"]
   verbs: ["get", "list", "update", "create", "patch", "delete", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -29,7 +28,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
+kind: Role
 metadata:
   name: health-check-role
 rules:
@@ -46,6 +45,6 @@ subjects:
   name: infrastructure-service-account
   namespace: {{ namespace }}
 roleRef:
-  kind: ClusterRole
+  kind: Role
   name: health-check-role
   apiGroup: rbac.authorization.k8s.io
