@@ -4,7 +4,6 @@ environment: production
 datalabName: datalab
 domain: datalabs.nerc.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master
-discourseHostName: datalabs-discourse
 
 datalabVersion: 0.23.0-31-gcaa0b43
 datalabVolume: datalab
@@ -62,23 +61,6 @@ minio:
   replicas: 1
   connectImage: nerc/connect
   connectVersion: 1.0.0
-daskScheduler:
-  imageName: nerc/dask
-  version: latest
-daskWorker:
-  imageName: nerc/dask
-  version: latest
-  replicas: 4
-sparkMaster:
-  imageName: nerc/spark
-  version: 2.1.0.7
-sparkWorker:
-  imageName: nerc/spark
-  version: 2.1.0.7
-  replicas: 4
-sparkProxy:
-  imageName: elsonrodriguez/spark-ui-proxy
-  version: "1.0"
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
