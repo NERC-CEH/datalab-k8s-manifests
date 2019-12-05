@@ -6,11 +6,6 @@ This repository contains all of the Kubernetes manifests required to deploy a da
 
 Deployment of the datalab application, api and online documentation. For each one a deployment and corresponding service is created.
 
-## Discourse
-
-Discourse is deployed as a separate virtual machine within the tenancy; only ingress
-routes to the internal IP address are needed.
-
 ## Vault
 
 Deployment of Vault backed by Gluster volume with service.
