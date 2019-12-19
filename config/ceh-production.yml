@@ -5,7 +5,7 @@ datalabName: datalab
 domain: datalabs.ceh.ac.uk
 kubernetesMasterHostName: ceh-datalabs-k8s-master-1
 
-datalabVersion: 0.31.0-3-g80e3a8f
+datalabVersion: 0.31.0-36-g2450e46
 datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
