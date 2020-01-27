@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infrastructure-api-deployment
@@ -6,6 +6,9 @@ metadata:
 spec:
   replicas: {{ infrastructureApi.replicas }}
   revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: infrastructure-api
   template:
     metadata:
       labels:

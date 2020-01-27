@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: docs-deployment
@@ -6,6 +6,9 @@ metadata:
 spec:
   replicas: {{ datalabDocs.replicas }}
   revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: docs
   template:
     metadata:
       labels:
@@ -41,7 +44,7 @@ spec:
     app: docs
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: datalab-docs-ingress

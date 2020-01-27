@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: datalab-app-deployment
@@ -6,6 +6,9 @@ metadata:
 spec:
   replicas: {{ datalabApp.replicas }}
   revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: datalab-app
   template:
     metadata:
       labels:
