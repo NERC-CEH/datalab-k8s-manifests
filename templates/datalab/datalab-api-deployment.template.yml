@@ -50,6 +50,8 @@ spec:
               value: {{ &authorisationAudience }}
             - name: AUTHORISATION_ISSUER
               value: {{ &authorisationIssuer }}
+            - name: NODE_OPTIONS
+              value: --max-http-header-size=81920
           livenessProbe:
             httpGet:
               path: /status

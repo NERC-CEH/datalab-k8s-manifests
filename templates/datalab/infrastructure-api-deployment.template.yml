@@ -53,6 +53,8 @@ spec:
                 secretKeyRef:
                   name: mongo-password-secret
                   key: secret
+            - name: NODE_OPTIONS
+              value: --max-http-header-size=81920
           ports:
             - containerPort: 8000
           livenessProbe:
