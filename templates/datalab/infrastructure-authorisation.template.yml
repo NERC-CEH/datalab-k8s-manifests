@@ -13,19 +13,18 @@ rules:
   resources: ["secrets", "deployments", "services", "ingresses", "persistentvolumeclaims", "events", "pods","pods/log","namespaces","configmaps","serviceaccounts","rolebindings"]
   verbs: ["get", "list", "update", "create", "patch", "delete", "watch"]
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
   name: infrastructure-management
-  namespace: {{ namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: infrastructure-management-role
 subjects:
 - kind: ServiceAccount
   name: infrastructure-service-account
   namespace: {{ namespace }}
-roleRef:
-  kind: Role
-  name: infrastructure-management-role
-  apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
