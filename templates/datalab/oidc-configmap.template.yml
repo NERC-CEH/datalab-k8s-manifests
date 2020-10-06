@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oidc-config
+  namespace: {{ namespace }}
+data:
+  config: |
+    {
+      "client_id": "{{ auth0ClientId }}",
+      "redirect_uri": "https://{{ datalabName }}.{{ domain }}/callback",
+      "response_type": "code",
+      "scope": "openid profile",
+      "authority": "https://mjbr.eu.auth0.com",
+      "automaticSilentRenew": true,
+      "accessTokenExpiringNotificationTime": "600",
+      "filterProtocolClaims": true,
+      "loadUserInfo": true,
+      "extraQueryParams": {
+        "audience": "https://{{ datalabName }}.{{ domain }}/api",
+      },
+      "metadata": {
+        "issuer": "https://mjbr.eu.auth0.com/",
+        "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
+        "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
+        "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ datalabName }}.{{ domain }}/&client_id={{ auth0ClientId }}",
+        "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
+        "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token"
+      }
+    }
