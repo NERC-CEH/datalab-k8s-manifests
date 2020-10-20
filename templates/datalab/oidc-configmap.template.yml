@@ -6,7 +6,7 @@ metadata:
 data:
   config: |
     {
-      "client_id": "{{ auth0ClientId }}",
+      "client_id": "{{ oidcProviderClientId }}",
       "redirect_uri": "https://{{ datalabName }}.{{ domain }}/callback",
       "response_type": "code",
       "scope": "openid profile",
@@ -22,7 +22,7 @@ data:
           "issuer": "https://mjbr.eu.auth0.com/",
           "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
           "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
-          "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ datalabName }}.{{ domain }}/&client_id={{ auth0ClientId }}",
+          "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ datalabName }}.{{ domain }}/&client_id={{ oidcProviderClientId }}",
           "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
           "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token"
       }
