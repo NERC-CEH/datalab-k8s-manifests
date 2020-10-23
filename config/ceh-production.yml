@@ -15,8 +15,8 @@ maxBodySize: 500m
 
 authService: http://datalab-auth-service.prod.svc.cluster.local
 authSignin: https://datalab.datalabs.ceh.ac.uk
-auth0ClientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
-auth0Audience: https://datalab.datalabs.ceh.ac.uk/api
+oidcProviderClientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
+oidcProviderAudience: https://datalab.datalabs.ceh.ac.uk/api
 authorisationAudience: https://api.datalabs.ceh.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
 authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437

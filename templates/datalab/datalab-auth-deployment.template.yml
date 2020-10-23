@@ -123,8 +123,8 @@ spec:
               value: /etc/keys/private
             - name: AUTHORISATION_PERMISSIONS
               value: /usr/src/config/permissions.yml
-            - name: AUTH_ZERO_AUDIENCE
-              value: {{ &auth0Audience }}
+            - name: OIDC_PROVIDER_AUDIENCE
+              value: {{ &oidcProviderAudience }}
             - name: AUTHORISATION_AUDIENCE
               value: {{ &authorisationAudience }}
             - name: AUTHORISATION_ISSUER
