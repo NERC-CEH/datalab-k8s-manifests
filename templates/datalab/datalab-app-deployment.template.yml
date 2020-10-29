@@ -30,16 +30,25 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
           volumeMounts:
-            - name: config-volume
+            - name: oidc-config-volume
               mountPath: /usr/share/nginx/html/web_auth_config.json
               subPath: web_auth_config.json
+            - name: storage-config-volume
+              mountPath: /usr/share/nginx/html/storage_config.json
+              subPath: storage_config.json
       volumes:
-        - name: config-volume
+        - name: oidc-config-volume
           configMap:
             name: oidc-config
             items:
               - key: config
                 path: web_auth_config.json
+        - name: storage-config-volume
+          configMap:
+            name: storage-config
+            items:
+              - key: config
+                path: storage_config.json
 ---
 apiVersion: v1
 kind: Service

@@ -63,6 +63,10 @@ spec:
               port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
+          volumeMounts:
+            - name: storage-config-volume
+              mountPath: /usr/src/app/workspaces/common/src/config/storage_config.json
+              subPath: storage_config.json
         - name: infrastructure-watcher
           image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
           imagePullPolicy: IfNotPresent
@@ -85,6 +89,13 @@ spec:
           command: ['kubectl', 'proxy']
           ports:
             - containerPort: 8001
+      volumes:
+        - name: storage-config-volume
+          configMap:
+            name: storage-config
+            items:
+              - key: config
+                path: storage_config.json
 ---
 apiVersion: v1
 kind: Service
