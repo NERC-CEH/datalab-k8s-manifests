@@ -83,6 +83,10 @@ spec:
                 secretKeyRef:
                   name: mongo-password-secret
                   key: secret
+          volumeMounts:
+            - name: storage-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/storage_config.json
+              subPath: storage_config.json
         - name: kubectl
           image: {{ &kubectl.imageName }}:{{ kubectl.version }}
           imagePullPolicy: IfNotPresent
