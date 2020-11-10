@@ -36,6 +36,9 @@ spec:
             - name: storage-config-volume
               mountPath: /usr/share/nginx/html/storage_config.json
               subPath: storage_config.json
+            - name: image-config-volume
+              mountPath: /usr/share/nginx/html/image_config.json
+              subPath: image_config.json
       volumes:
         - name: oidc-config-volume
           configMap:
@@ -49,6 +52,12 @@ spec:
             items:
               - key: config
                 path: storage_config.json
+        - name: image-config-volume
+          configMap:
+            name: image-config
+            items:
+              - key: config
+                path: image_config.json
 ---
 apiVersion: v1
 kind: Service
