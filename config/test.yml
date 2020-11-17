@@ -5,7 +5,7 @@ datalabName: testlab
 domain: test-datalabs.nerc.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master
 
-datalabVersion: 0.31.0-218-ga2ea110
+datalabVersion: 0.31.0-225-ga5cb87f
 datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
