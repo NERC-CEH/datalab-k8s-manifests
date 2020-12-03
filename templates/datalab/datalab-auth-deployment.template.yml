@@ -104,8 +104,6 @@ spec:
           ports:
             - containerPort: 9000
           env:
-            - name: AUTHORISATION_API_CLIENT_ID
-              value: {{ authorisationClientId }}
             - name: AUTHORISATION_API_IDENTIFIER
               value: {{ authorisationIdentifier }}
             - name: DATABASE_HOST
@@ -116,18 +114,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mongo-password-secret
-                  key: secret
-            - name: AUTHORISATION_API_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: authorisation-api-client-secret
-                  key: secret
-            - name: USER_MANAGEMENT_API_CLIENT_ID
-              value: {{ userManagementClientId }}
-            - name: USER_MANAGEMENT_API_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: user-management-api-client-secret
                   key: secret
             - name: PUBLIC_KEY
               value: /etc/keys/public

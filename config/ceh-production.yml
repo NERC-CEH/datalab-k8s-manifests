@@ -19,9 +19,7 @@ oidcProviderClientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
 oidcProviderAudience: https://datalab.datalabs.ceh.ac.uk/api
 authorisationAudience: https://api.datalabs.ceh.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
-authorisationClientId: QEv6yXf59AczfzdiavrlhC9WPIvDP437
 authorisationIdentifier: urn:auth0-authz-api
-userManagementClientId: ilh0GMVsZzqjYcBPq1sEyJeI2SReF1LP
 mongoUserName: datalabs
 
 datalabAuth:
