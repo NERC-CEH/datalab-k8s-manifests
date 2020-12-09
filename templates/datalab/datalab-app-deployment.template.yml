@@ -39,6 +39,9 @@ spec:
             - name: image-config-volume
               mountPath: /usr/share/nginx/html/image_config.json
               subPath: image_config.json
+            - name: catalogue-config-volume
+              mountPath: /usr/share/nginx/html/catalogue_config.json
+              subPath: catalogue_config.json
       volumes:
         - name: oidc-config-volume
           configMap:
@@ -58,6 +61,12 @@ spec:
             items:
               - key: config
                 path: image_config.json
+        - name: catalogue-config-volume
+          configMap:
+            name: catalogue-config
+            items:
+              - key: config
+                path: catalogue_config.json
 ---
 apiVersion: v1
 kind: Service
