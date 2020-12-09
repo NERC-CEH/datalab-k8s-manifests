@@ -1,0 +1,12 @@
+{
+  "name": "datalab-k8s-manifests",
+  "scripts": {
+    "pretest": "mkdir -p test",
+    "test": "./validate.sh storage-configmap"
+  },
+  "devDependencies": {
+    "ajv-cli": "^3.3.0",
+    "jq2": "^1.0.1",
+    "yamljs": "^0.3.0"
+  }
+}
