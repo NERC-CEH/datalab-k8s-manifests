@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infrastructure-api-deployment
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.global.namespace }}
 spec:
   replicas: {{ .Values.infrastructureApi.replicas }}
   revisionHistoryLimit: 3
@@ -35,7 +35,7 @@ spec:
                   name: vault-management-secret
                   key: secret
             - name: KUBERNETES_NAMESPACE
-              value: {{ .Values.namespace }}
+              value: {{ .Values.global.namespace }}
             - name: AUTH_SIGNIN_URL
               value: {{ .Values.authSignin }}
             - name: AUTHORISATION_SERVICE
@@ -76,7 +76,7 @@ spec:
           command: ["node", "watcher.js"]
           env:
             - name: KUBERNETES_NAMESPACE
-              value: {{ .Values.namespace }}
+              value: {{ .Values.global.namespace }}
             - name: DATABASE_HOST
               value: mongo-service
             - name: DATABASE_USER
@@ -117,7 +117,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: infrastructure-api-service
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.global.namespace }}
   labels:
     monitor: prometheus
 spec:

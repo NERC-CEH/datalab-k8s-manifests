@@ -1,0 +1,6 @@
+# Default values for vault-auto-unseal.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+imageName: nerc/vault-unseal
+imageVersion: 1.0.0
