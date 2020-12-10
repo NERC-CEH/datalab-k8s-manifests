@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docs-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.datalabDocs.replicas }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: docs
+  template:
+    metadata:
+      labels:
+        app: docs
+        environment: {{ .Values.environment }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/docs: {{ .Values.datalabDocs.policy }}
+    spec:
+      containers:
+        - name: docs
+          image: {{ .Values.datalabDocs.imageName }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docs-service
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: docs
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: datalab-docs-ingress
+  namespace: {{ .Values.namespace }}
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.datalabName }}-docs.{{ .Values.domain }}
+    secretName: tls-secret
+  rules:
+  - host: {{ .Values.datalabName }}-docs.{{ .Values.domain }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: docs-service
+          servicePort: 80

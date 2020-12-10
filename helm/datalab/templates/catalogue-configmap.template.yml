@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue-config
+  namespace: {{ .Values.namespace }}
+data:
+  config: |
+    {
+      "available": {{ .Values.catalogueAvailable }}
+    }

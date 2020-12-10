@@ -1,0 +1,71 @@
+# Default values for datalab.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: test
+environment: test
+datalabName: testlab
+domain: test-datalabs.nerc.ac.uk
+kubernetesMasterHostName: datalabs-k8s-master
+
+datalabVolume: testlab
+dataVolumeSize: 100Gi
+internalVolume: testlab-internal
+sparkMasterAddress: spark://spark-master:7077
+sharedRLibs: /data/packages/R/%p/%v
+maxBodySize: 500m
+
+authService: http://datalab-auth-service.test.svc.cluster.local
+authSignin: https://testlab.test-datalabs.nerc.ac.uk
+oidcProviderClientId: pz7ZUKi-bL79M6ADP7SWGauOiivdf6Hd
+oidcProviderAudience: https://datalab.datalabs.nerc.ac.uk/api
+authorisationAudience: https://api.datalabs.nerc.ac.uk/
+authorisationIssuer: https://authorisation.datalabs.nerc.ac.uk/
+authorisationIdentifier: urn:auth0-authz-api
+mongoUserName: datalab
+
+catalogueAvailable: true
+
+datalabAuth:
+  imageName: nerc/authorisation-svc
+  replicas: 1
+  policy: localhost/docker-default
+datalabApp:
+  imageName: nerc/datalab-app
+  replicas: 1
+  policy: localhost/docker-default
+datalabApi:
+  imageName: nerc/datalab-api
+  replicas: 1
+  policy: localhost/docker-default
+infrastructureApi:
+  imageName: nerc/infrastructure-api
+  replicas: 1
+  policy: localhost/docker-default
+datalabDocs:
+  imageName: nerc/docs
+  replicas: 1
+  policy: localhost/docker-default
+defaultBackend:
+  imageName: nerc/default-backend
+  replicas: 1
+  policy: localhost/docker-default
+  version: 0.2.0
+mongo:
+  imageName: mongo
+  version: 4.1.13-bionic
+kubectl:
+  imageName: nerc/kubectl
+  version: 0.1.0
+minio:
+  imageName: nerc/minio
+  version: "1.0"
+  replicas: 1
+  connectImage: nerc/connect
+  connectVersion: 1.0.0
+etcdBackup:
+  imageName: k8s.gcr.io/etcd
+  version: 3.3.10
+vaultUnseal:
+  imageName: nerc/vault-unseal
+  version: 1.0.0
