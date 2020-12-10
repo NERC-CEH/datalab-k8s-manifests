@@ -1,0 +1,29 @@
+{
+  "type":"object",
+  "properties": {
+    "types": {
+      "type": "object",
+      "additionalProperties": {
+        "type":"object",
+        "properties": {
+          "displayValue": {"type": "string"},
+          "description": {"type": "string"},
+          "storageClass": {"type": "string"}
+        },
+        "required":["displayValue","description","storageClass"],
+        "additionalProperties":false
+      }
+    },
+    "creationOptions": {
+      "type": "object",
+      "properties": {
+        "allowedTypes": {"type":"array","contains":{"type":"string"}},
+        "defaultType": {"type":"string"}
+      },
+      "required":["allowedTypes","defaultType"],
+      "additionalProperties": false
+    }
+  },
+  "required":["types","creationOptions"],
+  "additionalProperties": false
+}
