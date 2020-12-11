@@ -2,9 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-global:
-  namespace: test
-
+namespace: test
 environment: test
 datalabName: testlab
 domain: test-datalabs.nerc.ac.uk
@@ -68,3 +66,12 @@ minio:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
+
+deployVault: true
+deployVaultUnseal: true
+vault:
+  imageName: vault
+  version: 1.0.3
+vaultUnseal:
+  imageName: nerc/vault-unseal
+  version: 1.0.0

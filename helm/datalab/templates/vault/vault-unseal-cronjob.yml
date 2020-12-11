@@ -1,9 +1,9 @@
----
+{{- if .Values.deployVaultUnseal -}}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: vault-unseal
-  namespace:  {{ .Values.global.namespace }}
+  namespace:  {{ .Values.namespace }}
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
@@ -12,7 +12,7 @@ spec:
         spec:
           containers:
           - name: vault-unseal-checker
-            image: {{ .Values.imageName }}:{{ .Values.imageVersion }}
+            image: {{ .Values.vaultUnseal.imageName }}:{{ .Values.vaultUnseal.version }}
             env:
             - name: VAULT_KEYS
               valueFrom:
@@ -25,3 +25,4 @@ spec:
           tolerations:
           - effect: NoSchedule
             operator: Exists
+{{- end -}}
