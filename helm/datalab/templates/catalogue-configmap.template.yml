@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue-config
+  namespace: {{ namespace }}
+data:
+  config: |
+    {
+      "available": true
+    }
