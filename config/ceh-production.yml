@@ -5,7 +5,6 @@ datalabName: datalab
 domain: datalabs.ceh.ac.uk
 kubernetesMasterHostName: ceh-datalabs-k8s-master-1
 
-datalabVersion: 0.31.0-79-g6cc9c55
 datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
@@ -21,6 +20,8 @@ authorisationAudience: https://api.datalabs.ceh.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
 authorisationIdentifier: urn:auth0-authz-api
 mongoUserName: datalabs
+
+catalogueAvailable: false
 
 datalabAuth:
   imageName: nerc/authorisation-svc
@@ -50,9 +51,6 @@ defaultBackend:
 mongo:
   imageName: mongo
   version: "3.4"
-vault:
-  imageName: vault
-  version: "1.0.3"
 kubectl:
   imageName: nerc/kubectl
   version: 0.1.0
@@ -62,6 +60,12 @@ minio:
   replicas: 1
   connectImage: nerc/connect
   connectVersion: 1.0.0
+
+deployVault: true
+deployVaultUnseal: true
+vault:
+  imageName: vault
+  version: 1.0.3
 vaultUnseal:
   imageName: nerc/vault-unseal
   version: 1.0.0

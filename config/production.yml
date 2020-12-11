@@ -5,7 +5,6 @@ datalabName: datalab
 domain: datalabs.nerc.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master
 
-datalabVersion: 0.23.0-31-gcaa0b43
 datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
@@ -21,6 +20,8 @@ authorisationAudience: https://api.datalabs.nerc.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.nerc.ac.uk/
 authorisationIdentifier: urn:auth0-authz-api
 mongoUserName: datalab
+
+catalogueAvailable: false
 
 datalabAuth:
   imageName: nerc/authorisation-svc
@@ -62,3 +63,12 @@ minio:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
+
+deployVault: true
+deployVaultUnseal: true
+vault:
+  imageName: vault
+  version: 1.0.3
+vaultUnseal:
+  imageName: nerc/vault-unseal
+  version: 1.0.0
