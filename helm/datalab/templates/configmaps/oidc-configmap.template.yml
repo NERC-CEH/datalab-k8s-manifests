@@ -2,12 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: oidc-config
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
 data:
   config: |
     {
-      "client_id": "{{ oidcProviderClientId }}",
-      "redirect_uri": "https://{{ datalabName }}.{{ domain }}/callback",
+      "client_id": "{{ .Values.oidcProviderClientId }}",
+      "redirect_uri": "https://{{ .Values.datalabName }}.{{ .Values.domain }}/callback",
       "response_type": "code",
       "scope": "openid profile",
       "authority": "https://mjbr.eu.auth0.com",
@@ -22,7 +22,7 @@ data:
           "issuer": "https://mjbr.eu.auth0.com/",
           "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
           "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
-          "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ datalabName }}.{{ domain }}/&client_id={{ oidcProviderClientId }}",
+          "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ .Values.datalabName }}.{{ .Values.domain }}/&client_id={{ .Values.oidcProviderClientId }}",
           "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
           "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token"
       }

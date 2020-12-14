@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb-deployment
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   selector:
@@ -12,15 +12,15 @@ spec:
     metadata:
       labels:
         app: mongodb
-        environment: {{ environment }}
+        environment: {{ .Values.environment }}
     spec:
       containers:
         - name: mongodb
-          image: {{ &mongo.imageName }}:{{ mongo.version }}
+          image: {{ .Values.mongo.imageName }}:{{ .Values.mongo.version }}
           imagePullPolicy: IfNotPresent
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              value: {{ mongoUserName }}
+              value: {{ .Values.mongoUserName }}
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -43,13 +43,13 @@ spec:
       volumes:
         - name: mongodb-volume-1
           persistentVolumeClaim:
-            claimName: {{ datalabVolume }}-internal-claim
+            claimName: {{ .Values.datalabVolume }}-internal-claim
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mongo-service
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
     - port: 27017

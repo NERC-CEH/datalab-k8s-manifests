@@ -1,8 +1,9 @@
+{{- if .Values.deployVault -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: vault-service
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
     - name: http
@@ -11,3 +12,4 @@ spec:
   selector:
     app: vault
   type: NodePort
+{{- end -}}

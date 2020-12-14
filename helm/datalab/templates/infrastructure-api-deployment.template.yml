@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: infrastructure-api-deployment
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
-  replicas: {{ infrastructureApi.replicas }}
+  replicas: {{ .Values.infrastructureApi.replicas }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -13,18 +13,18 @@ spec:
     metadata:
       labels:
         app: infrastructure-api
-        environment: {{ environment }}
+        environment: {{ .Values.environment }}
       annotations:
-        container.apparmor.security.beta.kubernetes.io/infrastructure-api: {{ &infrastructureApi.policy }}
+        container.apparmor.security.beta.kubernetes.io/infrastructure-api: {{ .Values.infrastructureApi.policy }}
     spec:
       serviceAccountName: infrastructure-service-account
       containers:
         - name: infrastructure-api
-          image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
+          image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
           env:
             - name: DATALAB_DOMAIN
-              value: {{ domain }}
+              value: {{ .Values.domain }}
             - name: INFRASTRUCTURE_API_PORT
               value: '8000'
             - name: VAULT_API
@@ -35,19 +35,19 @@ spec:
                   name: vault-management-secret
                   key: secret
             - name: KUBERNETES_NAMESPACE
-              value: {{ namespace }}
+              value: {{ .Values.namespace }}
             - name: AUTH_SIGNIN_URL
-              value: {{ &authSignin }}
+              value: {{ .Values.authSignin }}
             - name: AUTHORISATION_SERVICE
-              value: {{ &authService }}
+              value: {{ .Values.authService }}
             - name: AUTHORISATION_AUDIENCE
-              value: {{ &authorisationAudience }}
+              value: {{ .Values.authorisationAudience }}
             - name: AUTHORISATION_ISSUER
-              value: {{ &authorisationIssuer }}
+              value: {{ .Values.authorisationIssuer }}
             - name: DATABASE_HOST
               value: mongo-service
             - name: DATABASE_USER
-              value: {{ mongoUserName }}
+              value: {{ .Values.mongoUserName }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -71,16 +71,16 @@ spec:
               mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
               subPath: image_config.json
         - name: infrastructure-watcher
-          image: {{ &infrastructureApi.imageName }}:{{ datalabVersion }}
+          image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
           command: ["node", "watcher.js"]
           env:
             - name: KUBERNETES_NAMESPACE
-              value: {{ namespace }}
+              value: {{ .Values.namespace }}
             - name: DATABASE_HOST
               value: mongo-service
             - name: DATABASE_USER
-              value: {{ mongoUserName }}
+              value: {{ .Values.mongoUserName }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -94,7 +94,7 @@ spec:
               mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
               subPath: image_config.json
         - name: kubectl
-          image: {{ &kubectl.imageName }}:{{ kubectl.version }}
+          image: {{ .Values.kubectl.imageName }}:{{ .Values.kubectl.version }}
           imagePullPolicy: IfNotPresent
           command: ['kubectl', 'proxy']
           ports:
@@ -117,7 +117,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: infrastructure-api-service
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
   labels:
     monitor: prometheus
 spec:

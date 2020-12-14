@@ -3,14 +3,14 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: datalab-ingress
-  namespace: {{ namespace }}
+  namespace: {{ .Values.namespace }}
 spec:
   tls:
   - hosts:
-    - {{ datalabName }}.{{ domain }}
+    - {{ .Values.datalabName }}.{{ .Values.domain }}
     secretName: tls-secret
   rules:
-  - host: {{ datalabName }}.{{ domain }}
+  - host: {{ .Values.datalabName }}.{{ .Values.domain }}
     http:
       paths:
       - path: /
