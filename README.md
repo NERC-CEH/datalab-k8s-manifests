@@ -1,7 +1,7 @@
 # DataLab Kubernetes Manifests
 
 This repository contains the Kubernetes manifests required to deploy a DataLab. 
-These manifests are configured to be deployed using [Helm](https://helm.sh/) through a single Helm chart located at `helm/datalab`.
+These manifests are configured to be deployed using [Helm 3](https://helm.sh/) through a single Helm chart located at `helm/datalab`.
 
 ## Installing a DataLab
 

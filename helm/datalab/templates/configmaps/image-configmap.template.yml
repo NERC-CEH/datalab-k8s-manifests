@@ -7,7 +7,7 @@ data:
   config: |
     {
       "categories": {
-        "NOTEBOOK": {
+        "ANALYSIS": {
           "userActions": {
             "share": true,
             "edit": true,
@@ -16,7 +16,7 @@ data:
             "logs": false
           }
         },
-        "SITE": {
+        "PUBLISH": {
           "userActions": {
             "share": true,
             "edit": true,
@@ -29,7 +29,7 @@ data:
       },
       "types": {
         "dask": {
-          "type": "INFRASTRUCTURE",
+          "category": "INFRASTRUCTURE",
           "versions": [
             {
               "image": "daskdev/dask:2.30.0"
@@ -38,7 +38,7 @@ data:
         },
         "jupyter": {
           "displayName": "Jupyter",
-          "category": "NOTEBOOK",
+          "category": "ANALYSIS",
           "versions": [
             {
               "displayName": "Dask 2.30.0 support",
@@ -48,7 +48,7 @@ data:
         },
         "jupyterlab": {
           "displayName": "JupyterLab",
-          "category": "NOTEBOOK",
+          "category": "ANALYSIS",
           "versions": [
             {
               "displayName": "Dask 2.30.0 support",
@@ -67,7 +67,7 @@ data:
         },
         "nbviewer": {
           "displayName": "NBViewer",
-          "category": "SITE",
+          "category": "PUBLISH",
           "versions": [
             {
               "displayName": "Latest",
@@ -77,7 +77,7 @@ data:
         },
         "rshiny": {
           "displayName": "RShiny",
-          "category": "SITE",
+          "category": "PUBLISH",
           "userSelectableVersion": true,
           "versions": [
             {
@@ -96,7 +96,7 @@ data:
         },
         "rstudio": {
           "displayName": "RStudio",
-          "category": "NOTEBOOK",
+          "category": "ANALYSIS",
           "userSelectableVersion": true,
           "versions": [
             {
@@ -124,7 +124,7 @@ data:
         },
         "zeppelin": {
           "displayName": "Zepplin",
-          "category": "NOTEBOOK",
+          "category": "ANALYSIS",
           "versions": [
             {
               "displayName": "0.7.2.7",
