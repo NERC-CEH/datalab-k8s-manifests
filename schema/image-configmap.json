@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "categories": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "userActions": {
+            "type": "object",
+            "properties": {
+              "share": {"type": "boolean"},
+              "edit": {"type": "boolean"},
+              "restart": {"type": "boolean"},
+              "delete": {"type": "boolean"},
+              "logs": {"type": "boolean"}
+            },
+            "required": ["share","edit","restart","delete","logs"],
+            "additionalProperties": false
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    "types": {
+      "type": "object",
+      "properties": {},
+      "required": [],   
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "displayName": {"type": "string"},
+          "category": {"type": "string"},
+          "userSelectableVersion": {"type": "boolean"},
+          "masterAddress": {"type": "string"},
+          "sharedRLibs": {"type": "string"},
+          "versions": {
+            "type": "array",
+            "contains": {
+              "type": "object",
+              "properties": {
+                "displayName": {"type": "string"},
+                "image": {"type": "string"},
+                "connectImage": {"type": "string"}
+              },
+              "required": ["image"],
+              "additionalProperties": false
+            }
+          },
+          "userActionOverrides": {
+            "type": "object",
+            "properties": {
+              "share": {"type": "boolean"},
+              "edit": {"type": "boolean"},
+              "restart": {"type": "boolean"},
+              "delete": {"type": "boolean"},
+              "logs": {"type": "boolean"}
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": ["category", "versions"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["categories", "types"],
+  "additionalProperties": false
+}

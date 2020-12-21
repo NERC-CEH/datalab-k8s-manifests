@@ -14,7 +14,7 @@ data:
           "scope": "openid profile",
           "authority": "https://mjbr.eu.auth0.com",
           "automaticSilentRenew": true,
-          "accessTokenExpiringNotificationTime": "600",
+          "accessTokenExpiringNotificationTime": 600,
           "filterProtocolClaims": true,
           "loadUserInfo": true,
           "extraQueryParams": {

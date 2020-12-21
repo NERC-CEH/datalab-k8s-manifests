@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "oidc": {
+      "type": "object",
+      "properties": {
+        "userManager": {
+          "type": "object",
+          "properties": {
+            "client_id": {"type": "string"},
+            "redirect_uri": {"type": "string"},
+            "response_type": {"type": "string"},
+            "scope": {"type": "string"},
+            "authority": {"type": "string"},
+            "automaticSilentRenew": {"type": "boolean"},
+            "accessTokenExpiringNotificationTime": {"type": "number"},
+            "filterProtocolClaims": {"type": "boolean"},
+            "loadUserInfo": {"type": "boolean"},
+            "extraQueryParams": {
+              "type": "object",
+              "properties": {
+                "audience": {"type": "string"}
+              },
+              "required": ["audience"],
+              "additionalProperties": false
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "issuer": {"type": "string"},
+                "authorization_endpoint": {"type": "string"},
+                "userinfo_endpoint": {"type": "string"},
+                "end_session_endpoint": {"type": "string"},
+                "jwks_uri": {"type": "string"},
+                "token_endpoint": {"type": "string"}
+              },
+              "required": ["issuer","authorization_endpoint","userinfo_endpoint","end_session_endpoint","jwks_uri","token_endpoint"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["client_id","redirect_uri","response_type","scope","authority","automaticSilentRenew","accessTokenExpiringNotificationTime","filterProtocolClaims","loadUserInfo","extraQueryParams","metadata"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["userManager"],
+      "additionalProperties": false
+    },
+    "signUp": {
+      "type": "object",
+      "properties": {
+        "selfService": {"type": "boolean"},
+        "requestEmail": {"type": "string"}
+      },
+      "required": ["selfService"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["oidc","signUp"],
+  "additionalProperties": false
+}

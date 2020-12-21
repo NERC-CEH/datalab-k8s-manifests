@@ -1,7 +1,7 @@
 {
   "name": "datalab-k8s-manifests",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "jest": {
     "testEnvironment": "node"

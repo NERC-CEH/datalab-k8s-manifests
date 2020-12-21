@@ -16,6 +16,13 @@
 	  },
 		"editor.codeActionsOnSave": {
 			"source.fixAll": true
-		}
+		},
+		"cSpell.language": "en-gb",
+		"cSpell.words": [
+			"datalab",
+			"configmap",
+			"oidc",
+			"configmaps"
+		]
 	}
 }
