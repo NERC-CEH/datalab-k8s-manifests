@@ -53,3 +53,7 @@ echo -n 'KEY_1,KEY_2' > ./vault_keys.txt
 kubectl create secret -n <namespace> generic vault-unseal-secret --from-file=./vault_keys.txt
 rm -f ./vault_keys.txt
 ```
+
+---
+
+[![Build Status](https://github.com/NERC-CEH/datalab-k8s-manifests/workflows/Push%20action/badge.svg)](https://github.com/NERC-CEH/datalab-k8s-manifests/workflows/Push%20action/badge.svg)

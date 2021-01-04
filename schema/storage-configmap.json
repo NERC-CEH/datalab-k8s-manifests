@@ -3,6 +3,8 @@
   "properties": {
     "types": {
       "type": "object",
+      "properties": {},
+      "required": [],
       "additionalProperties": {
         "type":"object",
         "properties": {
