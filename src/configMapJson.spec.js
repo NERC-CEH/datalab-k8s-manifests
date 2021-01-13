@@ -2,20 +2,39 @@ const path = require('path');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const Ajv = require('ajv');
+const { execSync } = require('child_process');
 
-// replace known booleans like {{ .Values.catalogueAvailable }} with false, so JSON can be parsed and checked
-function replaceKnownBooleans(rawConfigString) {
-  const knownBooleans = ['catalogueAvailable'];
-  const reducer = (accumulator, currentValue) => accumulator.replace(`{{ .Values.${currentValue} }}`, 'false');
-  const configString = knownBooleans.reduce(reducer, rawConfigString);
-  return configString;
+function renderHelmTemplate(templatePath) {
+  const directoryToRenderFrom = path.resolve(__dirname, '../helm/');
+  const chartName = 'datalab';
+
+  // Render the template using helm's templating engine.
+  // Removes need for special handling of the Helm templating syntax.
+  return execSync(
+    `helm template ${chartName} --show-only ${templatePath}`,
+    { cwd: directoryToRenderFrom },
+  ).toString();
 }
 
-function validateConfigMap(configMap) {
-  const template = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, `../helm/datalab/templates/configmaps/${configMap}-configmap.template.yml`)));
-  const configString = replaceKnownBooleans(template.data.config);
-  const config = JSON.parse(configString);
-  const schema = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../schema/${configMap}-configmap.json`)));
+function renderConfigMap(configMapName) {
+  const templatePath = `templates/configmaps/${configMapName}-configmap.template.yml`;
+  return renderHelmTemplate(templatePath);
+}
+
+function getSchema(filePath) {
+  const fullSchemaPath = path.resolve(__dirname, filePath);
+  return JSON.parse(fs.readFileSync(fullSchemaPath).toString());
+}
+
+function getConfigMapSchema(configMapName) {
+  const configMapPath = `../schema/${configMapName}-configmap.json`;
+  return getSchema(configMapPath);
+}
+
+function validateConfigMap(configMapName) {
+  const configMap = yaml.safeLoad(renderConfigMap(configMapName));
+  const config = JSON.parse(configMap.data.config);
+  const schema = getConfigMapSchema(configMapName);
   const ajv = new Ajv({ allErrors: true });
   const valid = ajv.validate(schema, config);
   if (!valid) {

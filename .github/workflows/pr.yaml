@@ -25,6 +25,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12"
+      - name: Install Helm
+        # Method from Helm documentation https://helm.sh/docs/intro/install/#from-script
+        run: >
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          && chmod 700 get_helm.sh
+          && ./get_helm.sh
+        shell: bash
       - name: npm install
         run: npm install
         shell: bash

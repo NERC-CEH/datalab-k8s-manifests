@@ -6,5 +6,18 @@ metadata:
 data:
   config: |
     {
-      "available": {{ .Values.catalogueAvailable }}
+      "available": {{ .Values.catalogueAvailable }},
+      {{- if .Values.catalogueAvailable }}
+      "storage": {
+        {{- with .Values.catalogueStorage }}
+        "type": "{{ .type }}",
+
+        {{- if eq .type "nfs" }}
+        "server": "{{ .server }}",
+        "rootDirectory": "{{ .rootDirectory }}"
+        {{- end }}
+
+        {{- end }}
+      }
+      {{- end }}
     }
