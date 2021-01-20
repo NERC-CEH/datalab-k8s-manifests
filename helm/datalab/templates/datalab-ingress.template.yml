@@ -4,11 +4,12 @@ kind: Ingress
 metadata:
   name: datalab-ingress
   namespace: {{ .Values.namespace }}
-  nginx.ingress.kubernetes.io/configuration-snippet: |
-    if ($request_uri ~* \.(json)) {
-      expires 1M;
-      add_header Cache-Control "no-store, no-cache, must-revalidate";
-    }
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($request_uri ~* \.(json)) {
+        expires 1M;
+        add_header Cache-Control "no-store, no-cache, must-revalidate";
+      }
 spec:
   tls:
   - hosts:
