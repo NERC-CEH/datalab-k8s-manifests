@@ -27,13 +27,6 @@ spec:
               value: {{ .Values.domain }}
             - name: INFRASTRUCTURE_API_PORT
               value: '8000'
-            - name: VAULT_API
-              value: http://vault-service:8200
-            - name: VAULT_APP_ROLE
-              valueFrom:
-                secretKeyRef:
-                  name: vault-management-secret
-                  key: secret
             - name: KUBERNETES_NAMESPACE
               value: {{ .Values.namespace }}
             - name: AUTH_SIGNIN_URL
