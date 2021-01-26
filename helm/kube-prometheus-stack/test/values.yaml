@@ -15,7 +15,6 @@ alertmanager:
           resources:
             requests:
               storage: 5Gi
-        selector: {}
 
 ## Deploy Grafana
 ##
@@ -68,4 +67,3 @@ prometheus:
           resources:
             requests:
               storage: 5Gi
-        selector: {}

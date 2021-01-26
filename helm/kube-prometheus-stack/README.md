@@ -10,5 +10,11 @@ helm repo update
 
 ### Install Helm Chart
 ```bash
-helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack --namespace prometheus -f values.yaml
+kubectl create ns prometheus
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace prometheus -f test/values.yaml
+```
+
+### Create Monitoring Ingress
+```bash
+kubectl create -f test/monitor-ingress.yaml
 ```
