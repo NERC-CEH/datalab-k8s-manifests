@@ -1,0 +1,69 @@
+alertmanager:
+  ## Deploy alertmanager
+  ##
+  alertmanagerSpec:
+    ## Standard object’s metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata
+    ## Metadata Labels and Annotations gets propagated to the Alertmanager pods.
+    ##
+    storage:
+      volumeClaimTemplate:
+        metadata:
+          name: data
+        spec:
+          storageClassName: glusterfs-storage
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
+
+## Deploy Grafana
+##
+grafana:
+  adminPassword: <grafana-admin-password>
+  persistence:
+    enabled: true
+    storageClassName: glusterfs-storage
+    accessModes: ["ReadWriteOnce"]
+    size: 5Gi
+
+  grafana.ini:
+    auth.github:
+      enabled: true
+      client_id: <prod-grafana-oauth-client_id>
+      client_secret: <prod-grafana-oauth-client-secret>
+      scopes: user:email,read:org
+      team_ids: '2320760'
+      auth_url: https://github.com/login/oauth/authorize
+      token_url: https://github.com/login/oauth/access_token
+      api_url: https://api.github.com/user
+      allow_sign_up: true
+
+    server:
+      domain: datalab-monitoring.datalabs.ceh.ac.uk
+      root_url: https://datalab-monitoring.datalabs.ceh.ac.uk
+
+## Configuration for prometheus-node-exporter subchart
+##
+prometheus-node-exporter:
+  service:
+    port: 30206
+    targetPort: 30206
+
+## Deploy a Prometheus instance
+##
+prometheus:
+  prometheusSpec:
+  ## Prometheus StorageSpec for persistent data
+    ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/storage.md
+    ##
+    serviceMonitorSelectorNilUsesHelmValues: false
+    storageSpec:
+      volumeClaimTemplate:
+        metadata:
+          name: data
+        spec:
+          storageClassName: glusterfs-storage
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
