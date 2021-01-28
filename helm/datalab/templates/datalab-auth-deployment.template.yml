@@ -8,7 +8,11 @@ data:
     ---
     instanceAdmin:
       permissions:
-        - admin
+        - instance:admin
+        - data:manager
+    dataManager:
+      permissions:
+        - data:manager
     catalogueRole:
       - role: admin
         permissions:
