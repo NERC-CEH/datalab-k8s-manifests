@@ -37,13 +37,6 @@ spec:
                   key: secret
             - name: INFRASTRUCTURE_API
               value: http://infrastructure-api-service:8000
-            - name: VAULT_APP_ROLE
-              valueFrom:
-                secretKeyRef:
-                  name: vault-secret
-                  key: secret
-            - name: VAULT_API
-              value: http://vault-service:8200
             - name: AUTHORISATION_SERVICE
               value: http://datalab-auth-service
             - name: AUTHORISATION_AUDIENCE

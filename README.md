@@ -1,5 +1,7 @@
 # DataLab Kubernetes Manifests
 
+[![Build Status](https://github.com/NERC-CEH/datalab-k8s-manifests/workflows/Push%20action/badge.svg)](https://github.com/NERC-CEH/datalab-k8s-manifests/workflows/Push%20action/badge.svg)
+
 This repository contains the Kubernetes manifests required to deploy a DataLab. 
 These manifests are configured to be deployed using [Helm 3](https://helm.sh/) through a single Helm chart located at `helm/datalab`.
 
@@ -37,23 +39,3 @@ To update the version of DataLab that is to be deployed, the `appVersion` in `.h
 The `appVersion` should be set to the Docker tag of the DataLab version to be deployed.
 When making changes in either of these places, the chart `version` field needs to be updated. 
 This is covered in more detail in comments within `./helm/datalab/Chart.yaml` itself. 
-
-## Additional notes
-
-### Vault unseal
-
-By default, the DataLab Helm chart [deploys a cronjob](helm/datalab/templates/vault/vault-unseal-cronjob.yml) that runs periodically to unseal the vault should it be rescheduled for any reason.
-This can be opted out of by setting `deployVaultUnseal` to `false`.
-For the unseal job to work, the vault keys must be stored in a Kubernetes secret. 
-This secret must be created manually in the correct namespace. 
-See the following snippet for an example of how this can be done where `<namespace>` should be replaced with the `namespace` value used when installing DataLab (e.g. `test` by default).
-
-```bash
-echo -n 'KEY_1,KEY_2' > ./vault_keys.txt
-kubectl create secret -n <namespace> generic vault-unseal-secret --from-file=./vault_keys.txt
-rm -f ./vault_keys.txt
-```
-
----
-
-[![Build Status](https://github.com/NERC-CEH/datalab-k8s-manifests/workflows/Push%20action/badge.svg)](https://github.com/NERC-CEH/datalab-k8s-manifests/workflows/Push%20action/badge.svg)

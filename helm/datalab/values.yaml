@@ -70,12 +70,3 @@ minio:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
-
-deployVault: true
-deployVaultUnseal: true
-vault:
-  imageName: vault
-  version: 1.0.3
-vaultUnseal:
-  imageName: nerc/vault-unseal
-  version: 1.0.0
