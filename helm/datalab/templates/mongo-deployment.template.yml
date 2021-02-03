@@ -18,6 +18,13 @@ spec:
         - name: mongodb
           image: {{ .Values.mongo.imageName }}:{{ .Values.mongo.version }}
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: {{ .Values.mongoUserName }}

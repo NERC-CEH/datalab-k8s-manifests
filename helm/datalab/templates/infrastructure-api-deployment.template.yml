@@ -22,6 +22,13 @@ spec:
         - name: infrastructure-api
           image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           env:
             - name: DATALAB_DOMAIN
               value: {{ .Values.domain }}
