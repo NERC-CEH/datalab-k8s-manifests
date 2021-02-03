@@ -14,8 +14,10 @@ spec:
       labels:
         app: infrastructure-api
         environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
       annotations:
         container.apparmor.security.beta.kubernetes.io/infrastructure-api: {{ .Values.infrastructureApi.policy }}
+      {{- end }}
     spec:
       serviceAccountName: infrastructure-service-account
       containers:

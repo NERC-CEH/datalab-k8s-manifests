@@ -14,8 +14,10 @@ spec:
       labels:
         app: docs
         environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
       annotations:
         container.apparmor.security.beta.kubernetes.io/docs: {{ .Values.datalabDocs.policy }}
+      {{- end }}
     spec:
       containers:
         - name: docs
