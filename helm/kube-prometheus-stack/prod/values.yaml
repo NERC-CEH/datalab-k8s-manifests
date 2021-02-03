@@ -46,8 +46,8 @@ grafana:
 ##
 prometheus-node-exporter:
   service:
-    port: 30206
-    targetPort: 30206
+    port: 32766
+    targetPort: 32766
 
 ## Deploy a Prometheus instance
 ##
