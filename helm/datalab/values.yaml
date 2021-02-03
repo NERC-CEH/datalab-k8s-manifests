@@ -24,6 +24,9 @@ authorisationIssuer: https://authorisation.datalabs.nerc.ac.uk/
 authorisationIdentifier: urn:auth0-authz-api
 mongoUserName: datalab
 
+# Don't turn this off in production!
+useAppArmor: true
+
 catalogueAvailable: true
 catalogueStorage:
   type: nfs

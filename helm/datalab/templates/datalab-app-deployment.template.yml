@@ -14,8 +14,10 @@ spec:
       labels:
         app: datalab-app
         environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
       annotations:
         container.apparmor.security.beta.kubernetes.io/datalab-app: {{ .Values.datalabApp.policy }}
+      {{- end }}
     spec:
       containers:
         - name: datalab-app

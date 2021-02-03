@@ -97,8 +97,10 @@ spec:
       labels:
         app: datalab-auth
         environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
       annotations:
         container.apparmor.security.beta.kubernetes.io/datalab-auth: {{ .Values.datalabAuth.policy }}
+      {{- end }}
     spec:
       containers:
         - name: datalab-auth
