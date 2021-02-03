@@ -28,7 +28,7 @@ catalogueAvailable: true
 catalogueStorage:
   type: nfs
   server: 192.168.3.16
-  rootDirectory: /central-asset-repository
+  rootDirectory: /central-asset-repository/nfs
 
 datalabAuth:
   imageName: nerc/authorisation-svc
