@@ -72,6 +72,9 @@ spec:
             - name: image-config-volume
               mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
               subPath: image_config.json
+            - name: catalogue-asset-repo-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+              subPath: catalogue_asset_repo_config.json
         - name: infrastructure-watcher
           image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
@@ -95,6 +98,9 @@ spec:
             - name: image-config-volume
               mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
               subPath: image_config.json
+            - name: catalogue-asset-repo-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+              subPath: catalogue_asset_repo_config.json
         - name: kubectl
           image: {{ .Values.kubectl.imageName }}:{{ .Values.kubectl.version }}
           imagePullPolicy: IfNotPresent
@@ -114,6 +120,12 @@ spec:
             items:
               - key: config
                 path: image_config.json
+        - name: catalogue-asset-repo-config-volume
+          configMap:
+            name: catalogue-asset-repo-config
+            items:
+              - key: config
+                path: catalogue_asset_repo_config.json
 ---
 apiVersion: v1
 kind: Service
