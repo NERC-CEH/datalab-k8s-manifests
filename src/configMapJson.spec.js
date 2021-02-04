@@ -44,8 +44,8 @@ function validateConfigMap(configMapName) {
 }
 
 describe('configMap JSON are valid', () => {
-  it('catalogue', () => {
-    expect(validateConfigMap('catalogue')).toEqual(true);
+  it('catalogue asset repo', () => {
+    expect(validateConfigMap('catalogue-asset-repo')).toEqual(true);
   });
 
   it('image', () => {
