@@ -73,3 +73,5 @@ minio:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
+metadata-catalogue:
+  auth: datalabs
