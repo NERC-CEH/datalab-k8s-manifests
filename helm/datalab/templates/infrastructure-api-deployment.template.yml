@@ -73,7 +73,7 @@ spec:
               mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
               subPath: image_config.json
             - name: catalogue-asset-repo-config-volume
-              mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+              mountPath: /usr/src/app/node_modules/common/src/config/catalogue_asset_repo_config.json
               subPath: catalogue_asset_repo_config.json
         - name: infrastructure-watcher
           image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
@@ -99,7 +99,7 @@ spec:
               mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
               subPath: image_config.json
             - name: catalogue-asset-repo-config-volume
-              mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+              mountPath: /usr/src/app/node_modules/common/src/config/catalogue_asset_repo_config.json
               subPath: catalogue_asset_repo_config.json
         - name: kubectl
           image: {{ .Values.kubectl.imageName }}:{{ .Values.kubectl.version }}
