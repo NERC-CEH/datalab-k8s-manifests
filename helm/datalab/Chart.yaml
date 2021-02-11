@@ -25,5 +25,5 @@ appVersion: 0.31.3-33-g242c11d6
 
 dependencies:
   - name: metadata-catalogue
-    version: 1.10.0
+    version: 1.10.1
     repository: "https://nerc-ceh.github.io/charts"
