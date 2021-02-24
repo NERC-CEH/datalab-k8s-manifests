@@ -41,7 +41,7 @@ spec:
             - name: AUTH_SIGNIN_URL
               value: {{ .Values.authSignin }}
             - name: AUTHORISATION_SERVICE
-              value: http://datalab-auth-service
+              value: {{ template "datalab.auth-service-internal-url" . }}
             - name: AUTHORISATION_AUDIENCE
               value: {{ .Values.authorisationAudience }}
             - name: AUTHORISATION_ISSUER
