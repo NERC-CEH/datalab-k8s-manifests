@@ -11,6 +11,7 @@
 	},
 	"settings": {
 		"editor.formatOnSave": false,
+		"editor.tabSize": 2,
 		"[JavaScript]": {
 			"editor.formatOnSave": true,
 	  },
@@ -19,10 +20,11 @@
 		},
 		"cSpell.language": "en-gb",
 		"cSpell.words": [
-			"datalab",
 			"configmap",
-			"oidc",
-			"configmaps"
+			"configmaps",
+			"dask",
+			"datalab",
+			"oidc"
 		]
 	}
 }
