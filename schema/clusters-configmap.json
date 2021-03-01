@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "definitions": {
+    "range": {
+      "type": "object",
+      "properties": {
+        "lowerLimit": {"type": "number"},
+        "default": {"type": "number"},
+        "upperLimit": {"type": "number"}
+      },
+      "required": ["lowerLimit", "default", "upperLimit"],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "dask": {
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "type": "object",
+          "properties": {
+            "workersMax": {"$ref": "#/definitions/range"}
+          },
+          "required": ["workersMax"],
+          "additionalProperties": false
+        },
+        "workers": {
+          "type": "object",
+          "properties": {
+            "memoryMax_GB": {"$ref": "#/definitions/range"}  ,          
+            "CpuMax_vCPU": {"$ref": "#/definitions/range"}            
+          },
+          "required": ["memoryMax_GB", "CpuMax_vCPU"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["cluster", "workers"],
+      "additionalProperties": false
+    }
+  }
+}

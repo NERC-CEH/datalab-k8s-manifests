@@ -51,6 +51,9 @@ spec:
             - name: catalogue-asset-repo-config-volume
               mountPath: /usr/share/nginx/html/catalogue_asset_repo_config.json
               subPath: catalogue_asset_repo_config.json
+            - name: clusters-config-volume
+              mountPath: /usr/share/nginx/html/clusters_config.json
+              subPath: clusters_config.json
       volumes:
         - name: oidc-config-volume
           configMap:
@@ -76,6 +79,12 @@ spec:
             items:
               - key: config
                 path: catalogue_asset_repo_config.json
+        - name: clusters-config-volume
+          configMap:
+            name: clusters-config
+            items:
+              - key: config
+                path: clusters_config.json
 ---
 apiVersion: v1
 kind: Service
