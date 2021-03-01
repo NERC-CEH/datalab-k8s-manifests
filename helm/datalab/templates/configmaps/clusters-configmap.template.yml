@@ -16,7 +16,7 @@ data:
         },
         "workers": {
           "memoryMax_GB": {
-            "lowerLimit": 4,
+            "lowerLimit": 0.5,
             "default": 4,
             "upperLimit": 8
           },
