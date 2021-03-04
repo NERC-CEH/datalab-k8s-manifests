@@ -1,0 +1,181 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datalab-auth-config
+  namespace: {{ .Values.namespace }}
+data:
+  permissions: |
+    ---
+    instanceAdmin:
+      permissions:
+        - instance:admin
+        - data:manager
+    dataManager:
+      permissions:
+        - data:manager
+    catalogueRole:
+      - role: admin
+        permissions:
+          - admin
+      - role: publisher
+        permissions:
+          - publish
+      - role: editor
+        permissions:
+          - edit
+    projectRoles:
+      admin:
+        - name: stacks
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+        - name: storage
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+        - name: users
+          permissions:
+            - list
+            - read
+        - name: settings
+          permissions:
+            - list
+            - read
+            - edit
+        - name: permissions
+          permissions:
+            - read
+            - create
+            - delete
+        - name: projects
+          permissions:
+            - edit
+            - read
+      user:
+        - name: stacks
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+        - name: storage
+          permissions:
+            - list
+            - open
+        - name: projects
+          permissions:
+            - read
+      viewer:
+        - name: stacks
+          permissions:
+            - list
+            - open
+        - name: projects
+          permissions:
+            - read
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalab-auth-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.datalabAuth.replicas }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: datalab-auth
+  template:
+    metadata:
+      labels:
+        app: datalab-auth
+        environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/datalab-auth: {{ .Values.datalabAuth.policy }}
+      {{- end }}
+    spec:
+      containers:
+        - name: datalab-auth
+          image: {{ .Values.datalabAuth.imageName }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: 9000
+          env:
+            - name: AUTHORISATION_API_IDENTIFIER
+              value: {{ .Values.authorisationIdentifier }}
+            - name: DATABASE_HOST
+              value: mongo-service
+            - name: DATABASE_USER
+              value: {{ .Values.mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
+            - name: PUBLIC_KEY
+              value: /etc/keys/public
+            - name: PRIVATE_KEY
+              value: /etc/keys/private
+            - name: AUTHORISATION_PERMISSIONS
+              value: /usr/src/config/permissions.yml
+            - name: OIDC_PROVIDER_AUDIENCE
+              value: {{ .Values.oidcProviderAudience }}
+            - name: AUTHORISATION_AUDIENCE
+              value: {{ .Values.authorisationAudience }}
+            - name: AUTHORISATION_ISSUER
+              value: {{ .Values.authorisationIssuer }}
+            - name: NODE_OPTIONS
+              value: --max-http-header-size=81920
+          volumeMounts:
+            - name: auth-signing-key
+              mountPath: "/etc/keys"
+              readOnly: true
+            - name: auth-config
+              mountPath: /usr/src/config
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 9000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: auth-signing-key
+          secret:
+            secretName: auth-signing-key
+        - name: auth-config
+          configMap:
+            name: datalab-auth-config
+            items:
+              - key: permissions
+                path: permissions.yml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalab-auth-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    monitor: prometheus
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 9000
+  selector:
+    app: datalab-auth
+  type: NodePort
