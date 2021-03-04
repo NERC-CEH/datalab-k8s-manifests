@@ -52,7 +52,7 @@ data:
           "versions": [
             {
               "displayName": "Dask 2.30.0 support",
-              "image": "nerc/fbf2130:f200ab964cea-dask-2.30.0"
+              "image": "nerc/jupyterlab:fbf2130-dask-2.30"
             }
           ]
         },
