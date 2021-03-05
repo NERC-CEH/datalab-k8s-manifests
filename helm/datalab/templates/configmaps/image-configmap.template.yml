@@ -82,6 +82,10 @@ data:
           "versions": [
             {
               "default": true,
+              "displayName": "4.0.4",
+              "image": "nerc/rshiny:4.0.4"
+            },
+            {
               "displayName": "4.0.1",
               "image": "nerc/rshiny:4.0.1"
             },
@@ -101,6 +105,11 @@ data:
           "versions": [
             {
               "default": true,
+              "displayName": "4.0.4",
+              "image": "nerc/rstudio:4.0.4",
+              "connectImage": "nerc/zeppelin-connect:1.1.1"
+            },
+            {
               "displayName": "4.0.1",
               "image": "nerc/rstudio:4.0.1",
               "connectImage": "nerc/zeppelin-connect:1.1.1"
