@@ -21,4 +21,4 @@ version: 0.15.2
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # For DataLab, this is the Docker tag for the version to be deployed.
-appVersion: 0.31.4-98-g45d8aa8d
+appVersion: 0.31.4-100-gf14107f3
