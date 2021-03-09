@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: monitoring-ingress
+  namespace: prometheus
+spec:
+  tls:
+  - hosts:
+    - datalab-monitoring.datalabs.ceh.ac.uk
+  rules:
+  - host: datalab-monitoring.datalabs.ceh.ac.uk
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kube-prometheus-stack-grafana
+          servicePort: 80

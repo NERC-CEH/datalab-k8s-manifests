@@ -35,7 +35,7 @@ function validateConfigMap(configMapName) {
   const configMap = yaml.safeLoad(renderConfigMap(configMapName));
   const config = JSON.parse(configMap.data.config);
   const schema = getConfigMapSchema(configMapName);
-  const ajv = new Ajv({ allErrors: true });
+  const ajv = new Ajv({ allErrors: true, strictTypes: true, strictTuples: true });
   const valid = ajv.validate(schema, config);
   if (!valid) {
     console.error(ajv.errors);
@@ -46,6 +46,10 @@ function validateConfigMap(configMapName) {
 describe('configMap JSON are valid', () => {
   it('catalogue asset repo', () => {
     expect(validateConfigMap('catalogue-asset-repo')).toEqual(true);
+  });
+
+  it('clusters', () => {
+    expect(validateConfigMap('clusters')).toEqual(true);
   });
 
   it('image', () => {

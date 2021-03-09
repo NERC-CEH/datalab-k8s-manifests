@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json-schema.org/schema#",
   "type": "object",
   "properties": {
     "catalogue": {
@@ -42,26 +43,8 @@
     },
     "assetRepo": {
       "type": "object",
-      "properties": {
-        "types": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object",
-            "properties": {
-              "description": {
-                "type": "string"
-              },
-              "displayValue": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "types"
-      ]
+      "properties": { },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
