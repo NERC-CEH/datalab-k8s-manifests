@@ -10,6 +10,7 @@ These manifests are configured to be deployed using [Helm 3](https://helm.sh/) t
 The Helm chart can be installed with default values using the following command where `<release_name>` is to be replaced with a name of your choice e.g. `datalab`.
 
 ```bash
+helm dependency build ./helm/datalab
 helm install <release_name> ./helm/datalab
 ```
 
@@ -28,6 +29,7 @@ Additional value files for different CEH environments are provided in the `confi
 Installed DataLabs can be upgraded to the latest chart using the following command where `<release_name>` is to be replaced with the name used when installing the DataLab Helm chart in [Installing a DataLab](#installing-a-datalab).
 
 ```bash
+helm dependency build ./helm/datalab/
 helm upgrade <release_name> ./helm/datalab
 ```
 
