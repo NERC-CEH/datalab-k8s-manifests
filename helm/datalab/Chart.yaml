@@ -27,3 +27,4 @@ dependencies:
   - name: metadata-catalogue
     version: 1.10.1
     repository: "https://nerc-ceh.github.io/charts"
+    condition: metadata-catalogue.enabled
