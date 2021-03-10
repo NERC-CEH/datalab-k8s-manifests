@@ -72,3 +72,14 @@ minio:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
+metadata-catalogue:
+  enabled: true
+  auth: datalabs
+  claimName:
+    catalogue: catalogue
+    datastore: datastore
+  datalabs:
+    issuer: https://authorisation.test-datalabs.nerc.ac.uk/
+  hostname: testlab.test-datalabs.nerc.ac.uk
+  imageTag:
+    catalogue: 2.77.0
