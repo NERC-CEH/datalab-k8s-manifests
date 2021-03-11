@@ -7,6 +7,13 @@ These manifests are configured to be deployed using [Helm 3](https://helm.sh/) t
 
 ## Installing a DataLab
 
+Ensure the CEH Helm Chart Repository has been added to allow for building dependencies.
+Here the repository has been added under the name `ceh`; this can be changed as desired.
+
+```bash
+helm repo add ceh https://nerc-ceh.github.io/charts
+```
+
 The Helm chart can be installed with default values using the following command where `<release_name>` is to be replaced with a name of your choice e.g. `datalab`.
 
 ```bash
