@@ -32,6 +32,11 @@ jobs:
           && chmod 700 get_helm.sh
           && ./get_helm.sh
         shell: bash
+      - name: Install Helm Chart Dependencies
+        run: >
+          helm repo add ceh https://nerc-ceh.github.io/charts
+          && helm dependency build ./helm/datalab/
+        shell: bash
       - name: npm install
         run: npm install
         shell: bash
