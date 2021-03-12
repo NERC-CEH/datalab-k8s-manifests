@@ -82,4 +82,4 @@ metadata-catalogue:
     issuer: https://authorisation.test-datalabs.nerc.ac.uk/
   hostname: testlab.test-datalabs.nerc.ac.uk
   imageTag:
-    catalogue: 2.81.0
+    catalogue: 2.81.1
