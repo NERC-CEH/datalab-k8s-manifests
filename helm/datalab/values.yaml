@@ -79,7 +79,7 @@ metadata-catalogue:
     catalogue: catalogue
     datastore: datastore
   datalabs:
-    issuer: https://authorisation.test-datalabs.nerc.ac.uk/
+    issuer: https://mjbr.eu.auth0.com/
   hostname: testlab.test-datalabs.nerc.ac.uk
   imageTag:
     catalogue: 2.81.2
