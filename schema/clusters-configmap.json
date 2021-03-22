@@ -10,6 +10,14 @@
       },
       "required": ["lowerLimit", "default", "upperLimit"],
       "additionalProperties": false
+    },
+    "default": {
+      "type": "object",
+      "properties": {
+        "default": {"type": "number"}
+      },
+      "required": ["default"],
+      "additionalProperties": false
     }
   },
   "type": "object",
@@ -25,11 +33,23 @@
           "required": ["workersMax"],
           "additionalProperties": false
         },
+        "scheduler": {
+          "type": "object",
+          "properties": {
+            "memoryMax_GB": {"$ref": "#/definitions/default"},
+            "CpuMax_vCPU": {"$ref": "#/definitions/default"}
+          }
+        },
         "workers": {
           "type": "object",
           "properties": {
-            "memoryMax_GB": {"$ref": "#/definitions/range"}  ,          
-            "CpuMax_vCPU": {"$ref": "#/definitions/range"}            
+            "memoryMax_GB": {"$ref": "#/definitions/range"},          
+            "CpuMax_vCPU": {"$ref": "#/definitions/range"},
+            "nThreads": {"$ref": "#/definitions/default"},
+            "deathTimeout_sec": {"$ref": "#/definitions/default"},
+            "targetCpuUtilization_percent": {"$ref": "#/definitions/default"},
+            "targetMemoryUtilization_percent": {"$ref": "#/definitions/default"},
+            "scaleDownWindow_sec": {"$ref": "#/definitions/default"}
           },
           "required": ["memoryMax_GB", "CpuMax_vCPU"],
           "additionalProperties": false
