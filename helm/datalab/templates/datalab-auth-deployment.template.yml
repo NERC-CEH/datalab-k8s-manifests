@@ -44,6 +44,7 @@ data:
             - create
             - delete
             - list
+            - open
             - edit
         - name: users
           permissions:
@@ -78,6 +79,7 @@ data:
         - name: clusters
           permissions:
             - list
+            - open
         - name: projects
           permissions:
             - read
