@@ -34,22 +34,19 @@
               ]
             }
           ]
+        },
+        "url": {
+          "type": "string"
         }
       },
       "required": [
         "available"
       ],
       "additionalProperties": false
-    },
-    "assetRepo": {
-      "type": "object",
-      "properties": { },
-      "additionalProperties": false
     }
   },
   "additionalProperties": false,
   "required": [
-    "catalogue",
-    "assetRepo"
+    "catalogue"
   ]
 }
