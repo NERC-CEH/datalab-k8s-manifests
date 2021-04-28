@@ -19,8 +19,8 @@ data:
           {{- end }}
 
           {{- end }}
-        }
+        },
+        "url": "{{ .Values.catalogueUrl }}"
         {{- end }}
-      },
-      "assetRepo": { }
+      }
     }
