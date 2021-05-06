@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resource-nginx-config
+  namespace: devtest
+data:
+  nginx.conf: |
+    events {}
+    http {
+      upstream backend {
+        server minio-stornfs.andyl.svc.cluster.local;
+      }
+      server {
+        location / {
+          root /data/www;
+        }
+        location ~* ^/someotherfolder/(.*)$ {
+          sub_filter_once off;
+          sub_filter_types *;
+          sub_filter_last_modified on;
+          sub_filter 'href="/' 'href="/resource/someotherfolder/';
+          sub_filter 'src="/' 'src="/resource/someotherfolder/';
+          sub_filter 'href:"/' 'href:"/resource/someotherfolder/';
+          sub_filter 'minioBrowserPrefix="/minio"' 'minioBrowserPrefix="/resource/someotherfolder/minio"';
+          client_max_body_size 10m;
+          rewrite ^/someotherfolder/(.*)$ /$1 break;
+          proxy_redirect off;
+          proxy_set_header Host $http_host;
+          proxy_set_header Accept-Encoding "";
+          proxy_pass http://backend;
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resource-nginx-demo
+  namespace: devtest
+data:
+  index.html: |
+    <html>
+     <body>
+      <h1>Hello world</h1>
+     </body>
+    </html>
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: resource-ingress
+  namespace: devtest
+spec:
+  rules:
+  - host: testlab.datalabs.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: resource-nginx-service
+            port:
+              number: 80
+        path: /resource(/|$)(.*)
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - testlab.datalabs.internal
+    secretName: tls-secret
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2/connect
+  name: resource-ingress-connect
+  namespace: devtest
+spec:
+  rules:
+  - host: testlab.datalabs.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: resource-nginx-service
+            port:
+              number: 81
+        path: /resource/(.*)/connect
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - testlab.datalabs.internal
+    secretName: tls-secret
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-nginx
+spec:
+  selector:
+    matchLabels:
+      run: resource-nginx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: resource-nginx
+    spec:
+      containers:
+      - name: resource-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx
+          readOnly: true
+          name: nginx-conf
+        - mountPath: /data/www
+          readOnly: true
+          name: nginx-demo
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: resource-nginx-config
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+      - name: nginx-demo
+        configMap:
+          name: resource-nginx-demo
+          items:
+          - key: index.html
+            path: index.html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resource-nginx-service
+  labels:
+    run: resource-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    run: resource-nginx
