@@ -66,7 +66,7 @@ kubectl:
   version: 0.1.0
 minio:
   imageName: nerc/minio
-  version: "1.0"
+  version: latest
   replicas: 1
   connectImage: nerc/connect
   connectVersion: 1.0.0

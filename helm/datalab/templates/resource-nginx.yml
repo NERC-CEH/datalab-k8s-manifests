@@ -8,26 +8,16 @@ data:
     events {}
     http {
       upstream backend {
-        server minio-stornfs.andyl.svc.cluster.local;
+        server minio-newminio4.andyl.svc.cluster.local;
       }
       server {
         location / {
           root /data/www;
         }
-        location ~* ^/someotherfolder/(.*)$ {
-          sub_filter_once off;
-          sub_filter_types *;
-          sub_filter_last_modified on;
-          sub_filter 'href="/' 'href="/resource/someotherfolder/';
-          sub_filter 'src="/' 'src="/resource/someotherfolder/';
-          sub_filter 'href:"/' 'href:"/resource/someotherfolder/';
-          sub_filter 'minioBrowserPrefix="/minio"' 'minioBrowserPrefix="/resource/someotherfolder/minio"';
-          client_max_body_size 10m;
-          rewrite ^/someotherfolder/(.*)$ /$1 break;
-          proxy_redirect off;
-          proxy_set_header Host $http_host;
-          proxy_set_header Accept-Encoding "";
-          proxy_pass http://backend;
+        location /andyl/newminio4 {
+            rewrite /minio$1 /andyl/newminio4(.*);
+            proxy_pass http://backend/minio;
+            proxy_redirect http://$proxy_host/minio/ $scheme://$host:$server_port/andyl/newminio4/;
         }
       }
     }
