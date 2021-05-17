@@ -32,6 +32,8 @@ spec:
               cpu: 500m
               memory: 512Mi
           env:
+            - name: DATALAB_NAME
+              value: {{ .Values.datalabName }}
             - name: DATALAB_DOMAIN
               value: {{ .Values.domain }}
             - name: INFRASTRUCTURE_API_PORT
