@@ -60,8 +60,8 @@ data:
           "category": "INFRASTRUCTURE",
           "versions": [
             {
-              "image": "nerc/minio:1.0",
-              "connectImage": "nerc/connect:1.0.0"
+              "image": "{{ .Values.minio.imageName }}:{{ .Values.minio.version }}",
+              "connectImage": "{{ .Values.minio.connectImage }}:{{ .Values.minio.connectVersion }}"
             }
           ]
         },
