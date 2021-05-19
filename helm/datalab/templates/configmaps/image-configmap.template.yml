@@ -107,17 +107,17 @@ data:
               "default": true,
               "displayName": "4.0.4",
               "image": "nerc/rstudio:4.0.4a",
-              "connectImage": "nerc/zeppelin-connect:1.1.1"
+              "connectImage": "nerc/zeppelin-connect:1.2.0"
             },
             {
               "displayName": "4.0.1",
               "image": "nerc/rstudio:4.0.1",
-              "connectImage": "nerc/zeppelin-connect:1.1.1"
+              "connectImage": "nerc/zeppelin-connect:1.2.0"
             },
             {
               "displayName": "3.5.3",
               "image": "nerc/rstudio:3.5.3",
-              "connectImage": "nerc/zeppelin-connect:1.1.1"
+              "connectImage": "nerc/zeppelin-connect:1.2.0"
             }
           ]
         },
@@ -138,7 +138,7 @@ data:
             {
               "displayName": "0.7.2.7",
               "image": "nerc/zeppelin:0.7.2.7",
-              "connectImage": "nerc/zeppelin-connect:1.1.1"
+              "connectImage": "nerc/zeppelin-connect:1.2.0"
             }
           ]
         }
