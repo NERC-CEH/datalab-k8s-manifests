@@ -83,4 +83,4 @@ metadata-catalogue:
     issuer: https://mjbr.eu.auth0.com/
   hostname: testlab.test-datalabs.nerc.ac.uk
   imageTag:
-    catalogue: 2.81.2
+    catalogue: 3.3.3-datalabs
