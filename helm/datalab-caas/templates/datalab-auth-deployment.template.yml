@@ -135,6 +135,8 @@ spec:
               value: /usr/src/config/permissions.yml
             - name: OIDC_PROVIDER_AUDIENCE
               value: {{ .Values.oidcProviderAudience }}
+            - name: OIDC_PROVIDER_DOMAIN 
+              value: {{ .Values.oidcProviderDomain }}
             - name: AUTHORISATION_AUDIENCE
               value: {{ .Values.authorisationAudience }}
             - name: AUTHORISATION_ISSUER

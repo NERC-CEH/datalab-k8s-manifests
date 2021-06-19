@@ -5,7 +5,7 @@
 namespace: test
 environment: test
 datalabName: testlab
-domain: 192.171.139.83.sslip.io
+domain: 192-171-139-83.sslip.io
 kubernetesMasterHostName: datalabs-kubernetes-caas-master-0
 
 datalabVolume: testlab
@@ -16,11 +16,12 @@ sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
 storageClassName: nfs-storage-caas
 
-authSignin: https://testlab.192.171.139.83.sslip.io
+authSignin: https://testlab.192-171-139-83.sslip.io
 oidcProviderClientId: datalabs
-oidcProviderAudience: https://testlab.192.171.139.83.sslip.io/api
-authorisationAudience: https://api.192.171.139.83.sslip.io/
-authorisationIssuer: https://authorisation.192.171.139.83.sslip.io/
+oidcProviderAudience: account
+oidcProviderDomain: 192-171-139-29.sslip.io/auth/realms/master
+authorisationAudience: https://api.192-171-139-83.sslip.io/
+authorisationIssuer: https://authorisation.192-171-139-83.sslip.io/
 authorisationIdentifier: urn:auth0-authz-api
 mongoUserName: datalab
 
