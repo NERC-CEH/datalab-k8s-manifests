@@ -14,6 +14,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.datalabName }}.{{ .Values.domain }}
+    - catalogue.{{ .Values.domain }}
     secretName: tls-secret
   rules:
   - host: {{ .Values.datalabName }}.{{ .Values.domain }}
@@ -27,3 +28,10 @@ spec:
         backend:
           serviceName: datalab-api-service
           servicePort: 8000
+  - host: catalogue.{{ .Values.domain }}
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: catalogue
+            servicePort: 80
