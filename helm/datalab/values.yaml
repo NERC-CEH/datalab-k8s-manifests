@@ -81,6 +81,7 @@ metadata-catalogue:
     datastore: datastore
   datalabs:
     issuer: https://mjbr.eu.auth0.com/
+    jwks: https://mjbr.eu.auth0.com/.well-known/jwks.json
   hostname: testlab.test-datalabs.nerc.ac.uk
   imageTag:
     catalogue: 3.3.3-datalabs
