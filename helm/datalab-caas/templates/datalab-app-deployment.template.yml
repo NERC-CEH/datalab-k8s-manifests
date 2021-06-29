@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalab-app-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.datalabApp.replicas }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: datalab-app
+  template:
+    metadata:
+      labels:
+        app: datalab-app
+        environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/datalab-app: {{ .Values.datalabApp.policy }}
+      {{- end }}
+    spec:
+      containers:
+        - name: datalab-app
+          image: {{ .Values.datalabApp.imageName }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: oidc-config-volume
+              mountPath: /usr/share/nginx/html/web_auth_config.json
+              subPath: web_auth_config.json
+            - name: storage-config-volume
+              mountPath: /usr/share/nginx/html/storage_config.json
+              subPath: storage_config.json
+            - name: image-config-volume
+              mountPath: /usr/share/nginx/html/image_config.json
+              subPath: image_config.json
+            - name: catalogue-asset-repo-config-volume
+              mountPath: /usr/share/nginx/html/catalogue_asset_repo_config.json
+              subPath: catalogue_asset_repo_config.json
+            - name: clusters-config-volume
+              mountPath: /usr/share/nginx/html/clusters_config.json
+              subPath: clusters_config.json
+      volumes:
+        - name: oidc-config-volume
+          configMap:
+            name: oidc-config
+            items:
+              - key: config
+                path: web_auth_config.json
+        - name: storage-config-volume
+          configMap:
+            name: storage-config
+            items:
+              - key: config
+                path: storage_config.json
+        - name: image-config-volume
+          configMap:
+            name: image-config
+            items:
+              - key: config
+                path: image_config.json
+        - name: catalogue-asset-repo-config-volume
+          configMap:
+            name: catalogue-asset-repo-config
+            items:
+              - key: config
+                path: catalogue_asset_repo_config.json
+        - name: clusters-config-volume
+          configMap:
+            name: clusters-config
+            items:
+              - key: config
+                path: clusters_config.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalab-app-service
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: datalab-app
+  type: NodePort

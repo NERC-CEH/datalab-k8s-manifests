@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        environment: {{ .Values.environment }}
+    spec:
+      containers:
+        - name: mongodb
+          image: {{ .Values.mongo.imageName }}:{{ .Values.mongo.version }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: {{ .Values.mongoUserName }}
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
+          ports:
+            - containerPort: 27017
+          livenessProbe:
+            exec:
+              command:
+                - mongo
+                - --eval
+                - "db.serverStatus()"
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: mongodb-volume-1
+              mountPath: /data/db
+              subPath: mongodb
+      volumes:
+        - name: mongodb-volume-1
+          persistentVolumeClaim:
+            claimName: {{ .Values.datalabVolume }}-internal-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    app: mongodb
+  type: NodePort

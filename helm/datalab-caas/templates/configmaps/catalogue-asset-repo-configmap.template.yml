@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalogue-asset-repo-config
+  namespace: {{ .Values.namespace }}
+data:
+  config: |
+    {
+      "catalogue": {
+        "available": {{ .Values.catalogueAvailable }},
+        {{- if .Values.catalogueAvailable }}
+        "storage": {
+          {{- with .Values.catalogueStorage }}
+          "type": "{{ .type }}",
+
+          {{- if eq .type "nfs" }}
+          "server": "{{ .server }}",
+          "rootDirectory": "{{ .rootDirectory }}"
+          {{- end }}
+
+          {{- end }}
+        }
+        {{- end }}
+      },
+      "assetRepo": { }
+    }

@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalab-api-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.datalabApi.replicas }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: datalab-api
+  template:
+    metadata:
+      labels:
+        app: datalab-api
+        environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/datalab-api: {{ .Values.datalabApi.policy }}
+      {{- end }}
+    spec:
+      containers:
+        - name: datalab-api
+          image: {{ .Values.datalabApi.imageName }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATALAB_NAME
+              value: {{ .Values.datalabName }}
+            - name: DATABASE_HOST
+              value: mongo-service
+            - name: DATABASE_USER
+              value: {{ .Values.mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
+            - name: INFRASTRUCTURE_API
+              value: http://infrastructure-api-service:8000
+            - name: AUTHORISATION_SERVICE
+              value: http://datalab-auth-service
+            - name: AUTHORISATION_AUDIENCE
+              value: {{ .Values.authorisationAudience }}
+            - name: AUTHORISATION_ISSUER
+              value: {{ .Values.authorisationIssuer }}
+            - name: NODE_OPTIONS
+              value: --max-http-header-size=81920
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: storage-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/storage_config.json
+              subPath: storage_config.json
+      volumes:
+        - name: storage-config-volume
+          configMap:
+            name: storage-config
+            items:
+              - key: config
+                path: storage_config.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalab-api-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    monitor: prometheus
+spec:
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: datalab-api
+  type: NodePort
