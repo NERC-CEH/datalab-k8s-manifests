@@ -13,6 +13,9 @@ data:
     dataManager:
       permissions:
         - data:manager
+        - catalogue:admin
+        - catalogue:publisher
+        - catalogue:editor
     catalogueRole:
       - role: admin
         permissions:
