@@ -84,4 +84,4 @@ metadata-catalogue:
     jwks: https://mjbr.eu.auth0.com/.well-known/jwks.json
   hostname: testlab.test-datalabs.nerc.ac.uk
   imageTag:
-    catalogue: 3.11.0-datalabs
+    catalogue: 3.11.1-datalabs
