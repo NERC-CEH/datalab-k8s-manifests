@@ -41,8 +41,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2.30.0 support",
-              "image": "nerc/jupyterlab:d7f1f82-dask-2.30"
+              "displayName": "Dask 2021.6/Spark 3.1.1",
+              "image": "nerc/jupyterlab:8749f2aede87-spark-3.1.1"
             }
           ]
         },
@@ -51,8 +51,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2.30.0 support",
-              "image": "nerc/jupyterlab:d7f1f82-dask-2.30"
+              "displayName": "Dask 2021.6/Spark 3.1.1",
+              "image": "nerc/jupyterlab:8749f2aede87-spark-3.1.1"
             }
           ]
         },
@@ -107,17 +107,17 @@ data:
               "default": true,
               "displayName": "4.0.4",
               "image": "nerc/rstudio:4.0.4a",
-              "connectImage": "nerc/zeppelin-connect:1.2.0"
+              "connectImage": "nerc/zeppelin-connect:1.2.1"
             },
             {
               "displayName": "4.0.1",
               "image": "nerc/rstudio:4.0.1",
-              "connectImage": "nerc/zeppelin-connect:1.2.0"
+              "connectImage": "nerc/zeppelin-connect:1.2.1"
             },
             {
               "displayName": "3.5.3",
               "image": "nerc/rstudio:3.5.3",
-              "connectImage": "nerc/zeppelin-connect:1.2.0"
+              "connectImage": "nerc/zeppelin-connect:1.2.1"
             }
           ]
         },
@@ -138,7 +138,7 @@ data:
             {
               "displayName": "0.7.2.7",
               "image": "nerc/zeppelin:0.7.2.7",
-              "connectImage": "nerc/zeppelin-connect:1.2.0"
+              "connectImage": "nerc/zeppelin-connect:1.2.1"
             }
           ]
         }
