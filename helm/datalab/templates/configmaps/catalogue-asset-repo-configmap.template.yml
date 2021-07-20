@@ -7,8 +7,7 @@ data:
   config: |
     {
       "catalogue": {
-        "available": {{ .Values.catalogueAvailable }},
-        {{- if .Values.catalogueAvailable }}
+        "available": {{ .Values.catalogueAvailable }}{{- if .Values.catalogueAvailable }},
         "storage": {
           {{- with .Values.catalogueStorage }}
           "type": "{{ .type }}",
