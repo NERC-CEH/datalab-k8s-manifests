@@ -25,9 +25,8 @@ data:
       },
       "creationOptions": {
         "allowedTypes": [
-          "GLUSTERFS",
           "NFS"
         ],
-        "defaultType": "GLUSTERFS"
+        "defaultType": "NFS"
       }
     }
