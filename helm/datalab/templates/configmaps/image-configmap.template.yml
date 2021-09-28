@@ -125,7 +125,7 @@ data:
           "category": "INFRASTRUCTURE",
           "versions": [
             {
-              "image": "nerc/spark-k8s:0.1.0"
+              "image": "nerc/spark-k8s:3.1.2"
             }
           ],
           "masterAddress": "spark://spark-master:7077",

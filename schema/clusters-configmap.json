@@ -21,42 +21,43 @@
     }
   },
   "type": "object",
-  "properties": {
-    "dask": {
-      "type": "object",
-      "properties": {
-        "cluster": {
-          "type": "object",
-          "properties": {
-            "workersMax": {"$ref": "#/definitions/range"}
-          },
-          "required": ["workersMax"],
-          "additionalProperties": false
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "cluster": {
+        "type": "object",
+        "properties": {
+          "workersMax": {"$ref": "#/definitions/range"}
         },
-        "scheduler": {
-          "type": "object",
-          "properties": {
-            "memoryMax_GB": {"$ref": "#/definitions/default"},
-            "CpuMax_vCPU": {"$ref": "#/definitions/default"}
-          }
-        },
-        "workers": {
-          "type": "object",
-          "properties": {
-            "memoryMax_GB": {"$ref": "#/definitions/range"},          
-            "CpuMax_vCPU": {"$ref": "#/definitions/range"},
-            "nThreads": {"$ref": "#/definitions/default"},
-            "deathTimeout_sec": {"$ref": "#/definitions/default"},
-            "targetCpuUtilization_percent": {"$ref": "#/definitions/default"},
-            "targetMemoryUtilization_percent": {"$ref": "#/definitions/default"},
-            "scaleDownWindow_sec": {"$ref": "#/definitions/default"}
-          },
-          "required": ["memoryMax_GB", "CpuMax_vCPU"],
-          "additionalProperties": false
+        "required": ["workersMax"],
+        "additionalProperties": false
+      },
+      "scheduler": {
+        "type": "object",
+        "properties": {
+          "memoryMax_GB": {"$ref": "#/definitions/default"},
+          "CpuMax_vCPU": {"$ref": "#/definitions/default"}
         }
       },
-      "required": ["cluster", "workers"],
-      "additionalProperties": false
-    }
+      "workers": {
+        "type": "object",
+        "properties": {
+          "memoryMax_GB": {"$ref": "#/definitions/range"},          
+          "CpuMax_vCPU": {"$ref": "#/definitions/range"},
+          "nThreads": {"$ref": "#/definitions/default"},
+          "deathTimeout_sec": {"$ref": "#/definitions/default"},
+          "targetCpuUtilization_percent": {"$ref": "#/definitions/default"},
+          "targetMemoryUtilization_percent": {"$ref": "#/definitions/default"},
+          "scaleDownWindow_sec": {"$ref": "#/definitions/default"}
+        },
+        "required": ["memoryMax_GB", "CpuMax_vCPU"],
+        "additionalProperties": false
+      },
+      "condaRequired": {
+        "type": "boolean"
+      }
+    },
+    "required": ["cluster", "workers"],
+    "additionalProperties": false
   }
 }
