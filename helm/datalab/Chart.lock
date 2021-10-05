@@ -1,6 +1,6 @@
 dependencies:
 - name: metadata-catalogue
   repository: https://nerc-ceh.github.io/charts
-  version: 1.13.5
-digest: sha256:3fe868b829b06ccc57c43afcb13cf6a67c31a346df4e6c79f4b86d6334546e67
-generated: "2021-06-21T10:48:09.613477819+01:00"
+  version: 1.15.0
+digest: sha256:b38a504cae8d3b8c6e4eaea5759df824a187156eca09fc58c9cc7bce56d34df4
+generated: "2021-10-05T16:40:12.137098334+01:00"
