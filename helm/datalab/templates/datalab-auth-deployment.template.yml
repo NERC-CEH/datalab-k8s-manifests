@@ -35,6 +35,7 @@ data:
             - list
             - open
             - edit
+            - scale
         - name: storage
           permissions:
             - create
@@ -49,6 +50,7 @@ data:
             - list
             - open
             - edit
+            - scale
         - name: users
           permissions:
             - list
