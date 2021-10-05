@@ -4,29 +4,30 @@ metadata:
   name: oidc-config
   namespace: {{ .Values.namespace }}
 data:
+  {{- if .Values.oidcProvider.auth0 }}
   config: |
     {
       "oidc": {
         "userManager": {
-          "client_id": "{{ .Values.oidcProviderClientId }}",
+          "client_id": "{{ .Values.oidcProvider.auth0.clientId }}",
           "redirect_uri": "https://{{ .Values.datalabName }}.{{ .Values.domain }}/callback",
           "response_type": "code",
           "scope": "openid profile",
-          "authority": "https://mjbr.eu.auth0.com",
+          "authority": "{{ .Values.oidcProvider.auth0.authority }}",
           "automaticSilentRenew": true,
           "accessTokenExpiringNotificationTime": 600,
           "filterProtocolClaims": true,
           "loadUserInfo": true,
           "extraQueryParams": {
-            "audience": "{{ .Values.oidcProviderAudience }}"
+            "audience": "{{ .Values.oidcProvider.auth0.extraQueryParams.audience }}"
           },
           "metadata": {
-            "issuer": "https://mjbr.eu.auth0.com/",
-            "authorization_endpoint": "https://mjbr.eu.auth0.com/authorize",
-            "userinfo_endpoint": "https://mjbr.eu.auth0.com/userinfo",
-            "end_session_endpoint": "https://mjbr.eu.auth0.com/v2/logout?returnTo=https://{{ .Values.datalabName }}.{{ .Values.domain }}/&client_id={{ .Values.oidcProviderClientId }}",
-            "jwks_uri": "https://mjbr.eu.auth0.com/.well-known/jwks.json",
-            "token_endpoint": "https://mjbr.eu.auth0.com/oauth/token"
+            "issuer": "{{ .Values.oidcProvider.auth0.metadata.issuer }}",
+            "authorization_endpoint": "{{ .Values.oidcProvider.auth0.metadata.issuer }}authorize",
+            "userinfo_endpoint": "{{ .Values.oidcProvider.auth0.metadata.issuer }}userinfo",
+            "end_session_endpoint": "{{ .Values.oidcProvider.auth0.metadata.issuer }}v2/logout?returnTo=https://{{ .Values.datalabName }}.{{ .Values.domain }}/&client_id={{ .Values.oidcProvider.auth0.clientId }}",
+            "jwks_uri": "{{ .Values.oidcProvider.auth0.metadata.issuer }}.well-known/jwks.json",
+            "token_endpoint": "{{ .Values.oidcProvider.auth0.metadata.issuer }}oauth/token"
           }
         }
       },
@@ -35,3 +36,33 @@ data:
         "requestEmail": "appsupport@ceh.ac.uk"
       }
     }
+  {{- else if .Values.oidcProvider.keycloak }}
+  config: |
+    {
+      "oidc": {
+        "userManager": {
+          "client_id": "{{ .Values.oidcProvider.keycloak.clientId }}",
+          "redirect_uri": "https://{{ .Values.datalabName }}.{{ .Values.domain }}/callback",
+          "response_type": "code",
+          "scope": "openid profile email",
+          "authority": "{{ .Values.oidcProvider.keycloak.authority }}",
+          "automaticSilentRenew": true,
+          "accessTokenExpiringNotificationTime": 600,
+          "filterProtocolClaims": true,
+          "loadUserInfo": true,
+          "metadata": {
+            "issuer": "{{ .Values.oidcProvider.keycloak.metadata.issuer }}",
+            "authorization_endpoint": "{{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/auth",
+            "userinfo_endpoint": "{{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/userinfo",
+            "end_session_endpoint": "{{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/logout?redirect_uri=https://{{ .Values.datalabName }}.{{ .Values.domain }}",
+            "jwks_uri": "{{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/certs",
+            "token_endpoint": "{{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/token"
+          }
+        }
+      },
+      "signUp": {
+        "selfService": true,
+        "requestEmail": "appsupport@ceh.ac.uk"
+      }
+    }
+  {{- end }}

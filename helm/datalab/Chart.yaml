@@ -23,8 +23,8 @@ version: 0.34.11
 # For DataLab, this is the Docker tag for the version to be deployed.
 appVersion: 0.32.5-27-g6f985cbb
 
-dependencies:
-  - name: metadata-catalogue
-    version: 1.13.5
-    repository: "https://nerc-ceh.github.io/charts"
-    condition: metadata-catalogue.enabled
+#dependencies:
+#  - name: metadata-catalogue
+#    version: 1.13.5
+#    repository: "https://nerc-ceh.github.io/charts"
+#    condition: metadata-catalogue.enabled
