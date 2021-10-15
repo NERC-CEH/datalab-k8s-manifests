@@ -19,7 +19,7 @@ data:
           "filterProtocolClaims": true,
           "loadUserInfo": true,
           "extraQueryParams": {
-            "audience": "{{ .Values.oidcProvider.auth0.extraQueryParams.audience }}"
+            "audience": "{{ .Values.oidcProviderAudience }}"
           },
           "metadata": {
             "issuer": "{{ .Values.oidcProvider.auth0.metadata.issuer }}",

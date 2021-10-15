@@ -17,11 +17,24 @@ maxBodySize: 500m
 
 authService: http://datalab-auth-service.prod.svc.cluster.local
 authSignin: https://datalab.datalabs.ceh.ac.uk
-oidcProviderClientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
 oidcProviderAudience: https://datalab.datalabs.ceh.ac.uk/api
 authorisationAudience: https://api.datalabs.ceh.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
 mongoUserName: datalabs
+
+# Set oidcProvider
+oidcProvider:
+  auth0:
+    clientId: y5ynz3a4GX4uNiOJMXiOgXdfOn1kF6sr
+    authority: https://mjbr.eu.auth0.com
+    metadata:
+      issuer: https://mjbr.eu.auth0.com/
+
+#  keycloak:
+#    clientId: datalabs
+#    authority: https://192-171-139-29.sslip.io/auth/realms/master
+#    metadata:
+#      issuer: https://192-171-139-29.sslip.io/auth/realms/master
 
 
 # Don't turn this off in production!

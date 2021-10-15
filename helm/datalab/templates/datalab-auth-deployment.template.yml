@@ -153,6 +153,14 @@ spec:
               value: {{ .Values.authorisationAudience }}
             - name: AUTHORISATION_ISSUER
               value: {{ .Values.authorisationIssuer }}
+            {{- if .Values.oidcProvider.keycloak }}
+            - name: OIDC_OAUTH_TOKEN_ENDPOINT
+              value: {{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/token
+            - name: OIDC_JWKS_ENDPOINT
+              value: {{ .Values.oidcProvider.keycloak.metadata.issuer }}/protocol/openid-connect/certs
+            - name: OIDC_PROVIDER_DOMAIN
+              value: {{ .Values.oidcProviderDomain }}
+            {{- end }}
             - name: NODE_OPTIONS
               value: --max-http-header-size=81920
           volumeMounts:
