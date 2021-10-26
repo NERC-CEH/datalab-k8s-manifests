@@ -73,3 +73,18 @@ minio:
 etcdBackup:
   imageName: k8s.gcr.io/etcd
   version: 3.3.10
+
+metadata-catalogue:
+  enabled: false
+  auth: datalabs
+  claimName:
+    catalogue: catalogue
+    datastore: datastore
+  datalabs:
+    issuer: https://mjbr.eu.auth0.com/
+    jwks: https://mjbr.eu.auth0.com/.well-known/jwks.json
+  hostname: datalab.datalabs.ceh.ac.uk
+  imageTag:
+    catalogue: 3.22.0-datalabs
+  server: datalabs
+
