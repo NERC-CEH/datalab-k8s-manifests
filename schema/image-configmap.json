@@ -36,6 +36,8 @@
           "displayName": {"type": "string"},
           "category": {"type": "string"},
           "userSelectableVersion": {"type": "boolean"},
+          "userCanChooseFile": {"type": "boolean"},
+          "userCanChooseConda": {"type": "boolean"},
           "masterAddress": {"type": "string"},
           "sharedRLibs": {"type": "string"},
           "versions": {
