@@ -25,11 +25,12 @@ data:
             "logs": false
           }
         },
-        "INFRASTRUCTURE": {}
+        "INFRASTRUCTURE": {},
+        "COMPUTE": {}
       },
       "types": {
         "dask": {
-          "category": "INFRASTRUCTURE",
+          "category": "COMPUTE",
           "versions": [
             {
               "image": "daskdev/dask:2.30.0"
@@ -41,8 +42,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2021.6/Spark 3.1.1",
-              "image": "nerc/jupyterlab:8749f2aede87-spark-3.1.1"
+              "displayName": "Dask 2021.6/Spark 3.1.2",
+              "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
             }
           ]
         },
@@ -51,8 +52,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2021.6/Spark 3.1.1",
-              "image": "nerc/jupyterlab:8749f2aede87-spark-3.1.1"
+              "displayName": "Dask 2021.6/Spark 3.1.2",
+              "image": "nerc/jupyterlab:a71db3cfe02f-spark-3.1.2"
             }
           ]
         },
@@ -122,7 +123,7 @@ data:
           ]
         },
         "spark": {
-          "category": "INFRASTRUCTURE",
+          "category": "COMPUTE",
           "versions": [
             {
               "image": "nerc/spark-k8s:3.1.2"

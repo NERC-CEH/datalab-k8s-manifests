@@ -15,13 +15,13 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.34.18
+version: 0.34.21
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # For DataLab, this is the Docker tag for the version to be deployed.
-appVersion: 0.32.5-189-gb0610558
+appVersion: 0.32.5-269-g385e5c42
 
 dependencies:
   - name: metadata-catalogue
