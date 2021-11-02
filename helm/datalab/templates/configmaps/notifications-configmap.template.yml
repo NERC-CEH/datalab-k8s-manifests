@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notifications-config
+  namespace: {{ .Values.namespace }}
+data:
+  config: |
+    {
+      "dev": true,
+      "email": {
+        "fromDisplayName": "DataLabs Support",
+        "fromAddress": "support@example.com",
+        "toAddresses": "admin1@example.com, admin2@example.com",
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "secure": false,
+        "username": ""
+      }
+    }
