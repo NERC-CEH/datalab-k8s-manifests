@@ -12,7 +12,6 @@ datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
 sparkMasterAddress: spark://spark-master:7077
-sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
 
 authService: http://datalab-auth-service.prod.svc.cluster.local

@@ -12,7 +12,6 @@ datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
 sparkMasterAddress: spark://spark-master:7077
-sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
 
 authSignin: https://testlab.test-datalabs.nerc.ac.uk

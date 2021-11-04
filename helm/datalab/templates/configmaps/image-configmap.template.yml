@@ -141,8 +141,7 @@ data:
               "image": "nerc/spark-k8s:3.1.2"
             }
           ],
-          "masterAddress": "spark://spark-master:7077",
-          "sharedRLibs": "/data/packages/R/%p/%v"
+          "masterAddress": "spark://spark-master:7077"
         },
         "voila": {
           "displayName": "Voila",
