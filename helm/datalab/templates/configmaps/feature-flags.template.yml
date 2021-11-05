@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: feature-flag-config
+  namespace: {{ .Values.namespace }}
+data:
+  config: |
+    {
+      "request_projects": true
+    }
