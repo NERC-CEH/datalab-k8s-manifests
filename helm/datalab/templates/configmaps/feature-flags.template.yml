@@ -6,5 +6,5 @@ metadata:
 data:
   config: |
     {
-      "request_projects": true
+      "requestProjects": true
     }
