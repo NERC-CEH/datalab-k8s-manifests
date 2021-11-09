@@ -54,6 +54,9 @@ spec:
             - name: clusters-config-volume
               mountPath: /usr/share/nginx/html/clusters_config.json
               subPath: clusters_config.json
+            - name: feature-flag-config-volume
+              mountPath: /usr/share/nginx/html/feature_flags_config.json
+              subPath: feature_flags_config.json
       volumes:
         - name: oidc-config-volume
           configMap:
@@ -85,6 +88,12 @@ spec:
             items:
               - key: config
                 path: clusters_config.json
+        - name: feature-flag-config-volume
+          configMap:
+            name: feature-flag-config
+            items:
+              - key: config
+                path: feature_flags_config.json
 ---
 apiVersion: v1
 kind: Service
