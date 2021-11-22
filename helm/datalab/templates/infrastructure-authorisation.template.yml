@@ -15,7 +15,8 @@ rules:
         "extensions",
         "rbac.authorization.k8s.io",
         "networking.k8s.io",
-        "autoscaling"
+        "autoscaling",
+        "batch"
       ] # "" is the core API group
     resources:
       [
@@ -33,7 +34,8 @@ rules:
         "serviceaccounts",
         "rolebindings",
         "networkpolicies",
-        "horizontalpodautoscalers"
+        "horizontalpodautoscalers",
+        "jobs"
       ]
     verbs: ["get", "list", "update", "create", "patch", "delete", "watch"]
 ---
