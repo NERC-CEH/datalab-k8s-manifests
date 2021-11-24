@@ -40,6 +40,8 @@ spec:
               value: '8000'
             - name: KUBERNETES_NAMESPACE
               value: {{ .Values.namespace }}
+            - name: DEPLOYED_IN_CLUSTER
+              value: 'true'
             - name: AUTH_SIGNIN_URL
               value: {{ .Values.authSignin }}
             - name: AUTHORISATION_SERVICE
