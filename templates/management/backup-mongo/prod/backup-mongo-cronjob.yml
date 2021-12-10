@@ -1,0 +1,47 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-mongodb
+  namespace: prod
+spec:
+  schedule: "00 23 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-mongodb
+            image: nerc/mongo-s3-backup:0.0.1
+            env:
+            - name: MONGO_HOST
+              value: mongo-service
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USER
+              value: datalabs
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
+            - name: S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-access-key
+                  key: access-key
+            - name: S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-secret-key
+                  key: secret-key
+            command: ["/bin/sh"]
+            args: ["-c", "mongodump --host $(MONGO_HOST) --port $(MONGO_PORT) --archive=/backup/mongodump-`date +%Y%m%d-%H%M`.archive -u $(MONGO_USER) -p $(MONGO_PASS) && s4cmd --endpoint-url=http://ceh-datalab-U.s3-ext.jc.rl.ac.uk dsync -c 15 --verbose --debug -r /backup/ s3://datalab-mongo-backups/"]
+            volumeMounts:
+            - mountPath: /backup
+              name: backup
+          restartPolicy: OnFailure
+          volumes:
+          - name: backup
+            persistentVolumeClaim:
+              claimName: mongodb-backup-claim
