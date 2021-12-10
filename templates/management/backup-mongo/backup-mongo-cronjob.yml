@@ -5,7 +5,7 @@ metadata:
   name: backup-mongodb
   namespace: test
 spec:
-  schedule: "40 16 * * *"
+  schedule: "00 23 * * *"
   jobTemplate:
     spec:
       template:
@@ -15,7 +15,7 @@ spec:
             image: nerc/mongo-s3-backup:0.0.1
             env:
             - name: MONGO_HOST
-              value: http://mongo-service
+              value: mongo-service
             - name: MONGO_PORT
               value: "27017"
             - name: MONGO_USER
@@ -36,5 +36,12 @@ spec:
                   name: s3-secret-key
                   key: secret-key
             command: ["/bin/sh"]
-            args: ["-c", "mongodump --host $(MONGO_HOST) --port $(MONGO_PORT) --archive=mongodump-`date +%Y-%m-%d`.archive -u $(MONGO_USER) -p $(MONGO_PASS) && s4cmd --endpoint-url=http://ceh-datalab-U.s3-ext.jc.rl.ac.uk cp mongodump-`date +%Y-%m-%d`.archive s3://datalab-mongo-backups-test/"]
+            args: ["-c", "mongodump --host $(MONGO_HOST) --port $(MONGO_PORT) --archive=/backup/mongodump-`date +%Y%m%d-%H%M`.archive -u $(MONGO_USER) -p $(MONGO_PASS) && s4cmd --endpoint-url=http://ceh-datalab-U.s3-ext.jc.rl.ac.uk dsync -c 15 --verbose --debug -r /backup/ s3://datalab-mongo-backups-test/"]
+            volumeMounts:
+            - mountPath: /backup
+              name: backup
           restartPolicy: OnFailure
+          volumes:
+          - name: backup
+            persistentVolumeClaim:
+              claimName: mongodb-backup-claim
