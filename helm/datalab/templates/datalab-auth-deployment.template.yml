@@ -168,7 +168,7 @@ spec:
               path: /status
               port: 9000
             initialDelaySeconds: 5
-            periodSeconds: 10
+            periodSeconds: 30
       volumes:
         - name: auth-signing-key
           secret:

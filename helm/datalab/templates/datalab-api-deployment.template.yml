@@ -59,7 +59,7 @@ spec:
               path: /status
               port: 8000
             initialDelaySeconds: 5
-            periodSeconds: 10
+            periodSeconds: 30
           volumeMounts:
             - name: storage-config-volume
               mountPath: /usr/src/app/node_modules/common/src/config/storage_config.json
