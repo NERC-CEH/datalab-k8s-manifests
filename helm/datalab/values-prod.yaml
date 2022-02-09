@@ -11,6 +11,7 @@ kubernetesMasterHostName: ceh-datalabs-k8s-master-1
 datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
+internalVolumeSize: 10Gi
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m

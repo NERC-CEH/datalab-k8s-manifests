@@ -11,6 +11,7 @@ kubernetesMasterHostName: datalabs-k8s-master
 datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
+internalVolumeSize: 10Gi
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
