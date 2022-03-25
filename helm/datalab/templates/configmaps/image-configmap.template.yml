@@ -96,7 +96,7 @@ data:
             {
               "default": true,
               "displayName": "4.0.4",
-              "image": "nerc/rshiny:4.0.4a"
+              "image": "nerc/rshiny:4.0.4c"
             },
             {
               "displayName": "4.0.1",
@@ -119,7 +119,7 @@ data:
             {
               "default": true,
               "displayName": "4.0.4",
-              "image": "nerc/rstudio:4.0.4a",
+              "image": "nerc/rstudio:4.0.4c",
               "connectImage": "nerc/zeppelin-connect:1.2.1"
             },
             {
@@ -151,7 +151,7 @@ data:
           "versions": [
             {
               "displayName": "Latest",
-              "image": "nerc/jupyterlab:361bf5ba6ca6-spark-3.1.2"
+              "image": "nerc/jupyterlab:e82b4e70a1a0-spark-3.2.0"
             }
           ]
         },
