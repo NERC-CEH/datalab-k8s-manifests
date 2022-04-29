@@ -33,7 +33,7 @@ data:
           "category": "COMPUTE",
           "versions": [
             {
-              "image": "daskdev/dask:2.30.0"
+              "image": "daskdev/dask:2022.4.1"
             }
           ]
         },
@@ -42,8 +42,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2021.6.2/Spark 3.2.0",
-              "image": "nerc/jupyterlab:e82b4e70a1a0-spark-3.2.0"
+              "displayName": "Dask 2022.4.1/Spark 3.2.1",
+              "image": "nerc/jupyterlab:2185a962a62e-spark-3.2.1"
             }
           ]
         },
@@ -52,8 +52,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2021.6.2/Spark 3.2.0",
-              "image": "nerc/jupyterlab:e82b4e70a1a0-spark-3.2.0"
+              "displayName": "Dask 2022.4.1/Spark 3.2.1",
+              "image": "nerc/jupyterlab:2185a962a62e-spark-3.2.1"
             }
           ]
         },
@@ -84,7 +84,7 @@ data:
           "versions": [
             {
               "displayName": "Latest",
-              "image": "nerc/jupyterlab:e82b4e70a1a0-spark-3.2.0"
+              "image": "nerc/jupyterlab:2185a962a62e-spark-3.2.1"
             }
           ]
         },

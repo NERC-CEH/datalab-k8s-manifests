@@ -12,6 +12,7 @@ datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
 internalVolumeSize: 10Gi
+internalVolumeStorageClass: glusterfs-storage
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
