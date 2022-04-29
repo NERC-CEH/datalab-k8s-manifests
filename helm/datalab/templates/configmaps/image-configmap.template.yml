@@ -151,7 +151,7 @@ data:
           "versions": [
             {
               "displayName": "Latest",
-              "image": "nerc/jupyterlab:e82b4e70a1a0-spark-3.2.0"
+              "image": "nerc/jupyterlab:2185a962a62e-spark-3.2.1"
             }
           ]
         },
