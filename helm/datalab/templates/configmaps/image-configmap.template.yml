@@ -96,7 +96,7 @@ data:
             {
               "default": true,
               "displayName": "4.0.4",
-              "image": "nerc/rshiny:4.0.4d"
+              "image": "nerc/rshiny:4.0.4e"
             },
             {
               "displayName": "4.0.1",
