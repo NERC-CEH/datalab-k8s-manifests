@@ -62,5 +62,9 @@ describe('configMap JSON are valid', () => {
   it('storage', () => {
     expect(validateConfigMap('storage')).toEqual(true);
   });
+
+  it('feature-flags', () => {
+    expect(validateConfigMap('feature-flags')).toEqual(true);
+  });
 });
 
