@@ -12,6 +12,7 @@ datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
 internalVolumeSize: 10Gi
+internalVolumeStorageClass: glusterfs-storage
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
@@ -23,6 +24,10 @@ authorisationAudience: https://api.datalabs.nerc.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.nerc.ac.uk/
 authorisationIdentifier: urn:auth0-authz-api
 mongoUserName: datalab
+
+expireNotebooks:
+  expireTimeWarning: 14
+  expireTimeLimit: 31
 
 # Don't turn this off in production!
 useAppArmor: true

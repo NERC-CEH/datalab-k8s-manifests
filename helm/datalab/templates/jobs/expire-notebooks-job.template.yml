@@ -1,0 +1,110 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: expire-notebooks
+  namespace: {{ .Values.namespace }}
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          serviceAccountName: infrastructure-service-account
+          containers:
+          - name: expire-notebooks
+            image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
+            imagePullPolicy: IfNotPresent
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              trap "touch /usr/share/pod/done" EXIT
+              node expireNotebooks.js
+            env:
+              - name: KUBERNETES_NAMESPACE
+                value: {{ .Values.namespace }}
+              - name: DATABASE_HOST
+                value: mongo-service
+              - name: DATABASE_USER
+                value: {{ .Values.mongoUserName }}
+              - name: DATABASE_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mongo-password-secret
+                    key: secret
+            volumeMounts:
+              - name: storage-config-volume
+                mountPath: /usr/src/app/node_modules/common/src/config/storage_config.json
+                subPath: storage_config.json
+              - name: image-config-volume
+                mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+                subPath: image_config.json
+              - name: catalogue-asset-repo-config-volume
+                mountPath: /usr/src/app/node_modules/common/src/config/catalogue_asset_repo_config.json
+                subPath: catalogue_asset_repo_config.json
+              - name: clusters-config-volume
+                mountPath: /usr/src/app/node_modules/common/src/config/clusters_config.json
+                subPath: clusters_config.json
+              - name: feature-flag-config-volume
+                mountPath: /usr/src/app/node_modules/common/src/config/feature_flags_config.json
+                subPath: feature_flags_config.json
+              - name: tmp-pod
+                mountPath: /usr/share/pod
+          - name: kubectl
+            image: {{ .Values.kubectl.imageName }}:{{ .Values.kubectl.version }}
+            imagePullPolicy: IfNotPresent
+            command: ["/bin/sh", "-c"]
+            args:
+            - | 
+              kubectl proxy &
+              while ! test -f /usr/share/pod/done; do
+                echo "Waiting for the agent pod to finish..."
+                sleep 5
+              done
+              echo "Agent pod finished, exiting"
+              exit 0
+            ports:
+              - containerPort: 8001
+            volumeMounts:
+              - name: tmp-pod
+                mountPath: /usr/share/pod
+                readOnly: true
+          volumes:
+          - name: storage-config-volume
+            configMap:
+              name: storage-config
+              items:
+                - key: config
+                  path: storage_config.json
+          - name: image-config-volume
+            configMap:
+              name: image-config
+              items:
+                - key: config
+                  path: image_config.json
+          - name: catalogue-asset-repo-config-volume
+            configMap:
+              name: catalogue-asset-repo-config
+              items:
+                - key: config
+                  path: catalogue_asset_repo_config.json
+          - name: clusters-config-volume
+            configMap:
+              name: clusters-config
+              items:
+                - key: config
+                  path: clusters_config.json
+          - name: notifications-config-volume
+            configMap:
+              name: notifications-config
+              items:
+                - key: config
+                  path: notifications_config.json
+          - name: feature-flag-config-volume
+            configMap:
+              name: feature-flag-config
+              items:
+                - key: config
+                  path: feature_flags_config.json
+          - name: tmp-pod
+            emptyDir: {}

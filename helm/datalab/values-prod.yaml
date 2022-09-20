@@ -12,6 +12,7 @@ datalabVolume: datalab
 dataVolumeSize: 100Gi
 internalVolume: datalab-internal
 internalVolumeSize: 10Gi
+internalVolumeStorageClass: nfs-client-mongo
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
@@ -24,6 +25,9 @@ authorisationAudience: https://api.datalabs.ceh.ac.uk/
 authorisationIssuer: https://authorisation.datalabs.ceh.ac.uk/
 mongoUserName: datalabs
 
+expireNotebooks:
+  expireTimeWarning: 14
+  expireTimeLimit: 31
 
 # Don't turn this off in production!
 useAppArmor: true

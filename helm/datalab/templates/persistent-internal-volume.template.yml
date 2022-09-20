@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.datalabName }}-internal-claim
   namespace: {{ .Values.namespace }}
   annotations:
-    volume.beta.kubernetes.io/storage-class: nfs-storage
+    volume.beta.kubernetes.io/storage-class: {{ .Values.internalVolumeStorageClass }}
 spec:
   accessModes:
     - ReadWriteMany

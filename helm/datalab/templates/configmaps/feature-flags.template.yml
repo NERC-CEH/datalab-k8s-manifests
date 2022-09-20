@@ -7,4 +7,10 @@ data:
   config: |
     {
       "requestProjects": true
+      {{- if .Values.expireNotebooks }},
+      "expireUnusedNotebooks": {
+        "accessTimeWarning": {{ .Values.expireNotebooks.expireTimeWarning }},
+        "accessTimeLimit": {{ .Values.expireNotebooks.expireTimeLimit }}
+      }
+      {{- end }}
     }
