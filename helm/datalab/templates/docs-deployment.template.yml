@@ -53,7 +53,7 @@ spec:
     app: docs
   type: NodePort
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: datalab-docs-ingress
@@ -68,6 +68,9 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: docs-service
-          servicePort: 80
+          service:
+            name: docs-service
+            port: 
+              number: 80

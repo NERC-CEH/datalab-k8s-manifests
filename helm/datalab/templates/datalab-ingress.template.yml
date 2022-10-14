@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: datalab-ingress
@@ -21,17 +21,26 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: datalab-app-service
-          servicePort: 80
+          service:
+            name: datalab-app-service
+            port: 
+              number: 80
       - path: /api
+        pathType: Prefix
         backend:
-          serviceName: datalab-api-service
-          servicePort: 8000
+          service:
+            name: datalab-api-service
+            port: 
+              number: 8000
   - host: catalogue.{{ .Values.domain }}
     http:
       paths:
-        - path: /
-          backend:
-            serviceName: catalogue
-            servicePort: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: catalogue
+            port: 
+              number: 80
