@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "requestProjects": {
+      "type": "boolean"
+    },
+    "expireUnusedNotebooks": {
+      "properties": {
+        "accessTimeWarning": {
+          "type": "integer"
+        },
+        "accessTimeLimit": {
+          "type": "integer"
+        }
+      },
+      "required": ["accessTimeWarning", "accessTimeLimit"]
+    }
+  },
+  "required": [
+    "requestProjects"
+  ]
+}
+
