@@ -27,7 +27,7 @@ mongoUserName: datalab
 
 expireNotebooks:
   expireTimeWarning: 14
-  expireTimeLimit: 31
+  expireTimeLimit: 21
 
 # Don't turn this off in production!
 useAppArmor: true
