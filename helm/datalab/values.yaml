@@ -37,7 +37,8 @@ catalogueStorage:
   type: nfs
   server: 192.168.3.16
   rootDirectory: /central-asset-repo/nfs
-catalogueUrl: https://www.google.co.uk/
+# URL for the Catalogue
+#catalogueUrl: https://www.google.co.uk/
 
 datalabAuth:
   imageName: nerc/authorisation-svc

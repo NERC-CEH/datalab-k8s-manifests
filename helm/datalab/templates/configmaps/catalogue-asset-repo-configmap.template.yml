@@ -18,8 +18,9 @@ data:
           {{- end }}
 
           {{- end }}
-        },
+        }{{- if .Values.catalogueUrl }},
         "url": "{{ .Values.catalogueUrl }}"
+        {{- end }}
         {{- end }}
       }
     }
