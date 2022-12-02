@@ -100,7 +100,7 @@ data:
             },
             {
               "displayName": "4.0.4",
-              "image": "nerc/rshiny:4.0.4e"
+              "image": "nerc/rshiny:4.0.4f"
             },
             {
               "displayName": "4.0.1",
