@@ -42,8 +42,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2022.4.1/Spark 3.2.1",
-              "image": "nerc/jupyterlab:c5ce52ae1fda-spark-3.2.1"
+              "displayName": "Dask 2023.1/Spark 3.3.0",
+              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
             }
           ]
         },
@@ -52,8 +52,8 @@ data:
           "category": "ANALYSIS",
           "versions": [
             {
-              "displayName": "Dask 2022.4.1/Spark 3.2.1",
-              "image": "nerc/jupyterlab:c5ce52ae1fda-spark-3.2.1"
+              "displayName": "Dask 2023.1/Spark 3.3.0",
+              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
             }
           ]
         },
@@ -83,8 +83,8 @@ data:
           "userCanChooseConda": true,
           "versions": [
             {
-              "displayName": "Latest",
-              "image": "nerc/jupyterlab:c5ce52ae1fda-spark-3.2.1"
+              "displayName": "Dask 2023.1/Spark 3.3.0",
+              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
             }
           ]
         },
@@ -150,8 +150,8 @@ data:
           "userCanChooseFile": true,
           "versions": [
             {
-              "displayName": "Latest",
-              "image": "nerc/jupyterlab:c5ce52ae1fda-spark-3.2.1"
+              "displayName": "Dask 2023.1/Spark 3.3.0",
+              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
             }
           ]
         },
