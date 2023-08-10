@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datalab-auth-config
+  namespace: {{ .Values.namespace }}
+data:
+  permissions: |
+    ---
+    instanceAdmin:
+      permissions:
+        - instance:admin
+        - data:manager
+    dataManager:
+      permissions:
+        - data:manager
+        - catalogue:admin
+        - catalogue:publisher
+        - catalogue:editor
+    catalogueRole:
+      - role: admin
+        permissions:
+          - admin
+      - role: publisher
+        permissions:
+          - publish
+      - role: editor
+        permissions:
+          - edit
+    projectRoles:
+      admin:
+        - name: stacks
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+            - scale
+        - name: storage
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+        - name: clusters
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+            - scale
+        - name: users
+          permissions:
+            - list
+            - read
+        - name: settings
+          permissions:
+            - list
+            - read
+            - edit
+        - name: permissions
+          permissions:
+            - read
+            - create
+            - delete
+        - name: projects
+          permissions:
+            - edit
+            - read
+      user:
+        - name: stacks
+          permissions:
+            - create
+            - delete
+            - list
+            - open
+            - edit
+            - scale
+        - name: storage
+          permissions:
+            - list
+            - open
+        - name: clusters
+          permissions:
+            - list
+            - open
+        - name: projects
+          permissions:
+            - read
+      viewer:
+        - name: stacks
+          permissions:
+            - list
+            - open
+        - name: projects
+          permissions:
+            - read
