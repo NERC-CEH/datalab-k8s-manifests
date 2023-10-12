@@ -43,7 +43,7 @@ data:
           "versions": [
             {
               "displayName": "Dask 2023.1/Spark 3.3.0",
-              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
+              "image": "nerc/jupyterlab:c4e407bfedbb-spark-3.3.0"
             }
           ]
         },
@@ -53,7 +53,7 @@ data:
           "versions": [
             {
               "displayName": "Dask 2023.1/Spark 3.3.0",
-              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
+              "image": "nerc/jupyterlab:c4e407bfedbb-spark-3.3.0"
             }
           ]
         },
@@ -84,7 +84,7 @@ data:
           "versions": [
             {
               "displayName": "Dask 2023.1/Spark 3.3.0",
-              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
+              "image": "nerc/jupyterlab:c4e407bfedbb-spark-3.3.0"
             }
           ]
         },
@@ -95,16 +95,17 @@ data:
           "versions": [
             {
               "default": true,
+              "displayName": "4.3.1",
+              "image": "nerc/rshiny:4.3.1"
+            },
+            {
+              "default": true,
               "displayName": "4.2.1",
               "image": "nerc/rshiny:4.2.1"
             },
             {
               "displayName": "4.0.4",
               "image": "nerc/rshiny:4.0.4f"
-            },
-            {
-              "displayName": "4.0.1",
-              "image": "nerc/rshiny:4.0.1"
             }
           ],
           "userActionOverrides": {
@@ -118,6 +119,11 @@ data:
           "versions": [
             {
               "default": true,
+              "displayName": "4.3.1",
+              "image": "nerc/rstudio:4.3.1",
+              "connectImage": "nerc/zeppelin-connect:1.2.1"
+            },
+            {
               "displayName": "4.2.1",
               "image": "nerc/rstudio:4.2.1",
               "connectImage": "nerc/zeppelin-connect:1.2.1"
@@ -125,11 +131,6 @@ data:
             {
               "displayName": "4.0.4",
               "image": "nerc/rstudio:4.0.4d",
-              "connectImage": "nerc/zeppelin-connect:1.2.1"
-            },
-            {
-              "displayName": "4.0.1",
-              "image": "nerc/rstudio:4.0.1",
               "connectImage": "nerc/zeppelin-connect:1.2.1"
             }
           ]
@@ -151,7 +152,7 @@ data:
           "versions": [
             {
               "displayName": "Dask 2023.1/Spark 3.3.0",
-              "image": "nerc/jupyterlab:ee1e157f36f5-spark-3.3.0"
+              "image": "nerc/jupyterlab:c4e407bfedbb-spark-3.3.0"
             }
           ]
         },
