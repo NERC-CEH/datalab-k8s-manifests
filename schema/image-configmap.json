@@ -39,7 +39,6 @@
           "userCanChooseFile": {"type": "boolean"},
           "userCanChooseConda": {"type": "boolean"},
           "masterAddress": {"type": "string"},
-          "sharedRLibs": {"type": "string"},
           "versions": {
             "type": "array",
             "contains": {
