@@ -1,0 +1,144 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infrastructure-api-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.infrastructureApi.replicas }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: infrastructure-api
+  template:
+    metadata:
+      labels:
+        app: infrastructure-api
+        environment: {{ .Values.environment }}
+      {{- if .Values.useAppArmor }}
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/infrastructure-api: {{ .Values.infrastructureApi.policy }}
+      {{- end }}
+    spec:
+      serviceAccountName: infrastructure-service-account
+      containers:
+        - name: infrastructure-api
+          image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: DATALAB_DOMAIN
+              value: {{ .Values.domain }}
+            - name: INFRASTRUCTURE_API_PORT
+              value: '8000'
+            - name: KUBERNETES_NAMESPACE
+              value: {{ .Values.namespace }}
+            - name: AUTH_SIGNIN_URL
+              value: {{ .Values.authSignin }}
+            - name: AUTHORISATION_SERVICE
+              value: {{ template "datalab.auth-service-internal-url" . }}
+            - name: AUTHORISATION_AUDIENCE
+              value: {{ .Values.authorisationAudience }}
+            - name: AUTHORISATION_ISSUER
+              value: {{ .Values.authorisationIssuer }}
+            - name: DATABASE_HOST
+              value: mongo-service
+            - name: DATABASE_USER
+              value: {{ .Values.mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
+            - name: NODE_OPTIONS
+              value: --max-http-header-size=81920
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: storage-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/storage_config.json
+              subPath: storage_config.json
+            - name: image-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+              subPath: image_config.json
+            - name: catalogue-asset-repo-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/catalogue_asset_repo_config.json
+              subPath: catalogue_asset_repo_config.json
+        - name: infrastructure-watcher
+          image: {{ .Values.infrastructureApi.imageName }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: IfNotPresent
+          command: ["node", "watcher.js"]
+          env:
+            - name: KUBERNETES_NAMESPACE
+              value: {{ .Values.namespace }}
+            - name: DATABASE_HOST
+              value: mongo-service
+            - name: DATABASE_USER
+              value: {{ .Values.mongoUserName }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password-secret
+                  key: secret
+          volumeMounts:
+            - name: storage-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/storage_config.json
+              subPath: storage_config.json
+            - name: image-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/image_config.json
+              subPath: image_config.json
+            - name: catalogue-asset-repo-config-volume
+              mountPath: /usr/src/app/node_modules/common/src/config/catalogue_asset_repo_config.json
+              subPath: catalogue_asset_repo_config.json
+        - name: kubectl
+          image: {{ .Values.kubectl.imageName }}:{{ .Values.kubectl.version }}
+          imagePullPolicy: IfNotPresent
+          command: ['kubectl', 'proxy']
+          ports:
+            - containerPort: 8001
+      volumes:
+        - name: storage-config-volume
+          configMap:
+            name: storage-config
+            items:
+              - key: config
+                path: storage_config.json
+        - name: image-config-volume
+          configMap:
+            name: image-config
+            items:
+              - key: config
+                path: image_config.json
+        - name: catalogue-asset-repo-config-volume
+          configMap:
+            name: catalogue-asset-repo-config
+            items:
+              - key: config
+                path: catalogue_asset_repo_config.json
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: infrastructure-api-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    monitor: prometheus
+spec:
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: infrastructure-api
+  type: NodePort
