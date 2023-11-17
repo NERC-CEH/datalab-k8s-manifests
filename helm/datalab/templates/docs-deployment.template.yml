@@ -59,6 +59,7 @@ metadata:
   name: datalab-docs-ingress
   namespace: {{ .Values.namespace }}
 spec:
+  ingressClassName: nginx
   tls:
   - hosts:
     - {{ .Values.datalabName }}-docs.{{ .Values.domain }}

@@ -5,14 +5,14 @@
 namespace: test
 environment: test
 datalabName: testlab
-domain: test-datalabs.nerc.ac.uk
+domain: test-datalabs.ceh.ac.uk
 kubernetesMasterHostName: datalabs-k8s-master
 
 datalabVolume: testlab
 dataVolumeSize: 100Gi
 internalVolume: testlab-internal
 internalVolumeSize: 10Gi
-internalVolumeStorageClass: glusterfs-storage
+internalVolumeStorageClass: nfs-client
 sparkMasterAddress: spark://spark-master:7077
 sharedRLibs: /data/packages/R/%p/%v
 maxBodySize: 500m
@@ -35,8 +35,8 @@ useAppArmor: true
 catalogueAvailable: true
 catalogueStorage:
   type: nfs
-  server: 192.168.3.16
-  rootDirectory: /central-asset-repo/nfs
+  server: 192.168.3.126 
+  rootDirectory: /data/assetRepo
 # URL for the Catalogue
 #catalogueUrl: https://www.google.co.uk/
 
@@ -88,7 +88,7 @@ metadata-catalogue:
   datalabs:
     issuer: https://mjbr.eu.auth0.com/
     jwks: https://mjbr.eu.auth0.com/.well-known/jwks.json
-  hostname: testlab.test-datalabs.nerc.ac.uk
+  hostname: testlab.test-datalabs.ceh.ac.uk
   imageTag:
     catalogue: 3.54.0-datalabs
   server: datalabs
