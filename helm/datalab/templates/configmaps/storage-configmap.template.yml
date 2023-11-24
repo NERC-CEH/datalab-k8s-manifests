@@ -20,7 +20,7 @@ data:
         "NFS": {
           "displayValue": "NFS",
           "description": "Network File System (NFS) volume to store data for Notebooks and Sites.",
-          "storageClass": "nfs-storage"
+          "storageClass": "nfs-client"
         }
       },
       "creationOptions": {
