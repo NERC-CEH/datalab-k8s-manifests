@@ -156,6 +156,16 @@ data:
             }
           ]
         },
+        "vscode": {
+          "displayName": "VS Code Server",
+          "category": "ANALYSIS",
+          "versions": [
+            {
+              "displayName": "Miniconda3",
+              "image": "nerc/vscode-server:2b96491b4620-0.0.2"
+            }
+          ]
+        },
         "zeppelin": {
           "displayName": "Zeppelin",
           "category": "ANALYSIS",
