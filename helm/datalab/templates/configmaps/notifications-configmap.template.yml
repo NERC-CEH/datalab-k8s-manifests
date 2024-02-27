@@ -6,14 +6,13 @@ metadata:
 data:
   config: |
     {
-      "dev": true,
+      "dev": {{ .Values.notifications.dev }},
       "email": {
-        "fromDisplayName": "DataLabs Support",
-        "fromAddress": "support@example.com",
-        "toAddresses": "admin1@example.com, admin2@example.com",
-        "host": "smtp.ethereal.email",
-        "port": 587,
-        "secure": false,
-        "username": ""
+        "fromDisplayName": "{{ .Values.notifications.email.fromDisplayName }}",
+        "fromAddress": "{{ .Values.notifications.email.fromAddress }}",
+        "toAddresses": "{{ .Values.notifications.email.toAddress }}",
+        "host": "{{ .Values.notifications.email.host }}",
+        "port": {{ .Values.notifications.email.port }},
+        "secure": {{ .Values.notifications.email.secure }}
       }
     }
