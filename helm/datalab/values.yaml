@@ -41,7 +41,7 @@ notifications:
     fromAddress: noreply@ceh.ac.uk
     toAddress: appsupport@ceh.ac.uk
     hostname: email-smtp.eu-west-1.amazonaws.com
-    port: 587
+    port: 465
     secure: true
 
 # Don't turn this off in production!
