@@ -28,6 +28,22 @@ mongoUserName: datalab
 expireNotebooks:
   expireTimeWarning: 14
   expireTimeLimit: 21
+  inUseTimeWarning: 8
+
+# Note: When configuring email notification there should be a separate
+# secret created called "email-notification-secret" with two values that
+# are used to authenticate with the defined SMTP server.
+#   - username
+#   - password
+notifications:
+  dev: false
+  email:
+    fromDisplayName: "[TEST] DataLabs Support"
+    fromAddress: noreply@ceh.ac.uk
+    toAddress: appsupport@ceh.ac.uk
+    hostname: email-smtp.eu-west-1.amazonaws.com
+    port: 465
+    secure: true
 
 # Don't turn this off in production!
 useAppArmor: true

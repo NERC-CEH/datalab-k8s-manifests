@@ -10,7 +10,8 @@ data:
       {{- if .Values.expireNotebooks }},
       "expireUnusedNotebooks": {
         "accessTimeWarning": {{ .Values.expireNotebooks.expireTimeWarning }},
-        "accessTimeLimit": {{ .Values.expireNotebooks.expireTimeLimit }}
+        "accessTimeLimit": {{ .Values.expireNotebooks.expireTimeLimit }},
+        "inUseTimeWarning": {{ .Values.expireNotebooks.inUseTimeWarning }}
       }
       {{- end }}
     }
