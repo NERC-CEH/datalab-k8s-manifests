@@ -28,6 +28,7 @@ mongoUserName: datalab
 expireNotebooks:
   expireTimeWarning: 14
   expireTimeLimit: 21
+  inUseTimeWarning: 8
 
 # Note: When configuring email notification there should be a separate
 # secret created called "email-notification-secret" with two values that
