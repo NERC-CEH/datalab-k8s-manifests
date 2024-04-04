@@ -28,6 +28,17 @@ mongoUserName: datalabs
 expireNotebooks:
   expireTimeWarning: 14
   expireTimeLimit: 31
+  inUseTimeWarning: 8
+
+notifications:
+  dev: false
+  email:
+    fromDisplayName: "[TEST] DataLabs Support"
+    fromAddress: noreply@ceh.ac.uk
+    toAddress: appsupport@ceh.ac.uk
+    hostname: email-smtp.eu-west-1.amazonaws.com
+    port: 465
+    secure: true
 
 # Don't turn this off in production!
 useAppArmor: true

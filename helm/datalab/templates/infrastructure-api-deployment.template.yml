@@ -59,6 +59,18 @@ spec:
                 secretKeyRef:
                   name: mongo-password-secret
                   key: secret
+            {{- if .Values.notifications.email }}
+            - name: EMAIL_NOTIFIER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: email-notification-secret
+                  key: username
+            - name: EMAIL_NOTIFIER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: email-notification-secret
+                  key: password
+            {{- end }}
             - name: NODE_OPTIONS
               value: --max-http-header-size=81920
           ports:
